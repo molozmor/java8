@@ -1,0 +1,12 @@
+JDBC:
+1.	 Pruebas con las conexiones a la BD.
+
+2.	Implementar un analizador de consultas. Se teclea el SQL y el programa imprime todas filas y las columnas. Se puede completar con las operaciones insert, delete y update.
+
+3.	Implementar un patrón DAO con alguna entidad de la BD.
+
+4.	Exportar el contenido de una tabla a un fichero CSV con PreparedStatement.
+
+5.	Pruebas con las Transacciones.
+
+6.	Llamadas a procedimientos y funciones almacenadas con el interface Callable.
