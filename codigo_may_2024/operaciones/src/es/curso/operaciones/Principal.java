@@ -82,7 +82,7 @@ public class Principal {
 		double horas2 = h + (m / 60.0);
 		System.out.println("horas2: "+horas2);
 		
-		double horas3 = h + (m / 60);
+		double horas3 = h + (m / 60); // OJO hace division entera!
 		System.out.println("horas3: "+horas3);
 		
 		// Convertir un numero a char:
@@ -90,7 +90,25 @@ public class Principal {
 		letra = (char) num;
 		System.out.println("Letra: " + letra);
 		
+		// Div. entera y módulo:
+		int dinero = 230;
+		int numBilletes50, numBilletes20, numBilletes10;
+		int resto;
 		
-				
+		numBilletes50 = dinero / 50;
+		System.out.println("num billetes 50:"+numBilletes50);
+		
+		dinero = dinero % 50;
+		System.out.println("resto pendiente: "+ dinero);
+		
+		numBilletes20 = dinero / 20;
+		dinero = dinero % 20;
+		System.out.println("num billetes 20:"+numBilletes20);
+		
+		numBilletes10 = dinero / 10;
+		dinero = dinero % 10;  // dinero %= 10;
+		System.out.println("num billetes 10:"+numBilletes10);
+		
+		
 	}
 }
