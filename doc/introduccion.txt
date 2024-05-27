@@ -1,0 +1,13 @@
+dominio.empresa.aplicacion
+
+es.curso.ficheros
+
+java.lang
+
+Nomenclatura en Java:
+--------------------
+Nombre de la clases: Principal, Usuario
+variables: usuario, nombreApellidos
+métodos: calcularImportes()
+constante: IVA
+paquetes: es.empresa.aplicacion
