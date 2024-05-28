@@ -45,7 +45,9 @@ public class Principal {
 		// Leer de teclado;
 
 		int dinero;
-		int numBilletes50, numBilletes20, numBilletes10;
+		//int numBilletes50, numBilletes20, numBilletes10;
+		int billetes[] = {50, 20, 10};
+		int numBilletes;
 
 		//while (true) {
 			do {
@@ -58,24 +60,35 @@ public class Principal {
 
 			} while (dinero % 10 != 0);
 			System.out.println("Importe a retirar: " + dinero);
-
-			if (dinero >= 50) {
-				numBilletes50 = dinero / 50;
-				System.out.println("num billetes 50:" + numBilletes50);
-				dinero = dinero % 50;
+			
+			for (int i = 0 ; i < billetes.length ; i++) {
+			
+				if (dinero >= billetes[i]) {
+					numBilletes = dinero / billetes[i];
+					System.out.println("Número de billetes de "+billetes[i]+" = " + numBilletes);
+					dinero %= billetes[i]; 
+				}
+				
+				if (dinero == 0) break;
 			}
 
-			if (dinero >= 20) {
-				numBilletes20 = dinero / 20;
-				dinero = dinero % 20;
-				System.out.println("num billetes 20:" + numBilletes20);
-			}
-
-			if (dinero >= 10) {
-				numBilletes10 = dinero / 10;
-				dinero = dinero % 10; // dinero %= 10;
-				System.out.println("num billetes 10:" + numBilletes10);
-			}
+//			if (dinero >= 50) {
+//				numBilletes50 = dinero / 50;
+//				System.out.println("num billetes 50:" + numBilletes50);
+//				dinero = dinero % 50;
+//			}
+//
+//			if (dinero >= 20) {
+//				numBilletes20 = dinero / 20;
+//				dinero = dinero % 20;
+//				System.out.println("num billetes 20:" + numBilletes20);
+//			}
+//
+//			if (dinero >= 10) {
+//				numBilletes10 = dinero / 10;
+//				dinero = dinero % 10; // dinero %= 10;
+//				System.out.println("num billetes 10:" + numBilletes10);
+//			}
 		//}
 
 		// System.out.println(i);
