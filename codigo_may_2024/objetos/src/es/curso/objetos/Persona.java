@@ -1,5 +1,7 @@
 package es.curso.objetos;
 
+import java.util.Objects;
+
 public class Persona {
 	
 	// Definición de atributos: 
@@ -69,6 +71,28 @@ public class Persona {
 
 	public void setCarnetConducir(boolean carnetConducir) {
 		this.carnetConducir = carnetConducir;
+	}
+	
+	
+
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(altura, carnetConducir, edad, nombre);
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Persona other = (Persona) obj;
+		return Double.doubleToLongBits(altura) == Double.doubleToLongBits(other.altura)
+				&& carnetConducir == other.carnetConducir && edad == other.edad && Objects.equals(nombre, other.nombre);
 	}
 
 

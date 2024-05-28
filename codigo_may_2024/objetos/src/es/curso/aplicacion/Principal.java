@@ -32,18 +32,29 @@ public class Principal {
 			System.out.println("Son distintos persona y persona2");
 		}
 		
-		Persona persona3 = new Persona("Javier", 33, 1.81, false);
+		Persona persona3 = new Persona("Javier", 32, 1.81, false);
 		if (persona3 == persona2) {
 			System.out.println("Son iguales persona3 y persona2");
 		} else {
 			System.out.println("Son distintos persona3 y persona2");
 		}
 		
+		System.out.println("equals entre persona2 y persona3:" + persona2.equals(persona3));
+		System.out.println("hashCode de persona2 y persona3:" + persona2.hashCode() + " " + persona3.hashCode());
+		
+		
+		
 		String nombre1 = "Ana";
 		String nombre2 = "Ana";
 		
 		System.out.println("Comparar nombres: "+ nombre1==nombre2);
 		System.out.println("con equals: "+nombre1.equals(nombre2));
+		
+		int n1 = 10, n2 = 10;
+		System.out.println("numeros iguales: "+(n1==n2));
+		System.out.println(persona.equals(persona));
+		System.out.println(persona.getClass());
+		persona.equals(nombre1);
 	}
 
 }
