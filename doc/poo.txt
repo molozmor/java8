@@ -19,7 +19,58 @@ Instanciar la clase --> crear una persona ==> constructores
 
 amigos de la persona: Persona[] amigos
 
-Colecciones
+
+////////////////////////////////////////////////////////////////
+
+Relaciones entre clases:
+
+- herencia: Cuando tengamos clases que tienen cosas en común.
+
+  Perfiles de empleado: Programador, JefeProyecto, Administrador ...
+
+  Superclase - Clase Padre - Clase Principal
+  Empleado
+
+  Subclases - clase hija - clase derivada ...
+  Programador, JefeProyecto, Administrador
+
+  Un Programador ES UN Empleado
+
+- Composición: Tenemos un objeto que se desglosa en partes y cada 
+parte son objetos de otras clases.
+
+Coche: 
+  - Motor 
+  - Chasis
+  - Ruedas
+
+Ordenador: 
+  - Ram: xxxx
+  - Disco
+  - placa
+
+- Asociación: dos objetos independientes. En un instante un objeto
+necesita los servicios de otro objeto.
+
+Coche coche = new Coche(xxxxx)
+SurtidoGas surtidor = new SurtidorGas(....)
+
+coche.repostar(surtidor)
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
 
 
 
