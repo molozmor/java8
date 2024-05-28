@@ -1,0 +1,25 @@
+que es: una clase, un objeto / instancia, atributos / propiedades y métodos
+
+Personas:
+
+características: edad, altura, peso, ... ---> atributos
+
+cosas que hacen las personas: --> métodos (acciones que realizan las personas)
+- correr()
+- andar()
+- dormir() 
+
+objeto / instancias ===> una persona
+
+la clase es una --> y los objetos pueden ser muchos.
+
+this --> el objeto que está en curso
+
+Instanciar la clase --> crear una persona ==> constructores
+
+amigos de la persona: Persona[] amigos
+
+Colecciones
+
+
+
