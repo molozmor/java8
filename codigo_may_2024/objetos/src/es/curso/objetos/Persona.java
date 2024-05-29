@@ -15,6 +15,22 @@ public class Persona {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+
+
+	public Persona(String nombre) {
+		this(nombre, 0, 0.0, false);
+	}
+
+
+
+
+	public Persona(String nombre, int edad) {
+		this(nombre, edad, 0.0, false);
+	}
+
+
 
 
 	public Persona(String nombre, int edad, double altura, boolean carnetConducir) {

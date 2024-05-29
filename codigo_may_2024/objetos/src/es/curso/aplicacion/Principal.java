@@ -1,5 +1,6 @@
 package es.curso.aplicacion;
 
+import es.curso.objetos.Grupo;
 import es.curso.objetos.Persona;
 
 public class Principal {
@@ -55,6 +56,13 @@ public class Principal {
 		System.out.println(persona.equals(persona));
 		System.out.println(persona.getClass());
 		persona.equals(nombre1);
+		
+		// Prueba con el grupo:
+		Grupo grupo = new Grupo("Java", 10);
+		grupo.addPersona(persona);
+		grupo.addPersona(persona2);
+		
+		grupo.print();
 	}
 
 }
