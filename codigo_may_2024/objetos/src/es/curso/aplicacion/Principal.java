@@ -60,8 +60,8 @@ public class Principal {
 		// Prueba con el grupo:
 		Grupo grupo = new Grupo("Java", 10);
 		grupo.addPersona(persona);
-		grupo.addPersona(persona2);
-		
+		grupo.addPersona(persona2);		
+		System.out.println("Plazas libres: "+grupo.getPlazasLibres());
 		grupo.print();
 	}
 
