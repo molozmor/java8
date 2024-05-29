@@ -4,34 +4,30 @@ import java.util.Objects;
 
 public class Persona {
 	
+	private static int N = 0;
+	
+	private static final int EDAD_MIN = 0;
+	private static final int EDAD_MAX = 120;
+	
+	
 	// Definición de atributos: 
 	private String nombre;	
 	private int edad;
 	private double altura;
 	private boolean carnetConducir;
 	
-	
 	public Persona() {
 		super();
-		// TODO Auto-generated constructor stub
+		Persona.N++;
 	}
 	
-	
-
-
 	public Persona(String nombre) {
 		this(nombre, 0, 0.0, false);
 	}
 
-
-
-
 	public Persona(String nombre, int edad) {
 		this(nombre, edad, 0.0, false);
 	}
-
-
-
 
 	public Persona(String nombre, int edad, double altura, boolean carnetConducir) {
 		super();
@@ -39,15 +35,18 @@ public class Persona {
 		this.edad = edad;
 		this.altura = altura;
 		this.carnetConducir = carnetConducir;
+		
+		Persona.N++;
+		
 	}
-
-
+	
+	public static int getN() {
+		return Persona.N;
+	}
 
 	public String getNombre() {
 		return nombre;
 	}
-
-
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
@@ -62,7 +61,8 @@ public class Persona {
 
 
 	public void setEdad(int edad) {
-		this.edad = edad;
+		if (edad > EDAD_MIN && edad < EDAD_MAX)
+			this.edad = edad;
 	}
 
 
@@ -114,8 +114,7 @@ public class Persona {
 
 	@Override
 	public String toString() {
-		return "Persona [nombre=" + nombre + ", edad=" + edad + ", altura=" + altura + ", carnetConducir="
-				+ carnetConducir + "]";
+		return nombre  + " " + edad + " " + altura + " " + carnetConducir;
 	}
 
 
