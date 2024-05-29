@@ -3,6 +3,7 @@ package es.curso.principal;
 import java.util.ArrayList;
 
 import es.curso.figuras.Circulo;
+import es.curso.figuras.Escena;
 import es.curso.figuras.Figura;
 import es.curso.figuras.Triangulo;
 
@@ -10,7 +11,28 @@ public class Principal {
 
 	public static void main(String[] args) {
 		//pruebaFigura();
-		pruebaArrayList();
+		//pruebaArrayList();
+		pruebaEscena();
+	}
+
+	private static void pruebaEscena() {
+		// TODO Auto-generated method stub
+		
+		Escena escena = new Escena();
+		
+		Figura circulo = new Circulo("red", "circulo1", 5);				
+		Figura triangulo = new Triangulo("blue", "T1", 10.5, 5.0);
+		
+		escena.addFigura(circulo, triangulo);
+		escena.print();
+		
+		if (escena.borrar("circulo1")) {
+			System.out.println("figura borrada");
+			
+		} else {
+			System.out.println("No existe la figura");
+			
+		}
 	}
 
 	private static void pruebaArrayList() {
