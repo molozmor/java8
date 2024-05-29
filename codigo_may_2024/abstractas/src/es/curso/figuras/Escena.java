@@ -25,11 +25,26 @@ public class Escena {
 		for (Figura f : figuras) {
 			f.dibujar();
 		}
+		System.out.println();
 	}
 
-	public boolean borrar(String string) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean borrar(String etiqueta) {
+		// Buscar en la colección de figura por el nombre de la etiqueta
+		int pos = -1;
+		
+		for (int i = 0 ; i < figuras.size() ; i++) {
+			if (figuras.get(i).getEtiqueta().equalsIgnoreCase(etiqueta)) {
+				pos = i;
+				break;
+			}
+		}
+		
+		if (pos != -1) {
+			figuras.remove(pos);
+			return true;
+			
+		} else 
+			return false;
 	}
 	
 

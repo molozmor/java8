@@ -22,8 +22,11 @@ public class Principal {
 		
 		Figura circulo = new Circulo("red", "circulo1", 5);				
 		Figura triangulo = new Triangulo("blue", "T1", 10.5, 5.0);
+		Figura circulo2 = new Circulo("green", "circulo2", 15);
+		Figura circulo3 = new Circulo("blue", "circulo3", 4);
 		
-		escena.addFigura(circulo, triangulo);
+		escena.addFigura(circulo, triangulo, circulo2);
+		escena.addFigura(circulo3);
 		escena.print();
 		
 		if (escena.borrar("circulo1")) {
@@ -33,6 +36,8 @@ public class Principal {
 			System.out.println("No existe la figura");
 			
 		}
+		
+		escena.print();
 	}
 
 	private static void pruebaArrayList() {
