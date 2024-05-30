@@ -15,6 +15,7 @@ public class Principal {
 		
 		Empleado emp = new Empleado("1;Davolio;Representante de ventas",";");
 		System.out.println(emp);
+		System.out.println(emp.toCSV(";"));
 	}
 
 	private static void pruebasConString() {

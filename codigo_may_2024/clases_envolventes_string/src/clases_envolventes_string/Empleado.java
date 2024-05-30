@@ -70,6 +70,8 @@ public class Empleado {
 		return "Empleado [id=" + id + ", nombre=" + nombre + ", cargo=" + cargo + "]";
 	}
 	
-	
+	public String toCSV(String sep) {
+		return id + sep + nombre + sep + cargo;
+	}
 
 }
