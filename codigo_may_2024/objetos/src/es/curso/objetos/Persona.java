@@ -2,7 +2,7 @@ package es.curso.objetos;
 
 import java.util.Objects;
 
-public class Persona {
+public class Persona implements Comparable<Persona> {
 	
 	private static int N = 0;
 	
@@ -145,6 +145,22 @@ public class Persona {
 	/* METODO SOBRECARGADO CORRECTAMENTE! */
 	public void cumpleaños(int valor) {
 		edad += valor;
+	}
+
+	@Override
+	public int compareTo(Persona persona) {
+		// Comparar dos personas con la edad:
+		int edad1 = this.edad;
+		int edad2 = persona.edad;
+		
+		if (edad1 == edad2)
+			return 0;
+		
+		else if (edad1 < edad2)
+			return -1;
+		
+		else 
+			return 1;
 	}
 	
 }

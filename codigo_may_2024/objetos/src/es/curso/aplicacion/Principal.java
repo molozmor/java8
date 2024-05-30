@@ -1,5 +1,9 @@
 package es.curso.aplicacion;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+
 import es.curso.objetos.Empleado;
 import es.curso.objetos.Grupo;
 import es.curso.objetos.Persona;
@@ -20,7 +24,8 @@ public class Principal {
 
 		//pruebasPersona();
 		//pruebasGrupo();
-		pruebasEmpleado();
+		//pruebasEmpleado();
+		pruebasCompararPersonas();
 		
 		/*
 		int edad = 10;
@@ -36,6 +41,51 @@ public class Principal {
 		
 	}
 	
+	private static void pruebasCompararPersonas() {
+		Persona persona, persona2;
+
+		// Contruir la persona con el constructor por defecto
+		persona = new Persona("Jose Miguel", 44, 1.8, true);
+		persona2 = new Persona("Javier", 33, 1.81, false);
+
+		int resul = persona.compareTo(persona2);
+		switch (resul) {
+		case 0:
+			System.out.println("Tienen la misma edad");
+			break;
+			
+		case -1:
+			System.out.println(persona.getNombre()+" es menor");
+			break;
+
+		default:
+			System.out.println(persona2.getNombre()+" es menor");
+			break;
+		}
+		
+		// Prueba ordenar una colección de personas:
+		Empleado emp1 = new Empleado("Eva", 21,1.77,true, "Siemens", 2000.0);
+		
+		
+		Empleado emp2 = new Empleado("Sandra",53,1.76,true, "Accenture", 2500.0);
+		
+		
+		ArrayList<Persona> personas = new ArrayList<Persona>();
+		
+		personas.add(persona);
+		personas.add(persona2);
+		personas.add(emp2);
+		personas.add(emp1);
+		
+		System.out.println(personas);
+		
+		// Ordenar la colección de personas: la Persona implementa Comparable
+		Collections.sort(personas);
+		
+		System.out.println(personas);			
+			
+	}
+
 	private static void imprimir(Persona p) {
 		System.out.println(p);
 		
