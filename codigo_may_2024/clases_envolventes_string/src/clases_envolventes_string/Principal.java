@@ -6,7 +6,15 @@ public class Principal {
 		// TODO Auto-generated method stub
 
 		//pruebaDeprecated();
-		pruebasConString();
+		//pruebasConString();
+		pruebasConEmpleado();
+	}
+
+	private static void pruebasConEmpleado() {
+		// TODO Auto-generated method stub
+		
+		Empleado emp = new Empleado("1;Davolio;Representante de ventas",";");
+		System.out.println(emp);
 	}
 
 	private static void pruebasConString() {
@@ -26,6 +34,26 @@ public class Principal {
 		String []campos = empleado.split(";");
 		for (String s : campos)
 			System.out.println(s);
+		
+		// Convertir de texto a número (entero):
+		Integer i = 100;
+		Integer j = 123;
+		
+		// Comparar dos integer:
+		int resul = i.compareTo(j);
+		if (resul == 0)
+			System.out.println("son iguales");
+		
+		else if (resul == -1)
+			System.out.println(i + " <  " + j);
+	    
+		else
+			System.out.println(j + " <  " + i);
+		
+		// Podemos convertir de texto a número:
+		String snumero = "1235";
+		int n = Integer.parseInt(snumero);
+		System.out.println(++n);
 		
 		
 		
