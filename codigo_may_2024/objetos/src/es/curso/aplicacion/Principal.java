@@ -7,6 +7,7 @@ import java.util.Collections;
 import es.curso.objetos.Empleado;
 import es.curso.objetos.Grupo;
 import es.curso.objetos.Persona;
+import es.curso.objetos.util.OrdenarPersonas;
 
 public class Principal {
 	
@@ -64,10 +65,10 @@ public class Principal {
 		}
 		
 		// Prueba ordenar una colección de personas:
-		Empleado emp1 = new Empleado("Eva", 21,1.77,true, "Siemens", 2000.0);
+		Empleado emp1 = new Empleado("Raúl", 21,1.77,true, "Siemens", 2000.0);
 		
 		
-		Empleado emp2 = new Empleado("Sandra",53,1.76,true, "Accenture", 2500.0);
+		Empleado emp2 = new Empleado("Sandra",53,1.96,true, "Accenture", 2500.0);
 		
 		
 		ArrayList<Persona> personas = new ArrayList<Persona>();
@@ -82,8 +83,14 @@ public class Principal {
 		// Ordenar la colección de personas: la Persona implementa Comparable
 		Collections.sort(personas);
 		
-		System.out.println(personas);			
-			
+		System.out.println(personas);	
+		
+		// Ordenar por nombre ASC
+		Collections.sort(personas, new OrdenarPersonas());
+		System.out.println(personas);
+		
+		Collections.sort(personas, new OrdenarPersonas(OrdenarPersonas.ORD_ALTURA, OrdenarPersonas.DESC));
+		System.out.println(personas);	
 	}
 
 	private static void imprimir(Persona p) {
