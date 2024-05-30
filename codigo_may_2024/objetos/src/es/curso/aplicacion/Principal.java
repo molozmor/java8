@@ -1,14 +1,18 @@
 package es.curso.aplicacion;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 import es.curso.objetos.Empleado;
 import es.curso.objetos.Grupo;
 import es.curso.objetos.Persona;
 import es.curso.objetos.util.OrdenarPersonas;
 
+
+/**
+ * Implementación de la clase principal
+ */
 public class Principal {
 	
 	private static void modificarEdad(int edad) {
@@ -71,7 +75,7 @@ public class Principal {
 		Empleado emp2 = new Empleado("Sandra",53,1.96,true, "Accenture", 2500.0);
 		
 		
-		ArrayList<Persona> personas = new ArrayList<Persona>();
+		List<Persona> personas = new ArrayList<Persona>();
 		
 		personas.add(persona);
 		personas.add(persona2);

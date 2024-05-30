@@ -1,5 +1,8 @@
 package es.curso.objetos;
 
+/**
+ * Implementación de la clase grupo
+ */
 public class Grupo {
 	
 	private String nombre;

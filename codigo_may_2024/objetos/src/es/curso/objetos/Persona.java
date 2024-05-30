@@ -2,6 +2,9 @@ package es.curso.objetos;
 
 import java.util.Objects;
 
+/**
+ * Implementación de la clase persona
+ */
 public class Persona implements Comparable<Persona> {
 	
 	private static int N = 0;
@@ -16,6 +19,9 @@ public class Persona implements Comparable<Persona> {
 	private double altura;
 	private boolean carnetConducir;
 	
+	/**
+	 * Constructor por defecto
+	 */
 	public Persona() {
 		super();
 		Persona.N++;

@@ -1,5 +1,9 @@
 package es.curso.objetos;
 
+
+/**
+ * Implementación de la clase empleado
+ */
 public class Empleado extends Persona {
 	
 	private String empresa;
