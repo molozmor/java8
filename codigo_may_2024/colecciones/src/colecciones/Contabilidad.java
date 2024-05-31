@@ -51,6 +51,7 @@ public class Contabilidad implements IContabilidad {
 	@Override
 	public void print() throws ContabilidadException {
 		// TODO Auto-generated method stub
+			
 
 		for (String dia : gastos.keySet()) {
 			System.out.println(dia);
