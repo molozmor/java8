@@ -8,7 +8,6 @@ import java.util.TreeMap;
 public class Contabilidad implements IContabilidad {
 
 	private Map<String, List<Integer>> gastos;
-	
 
 	public Contabilidad() {
 		super();
@@ -16,13 +15,21 @@ public class Contabilidad implements IContabilidad {
 	}
 
 	@Override
-	public void addGasto(String diaSemana, Integer importe) {
-		
-		// Inicializa la lista si no existe la clave:
-		gastos.putIfAbsent(diaSemana.toLowerCase(), new ArrayList<>());
-		
-		// Añade el importe a la lista del día de la semana:
-		gastos.get(diaSemana).add(importe);		
+	public void addGasto(String diaSemana, Integer importe) throws ContabilidadException {
+
+		String clave = diaSemana.toLowerCase();
+
+		if (!OrdenarDiaSemana.DIAS.contains(clave)) {
+			throw new ContabilidadException("Dia de la semana: " + diaSemana + " incorrecto");
+
+		} else {
+
+			// Inicializa la lista si no existe la clave:
+			gastos.putIfAbsent(clave, new ArrayList<>());
+
+			// Añade el importe a la lista del día de la semana:
+			gastos.get(clave).add(importe);
+		}
 	}
 
 	@Override
@@ -30,18 +37,25 @@ public class Contabilidad implements IContabilidad {
 		// Si la clave existe devolvemos los gastos de este día
 		// No exista la clave porque no tenemos gastos ese día pero la clave es valida
 		// Un dia de la semana equivocado lanzar una excepción
-		
-		if (!OrdenarDiaSemana.DIAS.contains(diaSemana.toLowerCase())) {
-			throw new ContabilidadException("Dia de la semana: "+diaSemana+" incorrecto");
+
+		String clave = diaSemana.toLowerCase();
+
+		if (!OrdenarDiaSemana.DIAS.contains(clave)) {
+			throw new ContabilidadException("Dia de la semana: " + diaSemana + " incorrecto");
+
+		} else {
+			return gastos.get(clave);
 		}
-		return null;
 	}
 
 	@Override
-	public void print() {
+	public void print() throws ContabilidadException {
 		// TODO Auto-generated method stub
-		
+
+		for (String dia : gastos.keySet()) {
+			System.out.println(dia);
+			System.out.println(this.getGastos(dia));
+		}
 	}
-	
-	
+
 }

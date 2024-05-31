@@ -29,13 +29,23 @@ public class Principal {
 		// Definir un mapa que pueda almacenar el día de la semana y una lista con los gastos
 		// de cada día:
 		
-		Contabilidad conta = new Contabilidad();
+		Contabilidad conta;
 		
-		conta.addGasto("Lunes", 230);
-		conta.addGasto("LUNES", 117);
-		conta.addGasto("Jueves", 30);
-		conta.addGasto("Sabado", 56);
-		conta.addGasto("Lunes", 30);
+		try {
+			conta = new Contabilidad();
+			
+			conta.addGasto("Lunes", 230);
+			conta.addGasto("LUNES", 117);
+			conta.addGasto("Jueves", 30);
+			conta.addGasto("Sabado", 56);
+			conta.addGasto("Domingo", 30);
+			
+			conta.print();
+			
+		} catch (ContabilidadException e) {
+			// TODO Auto-generated catch block
+			System.err.println(e.getMessage());
+		}
 	}
 
 
