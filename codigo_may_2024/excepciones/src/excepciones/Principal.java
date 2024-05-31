@@ -1,5 +1,8 @@
 package excepciones;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Arrays;
 
 public class Principal {
@@ -13,8 +16,58 @@ public class Principal {
 		// test4();
 		// test5();
 		//test7();
-		test8();
+		//test8();
+		//test9();
+		//test10("123");
+		test10_ok("123");
+	}
 
+	private static void test10_ok(Object cadena) {
+		// ejemplo test10 bien!
+		
+		String cad = (String) cadena;
+		Integer i = new Integer(cad);
+		System.out.println("i: "+i);
+		
+	}
+
+	private static void test10(Object cadena) {
+		// Una excepcion al aplicar un casting
+		
+		Integer i = (Integer) cadena;
+		System.out.println("i: " + i);						
+	}
+	
+	
+
+	private static void test9() {
+		// Abrir y cerrar un fichero utilizando finally
+		
+		
+		FileInputStream fichero = null;
+		
+		try {
+			// Abrir
+			fichero = new FileInputStream("ficheros/Empleados.txt");
+			
+			System.out.println("leer fichero");
+			int n = 4/0;
+			
+					
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+			
+		} finally {
+			// Cerrar
+			try {
+				if (fichero != null) fichero.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 	}
 
 	private static int test8() {
