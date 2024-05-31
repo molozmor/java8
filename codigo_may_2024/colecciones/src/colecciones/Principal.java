@@ -16,8 +16,75 @@ public class Principal {
 		// TODO Auto-generated method stub
 
 		//pruebaListas();
-		pruebaMapas();
+		//pruebaMapas();		
+		//pruebaMapa2();
+		
+		pruebasListasMapas();
 	}
+	
+
+	private static void pruebasListasMapas() {
+		// TODO Auto-generated method stub
+		
+		// Definir un mapa que pueda almacenar el día de la semana y una lista con los gastos
+		// de cada día:
+		
+		Contabilidad conta = new Contabilidad();
+		
+		conta.addGasto("Lunes", 230);
+		conta.addGasto("Lunes", 117);
+		conta.addGasto("Jueves", 30);
+		conta.addGasto("Sabado", 56);
+		conta.addGasto("Lunes", 30);
+	}
+
+
+	private static void pruebaMapa2() {
+		// TODO Auto-generated method stub
+		// Definir,añadir
+		/*
+		 * Map<String, Integer> gastos = new HashMap<String, Integer>();
+		 *
+		 * gastos.put("Lunes",230); gastos.put("Martes",30); gastos.put("Miercoles",12);
+		 * gastos.put("Jueves",145); gastos.put("Viernes",500);
+		 * System.out.println(gastos);
+		 */
+		// Definir, añadir
+		Map<String, Integer> gastos = new LinkedHashMap<String, Integer>();
+ 
+		    gastos.put("Jueves", 145);
+	        gastos.put("Viernes", 500);
+	        gastos.put("Lunes", 230);
+	        gastos.put("Martes", 30);
+	        gastos.put("Miercoles", 12);
+ 
+	        // Imprimir el mapa original
+	        System.out.println("Mapa original:");
+	        for (Map.Entry<String, Integer> entry : gastos.entrySet()) {
+	            System.out.println(entry.getKey() + ": " + entry.getValue());
+	        }
+ 
+	        // Lista predefinida del orden de los días de la semana
+	        String[] diasSemana = {"Lunes", "Martes", "Miercoles", "Jueves", "Viernes"};
+ 
+	        // Crear un nuevo LinkedHashMap para mantener el orden deseado
+	        Map<String, Integer> gastosOrdenados = new LinkedHashMap<>();
+ 
+	        // Añadir las entradas en el orden de la lista predefinida
+	        for (String dia : diasSemana) {
+	            if (gastos.containsKey(dia)) {
+	                gastosOrdenados.put(dia, gastos.get(dia));
+	            }
+	        }
+ 
+	        // Imprimir el mapa ordenado
+	        System.out.println("\nMapa ordenado:");
+	        for (Map.Entry<String, Integer> entry : gastosOrdenados.entrySet()) {
+	            System.out.println(entry.getKey() + ": " + entry.getValue());
+	        }
+	    }
+
+
 
 	private static void pruebaMapas() {
 		// Definir, crear, añadir claves, recuperar valores, recorridos, ...
@@ -48,7 +115,7 @@ public class Principal {
 	
 		System.out.println(gastos2);
 		
-		// Mantiendo un orden personalizado:
+		// Ordena alfabeticamente
 		Map<String, Integer> gastos3 = new TreeMap<String, Integer>();
 		gastos3.put("Lunes", 230);
 		gastos3.put("Viernes", 12);
@@ -57,6 +124,14 @@ public class Principal {
 	
 		System.out.println(gastos3);
 		
+		// Ordenando por día de la semana:
+		Map<String, Integer> gastos4 = new TreeMap<String, Integer>(new OrdenarDiaSemana());
+		gastos4.put("Lunes", 230);
+		gastos4.put("Viernes", 12);
+		gastos4.put("Jueves", 145);
+		gastos4.put("Sabado", 230);
+	
+		System.out.println(gastos4);		
 		
 	}
 
