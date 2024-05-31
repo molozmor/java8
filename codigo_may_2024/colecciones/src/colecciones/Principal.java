@@ -32,7 +32,7 @@ public class Principal {
 		Contabilidad conta = new Contabilidad();
 		
 		conta.addGasto("Lunes", 230);
-		conta.addGasto("Lunes", 117);
+		conta.addGasto("LUNES", 117);
 		conta.addGasto("Jueves", 30);
 		conta.addGasto("Sabado", 56);
 		conta.addGasto("Lunes", 30);
