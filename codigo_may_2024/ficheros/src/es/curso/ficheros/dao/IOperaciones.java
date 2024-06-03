@@ -6,6 +6,6 @@ import es.curso.ficheros.beans.Pedido;
 
 public interface IOperaciones {
 	
-	public List<Pedido> select();
+	public List<Pedido> select() throws PedidoException;
 
 }
