@@ -18,6 +18,23 @@ public class PedidoFile implements IOperaciones {
 		super();
 		this.pathFichero = pathFichero;
 	}
+	
+	public static void borrarPaises(String path) {
+		File []ficheros;
+		File carpeta;
+		int cont = 0;
+				
+		carpeta = new File(path);
+		ficheros = carpeta.listFiles();
+		
+		for (File f : ficheros) {
+			System.out.println("Borrando:" + f.getAbsolutePath());
+			if (f.delete())
+				cont++;
+		}
+		
+		System.out.println("Se han eliminado: "+cont+" ficheros");
+	}
 
 
 	public static void exportarPaises(String path) {
@@ -31,7 +48,10 @@ public class PedidoFile implements IOperaciones {
 		FileOutputStream ficheroPais;
 		boolean existeFichero;
 
-		try {
+		try {	
+			// Vaciar la carpeta paises antes de exportar
+			PedidoFile.borrarPaises("paises");
+			
 			scanner = new Scanner(new File(path));
 			while (scanner.hasNextLine()) {
 				linea = scanner.nextLine();

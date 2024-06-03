@@ -22,12 +22,34 @@ public class Principal {
 		//pruebaLeerScanner();
 		//pruebaPedidoFile();
 		//pruebaEscribirFichero();
-		pruebaPaises();
+		//pruebaPaises();
+		
+		pruebaScanner();
 		
 	}
 
+	private static void pruebaScanner() {
+		// Prueba de teclado con Scanner:
+		Scanner scan;
+		String cad;
+		
+		// Lectura de teclado:
+		scan = new Scanner(System.in);
+		System.out.println("Leer una cadena:");
+		cad = scan.nextLine();
+		System.out.println("cad: "+cad);
+		scan.close();	
+		
+		// Procesamiento de cadenas: separa en palabras:
+		scan = new Scanner("hola que tal estas");
+		while (scan.hasNext()) {
+			System.out.println(scan.next());			
+		}
+		scan.close();
+	}
+
 	private static void pruebaPaises() {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub				
 		PedidoFile.exportarPaises("pedidos.csv");
 	}
 
