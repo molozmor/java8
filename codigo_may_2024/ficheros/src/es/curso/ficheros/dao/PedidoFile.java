@@ -19,6 +19,7 @@ public class PedidoFile implements IOperaciones {
 		this.pathFichero = pathFichero;
 	}
 
+
 	public static void exportarPaises(String path) {
 		// Generar un fichero por cada pais:
 		Scanner scanner = null;
@@ -53,26 +54,28 @@ public class PedidoFile implements IOperaciones {
 				existeFichero = fichero.exists();
 				ficheroPais = null;
 
+				// antonioespinherranz@hotmail.com
+
 				try {
 					// Grabar la linea de pedido en un fichero para cada pais:
 					ficheroPais = new FileOutputStream(pathPais, true);
 
 					if (!existeFichero) {
-						System.out.println("creando fichero: "+pathPais);
-						
+						System.out.println("creando fichero: " + pathPais);
+
 						// Si no existe hay que poner cabeceras:
 						ficheroPais.write(cabeceras.getBytes());
 						ficheroPais.write("\n".getBytes());
 					}
-					
+
 					// grabar la linea del pedido:
 					ficheroPais.write(linea.getBytes());
 					ficheroPais.write("\n".getBytes());
 
 				} catch (IOException e) {
-					System.out.println("error en el fichero: "+pathPais);
+					System.out.println("error en el fichero: " + pathPais);
 					System.out.println(e.getMessage());
-					
+
 				} finally {
 					if (ficheroPais != null) {
 						try {
