@@ -19,9 +19,19 @@ public class Principal {
 		//pruebaMapas();		
 		//pruebaMapa2();
 		
-		pruebasListasMapas();
+		//pruebasListasMapas();
+		pruebaEnum();
 	}
 	
+
+	private static void pruebaEnum() {
+		// TODO Auto-generated method stub
+		Direcciones d = Direcciones.Norte;
+		
+		System.out.println("Dir: "+d.getValue());
+		System.out.println("Dir:"+d);
+	}
+
 
 	private static void pruebasListasMapas() {
 		// TODO Auto-generated method stub
