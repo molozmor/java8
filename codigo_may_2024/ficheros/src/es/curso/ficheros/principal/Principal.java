@@ -22,8 +22,13 @@ public class Principal {
 		//pruebaLeerScanner();
 		//pruebaPedidoFile();
 		//pruebaEscribirFichero();
+		pruebaPaises();
 		
-		
+	}
+
+	private static void pruebaPaises() {
+		// TODO Auto-generated method stub
+		PedidoFile.exportarPaises("pedidos.csv");
 	}
 
 	private static void pruebaEscribirFichero() {
