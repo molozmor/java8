@@ -6,7 +6,7 @@ public class Principal {
 
 	public static void main(String[] args) {
 		testSQLite3();
-		testMySQL8();
+		//testMySQL8();
 	}
 
 	private static void testMySQL8() {

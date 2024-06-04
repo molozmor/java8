@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import java.sql.ResultSetMetaData;
+
 public class BaseDatosSQLite3 {
 
 	private static BaseDatosSQLite3 instance = null;
@@ -24,6 +26,41 @@ public class BaseDatosSQLite3 {
 	private BaseDatosSQLite3() throws SQLException, ClassNotFoundException {
 		Class.forName("org.sqlite.JDBC");
 		this.conexion = DriverManager.getConnection(URL_BD);
+	}
+	
+	public void exportarTabla(String tabla) {
+		String sql = "select * from " + tabla;
+		ResultSet rs = null;
+		PreparedStatement ps = null;
+		ResultSetMetaData rsdata = null;
+		int numCols;
+		
+		
+		try {
+			// Crear el statement a partir de la conexión:
+			ps = this.conexion.prepareStatement(sql);
+			
+			// Ejecutar la consulta;
+			rs = ps.executeQuery();
+			
+			// Obtener los metadatos de la consulta:
+			rsdata = rs.getMetaData();
+			
+			// Obtener las columnas y los nombres:
+			numCols = rsdata.getColumnCount();
+			
+			// Imprimir las cabeceras:
+			for (int i = 0 ; i < numCols ; i++) {
+				System.out.print(rsdata.getColumnLabel(i));
+			}
+			System.out.println();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	public void getClientes() throws SQLException {
