@@ -41,7 +41,7 @@ public class Principal {
 			bd = BaseDatosSQLite3.getInstance();
 			System.out.println("\nConexión abierta con SQLite3 ...");
 			
-			bd.exportarTabla("categorias");
+			bd.exportarTabla("pedidos");
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

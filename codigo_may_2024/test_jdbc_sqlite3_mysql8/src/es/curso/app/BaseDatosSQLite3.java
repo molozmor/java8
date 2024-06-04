@@ -70,10 +70,10 @@ public class BaseDatosSQLite3 {
 			// Grabar las cabeceras al fichero:
 			fichero.write(cabeceras.getBytes());
 			
-			// Recuperar los resultados:
-			String fila = "";
+			// Recuperar los resultados:		
 			
-			while (rs.next()) {
+			while (rs.next()) {			
+				String fila = "";
 				
 				for (int i = 1 ; i <= numCols ; i++) {
 					fila += rs.getString(i);
