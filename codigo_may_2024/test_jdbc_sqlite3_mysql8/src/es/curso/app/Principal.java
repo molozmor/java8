@@ -41,9 +41,9 @@ public class Principal {
 			bd = BaseDatosSQLite3.getInstance();
 			System.out.println("\nConexión abierta con SQLite3 ...");
 			
-			bd.getClientes();
+			bd.exportarTabla("categorias");
 
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			System.out.println("ERROR: " + e.getMessage());
 

@@ -1,5 +1,7 @@
 package es.curso.app;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -28,15 +30,20 @@ public class BaseDatosSQLite3 {
 		this.conexion = DriverManager.getConnection(URL_BD);
 	}
 	
-	public void exportarTabla(String tabla) {
+	public void exportarTabla(String tabla) throws Exception {
 		String sql = "select * from " + tabla;
 		ResultSet rs = null;
 		PreparedStatement ps = null;
 		ResultSetMetaData rsdata = null;
 		int numCols;
-		
+		FileOutputStream fichero = null;
+		String path;
 		
 		try {
+			// Crear el fichero:
+			path = "ficheros/"+tabla+".csv";
+			fichero = new FileOutputStream(path);
+			
 			// Crear el statement a partir de la conexión:
 			ps = this.conexion.prepareStatement(sql);
 			
@@ -50,15 +57,48 @@ public class BaseDatosSQLite3 {
 			numCols = rsdata.getColumnCount();
 			
 			// Imprimir las cabeceras:
-			for (int i = 0 ; i < numCols ; i++) {
-				System.out.print(rsdata.getColumnLabel(i));
+			String cabeceras = "";
+			
+			for (int i = 1 ; i <= numCols ; i++) {
+				cabeceras += rsdata.getColumnLabel(i);
+				
+				if (i < numCols)
+					cabeceras += ";";
 			}
-			System.out.println();
+			cabeceras += "\n";
+			
+			// Grabar las cabeceras al fichero:
+			fichero.write(cabeceras.getBytes());
+			
+			// Recuperar los resultados:
+			String fila = "";
+			
+			while (rs.next()) {
+				
+				for (int i = 1 ; i <= numCols ; i++) {
+					fila += rs.getString(i);
+					
+					if (i < numCols)
+						fila += ";";
+					
+				}
+				fila += "\n";
+				fichero.write(fila.getBytes());
+			}
+			
+			System.out.println("Se ha generado el fichero: "+path);
 			
 			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (SQLException | FileNotFoundException e) {
+			throw e;
+
+		} finally {
+			if (fichero != null)
+				fichero.close();			
+			if (rs != null)
+				rs.close();
+			if (ps != null)
+				ps.close();
 		}
 		
 	}
