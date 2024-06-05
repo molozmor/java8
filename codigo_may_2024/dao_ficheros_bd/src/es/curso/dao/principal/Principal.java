@@ -28,9 +28,9 @@ public class Principal {
 		
 		//pruebaScanner();
 		
-		//pruebaDAO();
+		pruebaDAO();
 		
-		pruebaGenerarPK();
+		//pruebaGenerarPK();
 		
 	}
 

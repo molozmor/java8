@@ -13,12 +13,45 @@ import es.curso.dao.beans.Pedido;
 public class PedidoFile implements IOperaciones {
 
 	private String pathFichero;
+	private List<Pedido> pedidos;
 
-	public PedidoFile(String pathFichero) {
+	public PedidoFile(String pathFichero) throws PedidoException {
 		super();
 		this.pathFichero = pathFichero;
+		this.cargaFichero();
 	}
 	
+	private void cargaFichero() throws PedidoException {
+		Pedido pedido;
+		Scanner scanner = null;
+		String linea = null;
+		pedidos = new ArrayList<Pedido>();
+		boolean primeraFila = true;
+
+		try {
+			scanner = new Scanner(new File(this.pathFichero));
+			while (scanner.hasNextLine()) {
+				linea = scanner.nextLine();
+
+				if (primeraFila) {
+					// Saltar las cabeceras:
+					primeraFila = false;
+					continue;
+				}
+				pedido = new Pedido(linea);
+				pedidos.add(pedido);
+			}
+
+		} catch (FileNotFoundException e) {			
+			throw new PedidoException(e.getMessage());
+
+		} finally {
+			if (scanner != null)
+				scanner.close();
+		}
+		
+	}
+
 	public static void borrarPaises(String path) {
 		File []ficheros;
 		File carpeta;
@@ -120,34 +153,6 @@ public class PedidoFile implements IOperaciones {
 
 	@Override
 	public List<Pedido> select() throws PedidoException {
-		// Recuperar la lista de pedidos del fichero
-		Pedido pedido;
-		Scanner scanner = null;
-		String linea = null;
-		List<Pedido> pedidos = new ArrayList<Pedido>();
-		boolean primeraFila = true;
-
-		try {
-			scanner = new Scanner(new File(this.pathFichero));
-			while (scanner.hasNextLine()) {
-				linea = scanner.nextLine();
-
-				if (primeraFila) {
-					// Saltar las cabeceras:
-					primeraFila = false;
-					continue;
-				}
-				pedido = new Pedido(linea);
-				pedidos.add(pedido);
-			}
-
-		} catch (FileNotFoundException e) {			
-			throw new PedidoException(e.getMessage());
-
-		} finally {
-			if (scanner != null)
-				scanner.close();
-		}
 		return pedidos;
 	}
 
@@ -173,6 +178,33 @@ public class PedidoFile implements IOperaciones {
 	public boolean delete(int pk) throws PedidoException {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public void close() throws PedidoException {
+		// TODO Auto-generated method stub
+		FileOutputStream fichero = null;
+				
+		try {
+			fichero = new FileOutputStream(this.pathFichero);
+			for (Pedido p : this.pedidos) {
+				fichero.write(p.toCSV(";").getBytes());
+				fichero.write("\n".getBytes());
+			}
+			
+		} catch (IOException e) {
+			throw new PedidoException(e.getMessage());
+		} finally {
+			if (fichero != null) {
+				try {
+					fichero.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
 	}
 
 }

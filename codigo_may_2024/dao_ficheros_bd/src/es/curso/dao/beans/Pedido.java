@@ -45,6 +45,12 @@ public class Pedido {
 			System.out.println(linea);			
 		}
 	}
+	
+	public String toCSV(String sep) {
+		return this.idPedido + sep + this.idCliente + sep + this.idEmpleado + 
+				sep + this.idEmpresaEnvio + sep + this.importe + sep +
+				this.pais;
+	}
 
 	public int getIdPedido() {
 		return idPedido;

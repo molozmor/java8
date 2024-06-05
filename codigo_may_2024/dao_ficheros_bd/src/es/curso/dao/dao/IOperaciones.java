@@ -11,5 +11,5 @@ public interface IOperaciones {
 	public List<Pedido> select() throws PedidoException;
 	public boolean update(Pedido pedido) throws PedidoException;
 	public boolean delete(int pk) throws PedidoException;
-
+	public void close() throws PedidoException;
 }

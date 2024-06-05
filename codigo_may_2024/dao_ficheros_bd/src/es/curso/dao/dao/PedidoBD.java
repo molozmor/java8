@@ -8,8 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.sql.Connection;
@@ -17,43 +15,39 @@ import java.sql.Connection;
 import es.curso.dao.beans.Empleado;
 import es.curso.dao.beans.Pedido;
 
-
 /**
- * Clase que implementa las operaciones CRUD para un Pedido:
- * Create -> insert into
- * Read -> select pk
- * Update -> update
- * Delete -> delete
+ * Clase que implementa las operaciones CRUD para un Pedido: Create -> insert
+ * into Read -> select pk Update -> update Delete -> delete
  * 
  */
 public class PedidoBD implements IOperaciones {
-	
+
 	private static final String URL_BD = "jdbc:sqlite:";
-	
+
 	private Connection conexion;
 	private String pathBD;
 	private String cadConexion;
-	
+
 	public PedidoBD(String pathBD) throws PedidoException {
 		File f;
 		this.pathBD = pathBD;
 		this.cadConexion = URL_BD + pathBD;
-						
+
 		try {
 			// Comprobar si existe el fichero de la base de datos:
 			f = new File(pathBD);
 			if (!f.exists()) {
 				throw new FileNotFoundException("No existe el fichero: " + pathBD);
 			}
-			
+
 			// Abrir la conexion:
 			Class.forName("org.sqlite.JDBC");
 			this.conexion = DriverManager.getConnection(this.cadConexion);
-			
+
 		} catch (ClassNotFoundException | SQLException | FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			throw new PedidoException(e.getMessage());
-		}				
+		}
 	}
 
 	@Override
@@ -64,20 +58,20 @@ public class PedidoBD implements IOperaciones {
 		ResultSet rs = null;
 		Pedido pedido;
 		String sql = "select * from pedidos";
-				
+
 		pedidos = new ArrayList<Pedido>();
 		try {
 			ps = this.conexion.prepareStatement(sql);
 			rs = ps.executeQuery();
-			
+
 			while (rs.next()) {
-				pedido = this.cargaPedido(rs);											
+				pedido = this.cargaPedido(rs);
 				pedidos.add(pedido);
 			}
-			
+
 		} catch (SQLException e) {
 			throw new PedidoException(e.getMessage());
-			
+
 		} finally {
 			if (rs != null)
 				try {
@@ -94,8 +88,7 @@ public class PedidoBD implements IOperaciones {
 					e.printStackTrace();
 				}
 		}
-		
-		
+
 		return pedidos;
 	}
 
@@ -105,24 +98,24 @@ public class PedidoBD implements IOperaciones {
 		ResultSet rs = null;
 		Pedido pedido;
 		String sql = "select * from pedidos where idpedido = ?";
-		
+
 		try {
 			ps = this.conexion.prepareStatement(sql);
 			ps.setInt(1, pk);
 			rs = ps.executeQuery();
-			
+
 			if (rs.next()) {
 				// Cargar los datos del pedido
 				pedido = this.cargaPedido(rs);
-				
+
 			} else {
 				// Si no existe el pedido, lanzamos una excepción:
-				throw new PedidoException("No existe el pedido: "+pk);
+				throw new PedidoException("No existe el pedido: " + pk);
 			}
-			
+
 		} catch (SQLException e) {
 			throw new PedidoException(e.getMessage());
-			
+
 		} finally {
 			if (rs != null)
 				try {
@@ -131,7 +124,7 @@ public class PedidoBD implements IOperaciones {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			
+
 			if (ps != null)
 				try {
 					ps.close();
@@ -140,13 +133,13 @@ public class PedidoBD implements IOperaciones {
 					e.printStackTrace();
 				}
 		}
-				
+
 		return pedido;
 	}
 
 	private Pedido cargaPedido(ResultSet rs) throws SQLException {
 		Pedido pedido = new Pedido();
-		
+
 		pedido.setIdPedido(rs.getInt("idpedido"));
 		pedido.setIdCliente(rs.getString("idcliente"));
 		pedido.setIdEmpleado(rs.getInt("idempleado"));
@@ -155,29 +148,29 @@ public class PedidoBD implements IOperaciones {
 		pedido.setImporte(rs.getDouble("importe"));
 		return pedido;
 	}
-	
+
 	@Override
 	public boolean create(Pedido pedido) throws PedidoException {
 		int n = 0;
 		PreparedStatement ps = null;
-		String sql;		
-		
+		String sql;
+
 		try {
 			sql = "insert into pedidos values(?,?,?,?,?,?)";
 			ps = this.conexion.prepareStatement(sql);
-			
+
 			ps.setInt(1, pedido.getIdPedido());
 			ps.setString(2, pedido.getIdCliente());
 			ps.setInt(3, pedido.getIdEmpleado());
 			ps.setInt(4, pedido.getIdEmpresaEnvio());
 			ps.setDouble(5, pedido.getImporte());
 			ps.setString(6, pedido.getPais());
-			
+
 			n = ps.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			throw new PedidoException(e.getMessage());
-			
+
 		} finally {
 			if (ps != null)
 				try {
@@ -195,25 +188,25 @@ public class PedidoBD implements IOperaciones {
 		PreparedStatement ps = null;
 		String sql;
 		int n;
-		
+
 		try {
-			sql = "update pedidos set idcliente=?, idempleado=?, idempresaenvio=?, "+
-					"importe=?, pais=? where idpedido=?";
+			sql = "update pedidos set idcliente=?, idempleado=?, idempresaenvio=?, "
+					+ "importe=?, pais=? where idpedido=?";
 			ps = this.conexion.prepareStatement(sql);
-						
+
 			ps.setString(1, pedido.getIdCliente());
 			ps.setInt(2, pedido.getIdEmpleado());
 			ps.setInt(3, pedido.getIdEmpresaEnvio());
 			ps.setDouble(4, pedido.getImporte());
 			ps.setString(5, pedido.getPais());
 			ps.setInt(6, pedido.getIdPedido());
-			
+
 			n = ps.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			throw new PedidoException(e.getMessage());
-			
+
 		} finally {
 			if (ps != null)
 				try {
@@ -232,25 +225,24 @@ public class PedidoBD implements IOperaciones {
 		PreparedStatement ps2 = null;
 		String sql;
 		int n;
-		
+
 		try {
-			//System.out.println("Autocommit: " + this.conexion.getAutoCommit());
+			// System.out.println("Autocommit: " + this.conexion.getAutoCommit());
 			this.conexion.setAutoCommit(false);
-					
-			
+
 			// Borrar las filas dependientes de los pedidos: detallespedidos
 			sql = "delete from detallespedido where idpedido=?";
 			ps2 = this.conexion.prepareStatement(sql);
-			ps2.setInt(1, pk);			
+			ps2.setInt(1, pk);
 			n = ps2.executeUpdate();
-			
+
 			sql = "delete from pedidos where idpedido=?";
-			ps = this.conexion.prepareStatement(sql);									
-			ps.setInt(1, pk);			
+			ps = this.conexion.prepareStatement(sql);
+			ps.setInt(1, pk);
 			n += ps.executeUpdate();
-			
+
 			this.conexion.commit(); // Confirmar la tx
-			
+
 		} catch (SQLException e) {
 			try {
 				this.conexion.rollback();
@@ -258,10 +250,10 @@ public class PedidoBD implements IOperaciones {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			
+
 			// TODO Auto-generated catch block
 			throw new PedidoException(e.getMessage());
-			
+
 		} finally {
 			if (ps != null)
 				try {
@@ -273,32 +265,43 @@ public class PedidoBD implements IOperaciones {
 		}
 		return n > 0;
 	}
-	
+
 	public boolean createEmpleado(Empleado emp) throws Exception {
 		int n = 0;
 		PreparedStatement ps = null;
-		String sql;	
+		String sql;
 		ResultSet rs;
-		
+
 		try {
 			sql = "insert into empleados(nombre,cargo) values(?,?)";
 			ps = this.conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			
+
 			ps.setString(1, emp.getNombre());
 			ps.setString(2, emp.getCargo());
-			
+
 			n = ps.executeUpdate();
 			// Obtener el valor de la pk generada por la BD:
 			rs = ps.getGeneratedKeys();
 			if (rs.next()) {
 				emp.setId(rs.getInt(1));
 			}
-			
+
 		} catch (Exception e) {
 			throw e;
 		}
-		
+
 		return n == 1;
+	}
+
+	@Override
+	public void close() throws PedidoException {
+		if (this.conexion != null)
+			try {
+				this.conexion.close();
+			} catch (SQLException e) {
+				throw new PedidoException(e.getMessage());
+			}
+
 	}
 
 }
