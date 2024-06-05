@@ -10,6 +10,16 @@ public class Principal {
 		
 		obj.set(new Integer(100));
 		int num = (int) obj.get();
+		
+		// Con el tipo generico:
+		Wrapper<String> texto = new Wrapper<String>("hola");
+		cad = texto.getInstancia();			
+		
+		// Ya no lo permite:
+		//texto = texto.setInstancia(new Integer(100));
+		
+		Wrapper<Integer> numero = new Wrapper<Integer>(new Integer(100));
+		num = numero.getInstancia();
 
 	}
 
