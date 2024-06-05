@@ -66,16 +66,7 @@ public class PedidoBD implements IOperaciones {
 			rs = ps.executeQuery();
 			
 			while (rs.next()) {
-				pedido = new Pedido();
-				
-				pedido.setIdPedido(rs.getInt("idpedido"));
-				pedido.setIdCliente(rs.getString("idcliente"));
-				pedido.setIdEmpleado(rs.getInt("idempleado"));
-				pedido.setIdEmpresaEnvio(rs.getInt("idempresaenvio"));
-				pedido.setPais(rs.getString("pais"));
-				pedido.setImporte(rs.getDouble("importe"));
-								
-				
+				pedido = this.cargaPedido(rs);											
 				pedidos.add(pedido);
 			}
 			
@@ -101,6 +92,62 @@ public class PedidoBD implements IOperaciones {
 		
 		
 		return pedidos;
+	}
+
+	@Override
+	public Pedido read(int pk) throws PedidoException {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Pedido pedido;
+		String sql = "select * from pedidos where idpedido = ?";
+		
+		try {
+			ps = this.conexion.prepareStatement(sql);
+			ps.setInt(0, pk);
+			
+			if (rs.next()) {
+				// Cargar los datos del pedido
+				pedido = this.cargaPedido(rs);
+				
+			} else {
+				// Si no existe el pedido, lanzamos una excepción:
+				throw new PedidoException("No existe el pedido: "+pk);
+			}
+			
+		} catch (SQLException e) {
+			throw new PedidoException(e.getMessage());
+			
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			
+			if (ps != null)
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
+				
+		return pedido;
+	}
+
+	private Pedido cargaPedido(ResultSet rs) throws SQLException {
+		Pedido pedido = new Pedido();
+		
+		pedido.setIdPedido(rs.getInt("idpedido"));
+		pedido.setIdCliente(rs.getString("idcliente"));
+		pedido.setIdEmpleado(rs.getInt("idempleado"));
+		pedido.setIdEmpresaEnvio(rs.getInt("idempresaenvio"));
+		pedido.setPais(rs.getString("pais"));
+		pedido.setImporte(rs.getDouble("importe"));
+		return pedido;
 	}
 
 }

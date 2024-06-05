@@ -151,4 +151,10 @@ public class PedidoFile implements IOperaciones {
 		return pedidos;
 	}
 
+	@Override
+	public Pedido read(int pk) throws PedidoException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
