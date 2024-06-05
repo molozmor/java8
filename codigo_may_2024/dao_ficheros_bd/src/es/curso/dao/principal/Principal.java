@@ -66,7 +66,7 @@ public class Principal {
 				System.out.println("Pedido no actualizado");
 			}
 			
-			if (dao.delete(10248)) {
+			if (dao.delete(10249)) {
 				System.out.println("Pedido borrado");
 			} else {
 				System.out.println("Pedido no borrado");

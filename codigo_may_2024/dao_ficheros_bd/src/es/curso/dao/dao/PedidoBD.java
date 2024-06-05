@@ -224,17 +224,35 @@ public class PedidoBD implements IOperaciones {
 	@Override
 	public boolean delete(int pk) throws PedidoException {
 		PreparedStatement ps = null;
+		PreparedStatement ps2 = null;
 		String sql;
 		int n;
 		
 		try {
+			//System.out.println("Autocommit: " + this.conexion.getAutoCommit());
+			this.conexion.setAutoCommit(false);
+			
+			// Borrar las filas dependientes de los pedidos: detallespedidos
+			sql = "delete from detallespedido where idpedido=?";
+			ps2 = this.conexion.prepareStatement(sql);
+			ps2.setInt(1, pk);			
+			n = ps2.executeUpdate();
+			
 			sql = "delete from pedidos where idpedido=?";
-			ps = this.conexion.prepareStatement(sql);
-									
+			ps = this.conexion.prepareStatement(sql);									
 			ps.setInt(1, pk);			
-			n = ps.executeUpdate();
+			n += ps.executeUpdate();
+			
+			this.conexion.commit(); // Confirmar la tx
 			
 		} catch (SQLException e) {
+			try {
+				this.conexion.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
 			// TODO Auto-generated catch block
 			throw new PedidoException(e.getMessage());
 			
@@ -247,7 +265,7 @@ public class PedidoBD implements IOperaciones {
 					e.printStackTrace();
 				}
 		}
-		return n == 1;
+		return n > 0;
 	}	
 
 }
