@@ -219,6 +219,35 @@ public class PedidoBD implements IOperaciones {
 				}
 		}
 		return n == 1;
+	}
+
+	@Override
+	public boolean delete(int pk) throws PedidoException {
+		PreparedStatement ps = null;
+		String sql;
+		int n;
+		
+		try {
+			sql = "delete from pedidos where idpedido=?";
+			ps = this.conexion.prepareStatement(sql);
+									
+			ps.setInt(1, pk);			
+			n = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			throw new PedidoException(e.getMessage());
+			
+		} finally {
+			if (ps != null)
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
+		return n == 1;
 	}	
 
 }

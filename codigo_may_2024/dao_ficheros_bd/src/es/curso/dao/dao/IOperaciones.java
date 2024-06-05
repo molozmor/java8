@@ -10,5 +10,6 @@ public interface IOperaciones {
 	public Pedido read(int pk) throws PedidoException;
 	public List<Pedido> select() throws PedidoException;
 	public boolean update(Pedido pedido) throws PedidoException;
+	public boolean delete(int pk) throws PedidoException;
 
 }

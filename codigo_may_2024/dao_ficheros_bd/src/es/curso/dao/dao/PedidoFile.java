@@ -169,4 +169,10 @@ public class PedidoFile implements IOperaciones {
 		return false;
 	}
 
+	@Override
+	public boolean delete(int pk) throws PedidoException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
