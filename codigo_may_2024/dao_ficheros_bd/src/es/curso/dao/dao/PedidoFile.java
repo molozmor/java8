@@ -123,7 +123,7 @@ public class PedidoFile implements IOperaciones {
 		// Recuperar la lista de pedidos del fichero
 		Pedido pedido;
 		Scanner scanner = null;
-		String linea;
+		String linea = null;
 		List<Pedido> pedidos = new ArrayList<Pedido>();
 		boolean primeraFila = true;
 
@@ -141,7 +141,7 @@ public class PedidoFile implements IOperaciones {
 				pedidos.add(pedido);
 			}
 
-		} catch (FileNotFoundException e) {
+		} catch (FileNotFoundException e) {			
 			throw new PedidoException(e.getMessage());
 
 		} finally {

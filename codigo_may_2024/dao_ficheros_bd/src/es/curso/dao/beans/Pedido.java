@@ -8,7 +8,7 @@ public class Pedido {
 	private int idEmpresaEnvio;
 	private double importe;
 	private String pais;
-	
+
 	public Pedido() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -23,21 +23,27 @@ public class Pedido {
 		this.importe = importe;
 		this.pais = pais;
 	}
-	
+
 	public Pedido(String linea) {
 		this(linea, ";");
 	}
-	
+
 	public Pedido(String linea, String sep) {
 		String datos[];
-		
-		datos = linea.split(sep);
-		this.idPedido = Integer.parseInt(datos[0]);
-		this.idCliente = datos[1];
-		this.idEmpleado = Integer.parseInt(datos[2]);
-		this.idEmpresaEnvio = Integer.parseInt(datos[3]);
-		this.importe = Double.parseDouble(datos[4].replace(",", "."));
-		this.pais = datos[5];
+
+		try {
+
+			datos = linea.split(sep);
+			this.idPedido = Integer.parseInt(datos[0]);
+			this.idCliente = datos[1];
+			this.idEmpleado = Integer.parseInt(datos[2]);
+			this.idEmpresaEnvio = Integer.parseInt(datos[3]);
+			this.importe = Double.parseDouble(datos[4].replace(",", "."));
+			this.pais = datos[5];
+
+		} catch (Exception e) {
+			System.out.println(linea);			
+		}
 	}
 
 	public int getIdPedido() {
@@ -92,6 +98,6 @@ public class Pedido {
 	public String toString() {
 		return "Pedido [idPedido=" + idPedido + ", idCliente=" + idCliente + ", idEmpleado=" + idEmpleado
 				+ ", idEmpresaEnvio=" + idEmpresaEnvio + ", importe=" + importe + ", pais=" + pais + "]";
-	}		
-	
+	}
+
 }

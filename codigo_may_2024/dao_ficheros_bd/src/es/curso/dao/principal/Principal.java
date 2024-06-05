@@ -33,12 +33,18 @@ public class Principal {
 
 	private static void pruebaDAO() {
 		IOperaciones dao;
+		List<Pedido> pedidos = null;
 		
 		try {
-			dao = new PedidoBD("bd/empresa33.db");
-			dao.select();
+			//dao = new PedidoBD("bd/empresa3.db");
+			dao = new PedidoFile("pedidos.csv");
+			pedidos = dao.select();
+			for (Pedido p : pedidos) {
+				System.out.println(p);
+			}
 			
 		} catch (PedidoException e) {
+			System.out.println(pedidos.size());
 			System.out.println(e.getMessage());
 		}
 	}
