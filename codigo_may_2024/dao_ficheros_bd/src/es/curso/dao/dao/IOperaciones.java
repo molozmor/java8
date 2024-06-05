@@ -6,6 +6,7 @@ import es.curso.dao.beans.Pedido;
 
 public interface IOperaciones {
 	
+	public boolean create(Pedido pedido) throws PedidoException;
 	public Pedido read(int pk) throws PedidoException;
 	public List<Pedido> select() throws PedidoException;
 

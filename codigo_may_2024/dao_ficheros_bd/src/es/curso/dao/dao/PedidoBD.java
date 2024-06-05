@@ -103,7 +103,8 @@ public class PedidoBD implements IOperaciones {
 		
 		try {
 			ps = this.conexion.prepareStatement(sql);
-			ps.setInt(0, pk);
+			ps.setInt(1, pk);
+			rs = ps.executeQuery();
 			
 			if (rs.next()) {
 				// Cargar los datos del pedido
@@ -148,6 +149,40 @@ public class PedidoBD implements IOperaciones {
 		pedido.setPais(rs.getString("pais"));
 		pedido.setImporte(rs.getDouble("importe"));
 		return pedido;
+	}
+
+	@Override
+	public boolean create(Pedido pedido) throws PedidoException {
+		int n = 0;
+		PreparedStatement ps = null;
+		String sql;		
+		
+		try {
+			sql = "insert into pedidos values(?,?,?,?,?,?)";
+			ps = this.conexion.prepareStatement(sql);
+			
+			ps.setInt(1, pedido.getIdPedido());
+			ps.setString(2, pedido.getIdCliente());
+			ps.setInt(3, pedido.getIdEmpleado());
+			ps.setInt(4, pedido.getIdEmpresaEnvio());
+			ps.setDouble(5, pedido.getImporte());
+			ps.setString(6, pedido.getPais());
+			
+			n = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			throw new PedidoException(e.getMessage());
+			
+		} finally {
+			if (ps != null)
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
+		return n == 1;
 	}
 
 }

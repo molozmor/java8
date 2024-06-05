@@ -36,15 +36,16 @@ public class Principal {
 		List<Pedido> pedidos = null;
 		
 		try {
-			//dao = new PedidoBD("bd/empresa3.db");
-			dao = new PedidoFile("pedidos.csv");
-			pedidos = dao.select();
-			for (Pedido p : pedidos) {
-				System.out.println(p);
-			}
+			dao = new PedidoBD("bd/empresa3.db");
+			//dao = new PedidoFile("pedidos.csv");
 			
-		} catch (PedidoException e) {
-			System.out.println(pedidos.size());
+			pedidos = dao.select();
+			System.out.println("Número de pedidos: "+pedidos.size());
+			
+			Pedido pedido = dao.read(12000); // 11047 existe
+			System.out.println(pedido);
+			
+		} catch (PedidoException e) {			
 			System.out.println(e.getMessage());
 		}
 	}
