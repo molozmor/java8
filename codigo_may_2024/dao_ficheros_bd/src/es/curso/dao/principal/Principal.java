@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 import es.curso.dao.beans.Pedido;
 import es.curso.dao.dao.IOperaciones;
+import es.curso.dao.dao.PedidoBD;
 import es.curso.dao.dao.PedidoException;
 import es.curso.dao.dao.PedidoFile;
 
@@ -24,8 +25,22 @@ public class Principal {
 		//pruebaEscribirFichero();
 		//pruebaPaises();
 		
-		pruebaScanner();
+		//pruebaScanner();
 		
+		pruebaDAO();
+		
+	}
+
+	private static void pruebaDAO() {
+		IOperaciones dao;
+		
+		try {
+			dao = new PedidoBD("bd/empresa33.db");
+			dao.select();
+			
+		} catch (PedidoException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 	private static void pruebaScanner() {

@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.sql.Connection;
 
 import es.curso.dao.beans.Pedido;
@@ -28,15 +30,22 @@ public class PedidoBD implements IOperaciones {
 	private String cadConexion;
 	
 	public PedidoBD(String pathBD) throws PedidoException {
+		File f;
 		this.pathBD = pathBD;
 		this.cadConexion = URL_BD + pathBD;
-				
-		// Abrir la conexion:
+						
 		try {
+			// Comprobar si existe el fichero de la base de datos:
+			f = new File(pathBD);
+			if (!f.exists()) {
+				throw new FileNotFoundException("No existe el fichero: " + pathBD);
+			}
+			
+			// Abrir la conexion:
 			Class.forName("org.sqlite.JDBC");
 			this.conexion = DriverManager.getConnection(this.cadConexion);
 			
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (ClassNotFoundException | SQLException | FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			throw new PedidoException(e.getMessage());
 		}				
@@ -46,8 +55,8 @@ public class PedidoBD implements IOperaciones {
 	public List<Pedido> select() throws PedidoException {
 		// TODO Auto-generated method stub
 		List<Pedido> pedidos;
-		PreparedStatement ps;
-		ResultSet rs;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
 		Pedido pedido;
 		String sql = "select * from pedidos";
 		
@@ -72,6 +81,22 @@ public class PedidoBD implements IOperaciones {
 			
 		} catch (SQLException e) {
 			throw new PedidoException(e.getMessage());
+			
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			if (ps != null)
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		}
 		
 		
