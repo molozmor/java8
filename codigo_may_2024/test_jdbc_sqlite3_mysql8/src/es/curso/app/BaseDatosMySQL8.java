@@ -26,6 +26,33 @@ public class BaseDatosMySQL8 {
 		this.conexion = DriverManager.getConnection(URL_BD, "root","antonio");
 	}
 	
+	public double sumarPedido(int idPedido) throws SQLException {
+		double n = 0;
+		String sql;
+		CallableStatement call = null;		
+		
+		try {
+			sql = "{?=CALL sumarPedido(?)}";
+			call = this.conexion.prepareCall(sql);
+			call.setInt(2, idPedido);
+			call.registerOutParameter(1, java.sql.Types.FLOAT);
+			call.executeUpdate();
+			
+			// Recuperar el parámetro de salida del procedure:
+			n = call.getFloat(1);			
+			
+		} catch (SQLException e) {
+			throw e;
+			
+		} finally {
+			if (call != null) {
+				call.close();
+			}
+		}
+		
+		return n;
+	}
+	
 	public int contarPedidos(String pais) throws SQLException {
 		int n = 0;
 		String sql;
