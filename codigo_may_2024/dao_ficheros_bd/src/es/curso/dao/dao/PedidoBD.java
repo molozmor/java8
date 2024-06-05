@@ -3,13 +3,18 @@ package es.curso.dao.dao;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.sql.Connection;
 
+import es.curso.dao.beans.Empleado;
 import es.curso.dao.beans.Pedido;
 
 
@@ -59,7 +64,7 @@ public class PedidoBD implements IOperaciones {
 		ResultSet rs = null;
 		Pedido pedido;
 		String sql = "select * from pedidos";
-		
+				
 		pedidos = new ArrayList<Pedido>();
 		try {
 			ps = this.conexion.prepareStatement(sql);
@@ -231,6 +236,7 @@ public class PedidoBD implements IOperaciones {
 		try {
 			//System.out.println("Autocommit: " + this.conexion.getAutoCommit());
 			this.conexion.setAutoCommit(false);
+					
 			
 			// Borrar las filas dependientes de los pedidos: detallespedidos
 			sql = "delete from detallespedido where idpedido=?";
@@ -266,6 +272,33 @@ public class PedidoBD implements IOperaciones {
 				}
 		}
 		return n > 0;
-	}	
+	}
+	
+	public boolean createEmpleado(Empleado emp) throws Exception {
+		int n = 0;
+		PreparedStatement ps = null;
+		String sql;	
+		ResultSet rs;
+		
+		try {
+			sql = "insert into empleados(nombre,cargo) values(?,?)";
+			ps = this.conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			
+			ps.setString(1, emp.getNombre());
+			ps.setString(2, emp.getCargo());
+			
+			n = ps.executeUpdate();
+			// Obtener el valor de la pk generada por la BD:
+			rs = ps.getGeneratedKeys();
+			if (rs.next()) {
+				emp.setId(rs.getInt(1));
+			}
+			
+		} catch (Exception e) {
+			throw e;
+		}
+		
+		return n == 1;
+	}
 
 }
