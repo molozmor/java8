@@ -163,4 +163,10 @@ public class PedidoFile implements IOperaciones {
 		return false;
 	}
 
+	@Override
+	public boolean update(Pedido pedido) throws PedidoException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

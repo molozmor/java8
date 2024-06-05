@@ -44,16 +44,27 @@ public class Principal {
 			System.out.println("Número de pedidos: "+pedidos.size());
 			
 			// Crear un nuevo pedido:
+			/*
 			pedido = new Pedido(12001, "XXXXX", 7, 1, 365.0, "Perú");
 			
 			if (dao.create(pedido)) {
 				System.out.println("Pedido creado");
 			} else {
 				System.out.println("Pedido no creado");
-			}
+			}*/
 						
 			pedido = dao.read(12001); // 11047 existe
 			System.out.println(pedido);
+			
+			pedido.setIdCliente("ADCRR");
+			pedido.setPais("Francia");
+			pedido.setImporte(599.0);
+			
+			if (dao.update(pedido)) {
+				System.out.println("Pedido actualizado");
+			} else {
+				System.out.println("Pedido no actualizado");
+			}
 			
 		} catch (PedidoException e) {			
 			System.out.println(e.getMessage());

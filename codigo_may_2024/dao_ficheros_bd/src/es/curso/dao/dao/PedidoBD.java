@@ -150,45 +150,7 @@ public class PedidoBD implements IOperaciones {
 		pedido.setImporte(rs.getDouble("importe"));
 		return pedido;
 	}
-
-	@Override
-	public boolean create(Pedido pedido) throws PedidoException {
-		// TODO Auto-generated method stub
 	
-		PreparedStatement ps = null;
-        int n;
-        String sql;
-       
-       
-        try {
-              sql = "insert into pedidos values(?,?,?,?,?,?)";
-              ps = this.conexion.prepareStatement(sql);
-             
-              ps.setInt(1, pedido.getIdPedido());
-              ps.setString(2, pedido.getIdCliente());
-              ps.setInt(3, pedido.getIdEmpleado());
-              ps.setInt(4, pedido.getIdEmpresaEnvio());
-              ps.setDouble(5, pedido.getImporte());
-              ps.setString(6, pedido.getPais());
-             
-              n =  ps.executeUpdate();
-        } catch (SQLException e) {
-              throw new PedidoException(e.getMessage());
-        } finally {
-              if (ps != null) {
-                     try {
-                           ps.close();
-                     } catch (SQLException e) {
-                           e.printStackTrace();
-                     }
-              }
-        }
-       
-        return n == 1;
- }
-
-	
-/*
 	@Override
 	public boolean create(Pedido pedido) throws PedidoException {
 		int n = 0;
@@ -222,6 +184,41 @@ public class PedidoBD implements IOperaciones {
 		}
 		return n == 1;
 	}
-	*/
+
+	@Override
+	public boolean update(Pedido pedido) throws PedidoException {
+		PreparedStatement ps = null;
+		String sql;
+		int n;
+		
+		try {
+			sql = "update pedidos set idcliente=?, idempleado=?, idempresaenvio=?, "+
+					"importe=?, pais=? where idpedido=?";
+			ps = this.conexion.prepareStatement(sql);
+						
+			ps.setString(1, pedido.getIdCliente());
+			ps.setInt(2, pedido.getIdEmpleado());
+			ps.setInt(3, pedido.getIdEmpresaEnvio());
+			ps.setDouble(4, pedido.getImporte());
+			ps.setString(5, pedido.getPais());
+			ps.setInt(6, pedido.getIdPedido());
+			
+			n = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			throw new PedidoException(e.getMessage());
+			
+		} finally {
+			if (ps != null)
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
+		return n == 1;
+	}	
 
 }
