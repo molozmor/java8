@@ -20,6 +20,19 @@ public class Principal {
 		
 		Wrapper<Integer> numero = new Wrapper<Integer>(new Integer(100));
 		num = numero.getInstancia();
+		
+		////////////////////////////////
+		
+		Matriz<Integer> m1 = new Matriz<Integer>(5, 7, 0);
+		m1.print();
+		System.out.println();
+		m1.set(3, 4, 99);
+		m1.print();
+		System.out.println();
+		
+		Matriz<String> m2 = new Matriz<String>(5, 7, "hola");
+		m2.print();
+		
 
 	}
 

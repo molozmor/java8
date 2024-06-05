@@ -31,6 +31,16 @@ public class Matriz<T> {
 		}
 	}
 	
+	public void set(int i, int j, T item) {
+		List<T> fila;
+		
+		//  Recuperar la fila
+		fila = this.m.get(i);
+		
+		// Dentro de la fila, modificar la columna.
+		fila.set(j, item);
+	}
+	
 
 	public int getFilas() {
 		return filas;

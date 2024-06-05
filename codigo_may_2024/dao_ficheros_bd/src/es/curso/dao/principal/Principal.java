@@ -61,8 +61,8 @@ public class Principal {
 		Pedido pedido;
 		
 		try {
-			dao = new PedidoBD("bd/empresa3.db");
-			//dao = new PedidoFile("pedidos.csv");
+			//dao = new PedidoBD("bd/empresa3.db");
+			dao = new PedidoFile("pedidos.csv");
 			
 			pedidos = dao.select();
 			System.out.println("Número de pedidos: "+pedidos.size());
