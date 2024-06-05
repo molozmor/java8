@@ -34,6 +34,7 @@ public class Principal {
 	private static void pruebaDAO() {
 		IOperaciones dao;
 		List<Pedido> pedidos = null;
+		Pedido pedido;
 		
 		try {
 			dao = new PedidoBD("bd/empresa3.db");
@@ -42,7 +43,16 @@ public class Principal {
 			pedidos = dao.select();
 			System.out.println("Número de pedidos: "+pedidos.size());
 			
-			Pedido pedido = dao.read(12000); // 11047 existe
+			// Crear un nuevo pedido:
+			pedido = new Pedido(12001, "XXXXX", 7, 1, 365.0, "Perú");
+			
+			if (dao.create(pedido)) {
+				System.out.println("Pedido creado");
+			} else {
+				System.out.println("Pedido no creado");
+			}
+						
+			pedido = dao.read(12001); // 11047 existe
 			System.out.println(pedido);
 			
 		} catch (PedidoException e) {			
