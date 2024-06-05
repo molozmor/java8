@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
+import es.curso.dao.beans.Empleado;
 import es.curso.dao.beans.Pedido;
 import es.curso.dao.dao.IOperaciones;
 import es.curso.dao.dao.PedidoBD;
@@ -27,7 +28,30 @@ public class Principal {
 		
 		//pruebaScanner();
 		
-		pruebaDAO();
+		//pruebaDAO();
+		
+		pruebaGenerarPK();
+		
+	}
+
+	private static void pruebaGenerarPK() {
+		PedidoBD bd;
+		Empleado emp;
+		
+		try {
+			emp = new Empleado(0, "Juan", "Presidente");
+			bd = new PedidoBD("bd/empresa3.db");
+			
+			if (bd.createEmpleado(emp)) {
+				System.out.println("Emp Creado: "+emp);
+			} else {
+				System.out.println("No creado");
+			}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 

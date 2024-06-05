@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.CallableStatement;
 
 public class BaseDatosMySQL8 {
 
@@ -23,6 +24,33 @@ public class BaseDatosMySQL8 {
 	private BaseDatosMySQL8() throws SQLException, ClassNotFoundException {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		this.conexion = DriverManager.getConnection(URL_BD, "root","antonio");
+	}
+	
+	public int contarPedidos(String pais) throws SQLException {
+		int n = 0;
+		String sql;
+		CallableStatement call = null;		
+		
+		try {
+			sql = "{CALL contarPedidos(?, ?)}";
+			call = this.conexion.prepareCall(sql);
+			call.setString(1, pais);
+			call.registerOutParameter(2, java.sql.Types.INTEGER);
+			call.executeUpdate();
+			
+			// Recuperar el parámetro de salida del procedure:
+			n = call.getInt(2);			
+			
+		} catch (SQLException e) {
+			throw e;
+			
+		} finally {
+			if (call != null) {
+				call.close();
+			}
+		}
+		
+		return n;
 	}
 
 	public void getClientes() throws SQLException {

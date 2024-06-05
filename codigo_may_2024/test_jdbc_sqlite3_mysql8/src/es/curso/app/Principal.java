@@ -5,8 +5,8 @@ import java.sql.SQLException;
 public class Principal {
 
 	public static void main(String[] args) {
-		testSQLite3();
-		//testMySQL8();
+		//testSQLite3();
+		testMySQL8();
 	}
 
 	private static void testMySQL8() {
@@ -17,7 +17,8 @@ public class Principal {
 			bd = BaseDatosMySQL8.getInstance();
 			System.out.println("\nConexión abierta con MySQL8 ...");
 			
-			bd.getClientes();
+			//bd.getClientes();
+			System.out.println("Pedidos de Alemania: " + bd.contarPedidos("Alemania"));
 
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
