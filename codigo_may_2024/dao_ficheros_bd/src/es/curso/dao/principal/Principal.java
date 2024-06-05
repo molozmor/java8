@@ -68,15 +68,18 @@ public class Principal {
 			System.out.println("Número de pedidos: "+pedidos.size());
 			
 			// Crear un nuevo pedido:
-			/*
-			pedido = new Pedido(12001, "XXXXX", 7, 1, 365.0, "Perú");
+			
+			pedido = new Pedido(14005, "RRTGG", 7, 1, 365.0, "Perú");
 			
 			if (dao.create(pedido)) {
 				System.out.println("Pedido creado");
 			} else {
 				System.out.println("Pedido no creado");
-			}*/
-						
+			}
+			
+			dao.close();
+				
+			/*
 			pedido = dao.read(12001); // 11047 existe
 			System.out.println(pedido);
 			
@@ -94,7 +97,7 @@ public class Principal {
 				System.out.println("Pedido borrado");
 			} else {
 				System.out.println("Pedido no borrado");
-			}
+			}*/
 			
 		} catch (PedidoException e) {			
 			System.out.println(e.getMessage());
