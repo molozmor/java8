@@ -23,10 +23,12 @@ public class Servidor {
 		try {
 			// Crear el socket para atender a los clientes:			
 			server = new ServerSocket(PUERTO);
+			System.out.println("Servidor ok!");
 			
 			// Aceptar clientes:
 			System.out.println("Esperando clientes ...");
-			cliente = server.accept();
+			cliente = server.accept();			
+			System.out.println("cliente conectado: "+cliente.getLocalAddress());
 			
 			// Habilitar canales de E/S:
 			canalEntrada = new DataInputStream(cliente.getInputStream());
@@ -39,7 +41,7 @@ public class Servidor {
 				// Enviar respuesta al cliente:
 				canalSalida.writeUTF(texto.toUpperCase());
 				
-			} while (texto.equalsIgnoreCase("fin"));
+			} while (!texto.equalsIgnoreCase("fin"));
 			
 		} catch (IOException e) {
 			System.out.println(e.getMessage());

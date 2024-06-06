@@ -24,6 +24,7 @@ public class Cliente {
 		try {
 			// Crear el socket:
 			cliente = new Socket(HOST, PUERTO);
+			System.out.println("cliente conectado ...");
 			
 			// Inicializar canales de E/S con el socket.
 			canalEntrada = new DataInputStream(cliente.getInputStream());
@@ -45,7 +46,7 @@ public class Cliente {
 				
 				System.out.println("SERVER: "+respuesta);
 				
-			} while (texto.equalsIgnoreCase("fin"));
+			} while (!texto.equalsIgnoreCase("fin"));
 			
 			
 		} catch (IOException e) {
