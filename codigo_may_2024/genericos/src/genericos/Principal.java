@@ -1,6 +1,35 @@
 package genericos;
 
+import java.util.Arrays;
+
 public class Principal {
+		
+	public static <T extends Comparable<T>> void ordenar(T[] array) {
+	    T aux;
+	    for (int i = 0; i < array.length - 1; i++) {
+	        for (int j = i + 1; j < array.length; j++) {
+	            if (array[i].compareTo(array[j]) > 0) {
+	               
+	                aux = array[i];
+	                array[i] = array[j];
+	                array[j] = aux;
+	            }
+	        }
+	    }
+	}
+	
+	/*
+	public static <T> void ordenar(T[] array) {
+		T aux;
+		
+		for (int i = 0 ; i < array.length-1 ; i++) {
+			for (int j = i+1 ; j < array.length ; j++) {
+				if (compareTo(array[i], array[j]) > 0) {
+					
+				}
+			}
+		}
+	}*/
 
 	public static void main(String[] args) {
 		ObjectWrapper obj;
@@ -31,9 +60,17 @@ public class Principal {
 		System.out.println();
 		
 		Matriz<String> m2 = new Matriz<String>(5, 7, "hola");
+		m2.set(0, 0, "XXX");
 		m2.print();
 		
-
+		// Ordenar arrays:
+		Integer numeros[] = {4,6,4,2,1,2,4,5};
+		String nombres[] = {"Gema", "Ana","Raúl","Roberto"};
+		
+		ordenar(nombres);
+		ordenar(numeros);
+		System.out.println(Arrays.toString(nombres));
+		System.out.println(Arrays.toString(numeros));
 	}
 
 }

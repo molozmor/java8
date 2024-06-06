@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Matriz<T> {
 	
-	private List<List<T>> m;
+	private List<List<T>> m; 
 	private int filas;
 	private int cols;
 	
