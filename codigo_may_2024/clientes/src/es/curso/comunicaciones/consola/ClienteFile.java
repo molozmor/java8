@@ -19,8 +19,7 @@ public class ClienteFile {
 		DataOutputStream canalSalida = null;
 			
 		String texto, respuesta;
-		Scanner scanner;
-		
+			
 		try {
 			// Crear el socket:
 			cliente = new Socket(HOST, PUERTO);
@@ -30,24 +29,13 @@ public class ClienteFile {
 			canalEntrada = new DataInputStream(cliente.getInputStream());
 			canalSalida = new DataOutputStream(cliente.getOutputStream());
 			
-			// Crear el scanner para leer de teclado:
-			scanner = new Scanner(System.in);
-			
-			do {
-				// Leer de teclado:
-				System.out.print("Mensaje:> ");
-				texto = scanner.nextLine();
+			// Esperar envio del servidor:
+			respuesta = canalEntrada.readUTF();
+			System.out.println("SERVER: "+respuesta);
 				
-				// Enviar al servidor:
-				canalSalida.writeUTF(texto);
+			// Enviar al servidor:
+			canalSalida.writeUTF("bytes recibidos: "+respuesta.length());
 				
-				// Esperar la respuesta del servidor:
-				respuesta = canalEntrada.readUTF();
-				
-				System.out.println("SERVER: "+respuesta);
-				
-			} while (!texto.equalsIgnoreCase("fin"));
-			
 			
 		} catch (IOException e) {
 			System.out.println(e.getMessage());

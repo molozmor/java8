@@ -44,6 +44,8 @@ public class ServidorFile {
 			canalSalida = new DataOutputStream(cliente.getOutputStream());
 
 			texto = leerFichero("ficheros/Empleados.txt");
+			
+			System.out.println("texto a enviar:\n"+texto);
 
 			// Enviar contenido del fichero al cliente:
 			canalSalida.writeUTF(texto);
