@@ -38,6 +38,8 @@ public class Servidor {
 				// Esperar el mensaje del cliente:
 				texto = canalEntrada.readUTF();
 				
+				System.out.println("CLIENTE: "+texto);
+				
 				// Enviar respuesta al cliente:
 				canalSalida.writeUTF(texto.toUpperCase());
 				
