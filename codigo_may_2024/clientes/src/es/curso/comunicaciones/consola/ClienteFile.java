@@ -2,8 +2,11 @@ package es.curso.comunicaciones.consola;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 public class ClienteFile {
@@ -31,7 +34,9 @@ public class ClienteFile {
 			
 			// Esperar envio del servidor:
 			respuesta = canalEntrada.readUTF();
-			System.out.println("SERVER: "+respuesta);
+			//System.out.println("SERVER: "+respuesta);
+			
+			grabarFichero(respuesta);
 				
 			// Enviar al servidor:
 			canalSalida.writeUTF("bytes recibidos: "+respuesta.length());
@@ -53,6 +58,19 @@ public class ClienteFile {
 				}			
 		}
 		
+	}
+
+	private static void grabarFichero(String contenido) throws IOException {
+		Date ahora = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd_MM_yyyy_HH_mm_ss");
+		String path;
+		FileOutputStream fichero;
+		
+		path = "ficheros/"+sdf.format(ahora)+".txt";
+		fichero = new FileOutputStream(path);
+		fichero.write(contenido.getBytes());
+		fichero.close();
+		System.out.println("Fichero descargado: "+path);
 	}
 
 }
