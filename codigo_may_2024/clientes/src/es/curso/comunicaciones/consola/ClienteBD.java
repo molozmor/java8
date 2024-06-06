@@ -35,13 +35,17 @@ public class ClienteBD {
 			// Crear el socket:
 			cliente = new Socket(HOST, PUERTO);
 			System.out.println("cliente conectado ...");
+			System.out.println("Vamos a abrir canales de entrada / salida:");
 			
 			// Inicializar canales de E/S con el socket.
-			canalEntrada = new ObjectInputStream(cliente.getInputStream());
 			canalSalida = new ObjectOutputStream(cliente.getOutputStream());
+			canalEntrada = new ObjectInputStream(cliente.getInputStream());
+			
+			System.out.println("Se han creado los canales ...");
 			
 			// Crear el scanner para leer de teclado:
 			scanner = new Scanner(System.in);
+			System.out.println("Scanner creado ...");
 			
 			do {
 				empleado = leerEmpleado(scanner);
