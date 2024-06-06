@@ -14,7 +14,7 @@ public class Cliente {
 	public static void main(String[] args) {
 		Socket cliente = null;
 		
-		// Para leer / escri
+		// Para leer / escribir
 		DataInputStream canalEntrada = null;
 		DataOutputStream canalSalida = null;
 			
