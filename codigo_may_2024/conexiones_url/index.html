@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html class="no-js" lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+
+	<!-- This site is optimized with the Yoast SEO plugin v22.8 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Utilizando Genéricos en Java - Somos Hackers de la Programación</title>
+	<meta name="description" content="En esta entrada exploramos el uso de Genéricos en Java. Los genéricos nos permiten parametrizar los tipos de datos en Java." />
+	<link rel="canonical" href="https://somoshackersdelaprogramacion.es/utilizando-genericos-en-java" />
+	<meta property="og:locale" content="es_ES" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Utilizando Genéricos en Java - Somos Hackers de la Programación" />
+	<meta property="og:description" content="En esta entrada exploramos el uso de Genéricos en Java. Los genéricos nos permiten parametrizar los tipos de datos en Java." />
+	<meta property="og:url" content="https://somoshackersdelaprogramacion.es/utilizando-genericos-en-java" />
+	<meta property="og:site_name" content="Somos Hackers de la Programación" />
+	<meta property="article:published_time" content="2022-05-15T20:46:10+00:00" />
+	<meta property="article:modified_time" content="2022-05-16T08:21:03+00:00" />
+	<meta property="og:image" content="https://i0.wp.com/somoshackersdelaprogramacion.es/wp-content/uploads/2022/05/genericos-java.webp?fit=1600%2C900&ssl=1" />
+	<meta property="og:image:width" content="1600" />
+	<meta property="og:image:height" content="900" />
+	<meta property="og:image:type" content="image/webp" />
+	<meta name="author" content="k3rnel" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="Escrito por" />
+	<meta name="twitter:data1" content="k3rnel" />
+	<meta name="twitter:label2" content="Tiempo de lectura" />
+	<meta name="twitter:data2" content="7 minutos" />
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://somoshackersdelaprogramacion.es/utilizando-genericos-en-java","url":"https://somoshackersdelaprogramacion.es/utilizando-genericos-en-java","name":"Utilizando Genéricos en Java - Somos Hackers de la Programación","isPartOf":{"@id":"https://somoshackersdelaprogramacion.es/#website"},"primaryImageOfPage":{"@id":"https://somoshackersdelaprogramacion.es/utilizando-genericos-en-java#primaryimage"},"image":{"@id":"https://somoshackersdelaprogramacion.es/utilizando-genericos-en-java#primaryimage"},"thumbnailUrl":"https://i0.wp.com/somoshackersdelaprogramacion.es/wp-content/uploads/2022/05/genericos-java.webp?fit=1600%2C900&ssl=1","datePublished":"2022-05-15T20:46:10+00:00","dateModified":"2022-05-16T08:21:03+00:00","author":{"@id":"https://somoshackersdelaprogramacion.es/#/schema/person/f52f986ed97552fa89c70b9b8f5c87bc"},"description":"En esta entrada exploramos el uso de Genéricos en Java. Los genéricos nos permiten parametrizar los tipos de datos en Java.","breadcrumb":{"@id":"https://somoshackersdelaprogramacion.es/utilizando-genericos-en-java#breadcrumb"},"inLanguage":"es","potentialAction":[{"@type":"ReadAction","target":["https://somoshackersdelaprogramacion.es/utilizando-genericos-en-java"]}]},{"@type":"ImageObject","inLanguage":"es","@id":"https://somoshackersdelaprogramacion.es/utilizando-genericos-en-java#primaryimage","url":"https://i0.wp.com/somoshackersdelaprogramacion.es/wp-content/uploads/2022/05/genericos-java.webp?fit=1600%2C900&ssl=1","contentUrl":"https://i0.wp.com/somoshackersdelaprogramacion.es/wp-content/uploads/2022/05/genericos-java.webp?fit=1600%2C900&ssl=1","width":1600,"height":900,"caption":"Utilizando Genéricos en Java"},{"@type":"BreadcrumbList","@id":"https://somoshackersdelaprogramacion.es/utilizando-genericos-en-java#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Portada","item":"https://somoshackersdelaprogramacion.es/"},{"@type":"ListItem","position":2,"name":"Utilizando Genéricos en Java"}]},{"@type":"WebSite","@id":"https://somoshackersdelaprogramacion.es/#website","url":"https://somoshackersdelaprogramacion.es/","name":"Somos Hackers de la Programación","description":"Se trata de un blog personal acerca del arte de la programación","potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://somoshackersdelaprogramacion.es/?s={search_term_string}"},"query-input":"required name=search_term_string"}],"inLanguage":"es"},{"@type":"Person","@id":"https://somoshackersdelaprogramacion.es/#/schema/person/f52f986ed97552fa89c70b9b8f5c87bc","name":"k3rnel","image":{"@type":"ImageObject","inLanguage":"es","@id":"https://somoshackersdelaprogramacion.es/#/schema/person/image/","url":"https://secure.gravatar.com/avatar/f19c5623e620bcd2776e1ca78f14494d?s=96&d=mm&r=g","contentUrl":"https://secure.gravatar.com/avatar/f19c5623e620bcd2776e1ca78f14494d?s=96&d=mm&r=g","caption":"k3rnel"},"sameAs":["https://somoshackersdelaprogramacion.es"],"url":"https://somoshackersdelaprogramacion.es/author/k3rnel"}]}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//stats.wp.com' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//i0.wp.com' />
+<link rel='dns-prefetch' href='//c0.wp.com' />
+<link rel="alternate" type="application/rss+xml" title="Somos Hackers de la Programación &raquo; Feed" href="https://somoshackersdelaprogramacion.es/feed" />
+<link rel="alternate" type="application/rss+xml" title="Somos Hackers de la Programación &raquo; Feed de los comentarios" href="https://somoshackersdelaprogramacion.es/comments/feed" />
+<link rel="alternate" type="application/rss+xml" title="Somos Hackers de la Programación &raquo; Comentario Utilizando Genéricos en Java del feed" href="https://somoshackersdelaprogramacion.es/utilizando-genericos-en-java/feed" />
+<script type="text/javascript">
+/* <![CDATA[ */
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15.0.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15.0.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/somoshackersdelaprogramacion.es\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.5.3"}};
+/*! This file is auto-generated */
+!function(i,n){var o,s,e;function c(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(o,JSON.stringify(t))}catch(e){}}function p(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data),r=(e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0),new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data));return t.every(function(e,t){return e===r[t]})}function u(e,t,n){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\uddfa\ud83c\uddf3","\ud83c\uddfa\u200b\ud83c\uddf3")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!n(e,"\ud83d\udc26\u200d\u2b1b","\ud83d\udc26\u200b\u2b1b")}return!1}function f(e,t,n){var r="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):i.createElement("canvas"),a=r.getContext("2d",{willReadFrequently:!0}),o=(a.textBaseline="top",a.font="600 32px Arial",{});return e.forEach(function(e){o[e]=t(a,e,n)}),o}function t(e){var t=i.createElement("script");t.src=e,t.defer=!0,i.head.appendChild(t)}"undefined"!=typeof Promise&&(o="wpEmojiSettingsSupports",s=["flag","emoji"],n.supports={everything:!0,everythingExceptFlag:!0},e=new Promise(function(e){i.addEventListener("DOMContentLoaded",e,{once:!0})}),new Promise(function(t){var n=function(){try{var e=JSON.parse(sessionStorage.getItem(o));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(s),u.toString(),p.toString()].join(",")+"));",r=new Blob([e],{type:"text/javascript"}),a=new Worker(URL.createObjectURL(r),{name:"wpTestEmojiSupports"});return void(a.onmessage=function(e){c(n=e.data),a.terminate(),t(n)})}catch(e){}c(n=f(s,u,p))}t(n)}).then(function(e){for(var t in e)n.supports[t]=e[t],n.supports.everything=n.supports.everything&&n.supports[t],"flag"!==t&&(n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&n.supports[t]);n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&!n.supports.flag,n.DOMReady=!1,n.readyCallback=function(){n.DOMReady=!0}}).then(function(){return e}).then(function(){var e;n.supports.everything||(n.readyCallback(),(e=n.source||{}).concatemoji?t(e.concatemoji):e.wpemoji&&e.twemoji&&(t(e.twemoji),t(e.wpemoji)))}))}((window,document),window._wpemojiSettings);
+/* ]]> */
+</script>
+<style id='wp-emoji-styles-inline-css' type='text/css'>
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+</style>
+<link rel='stylesheet' id='wp-block-library-css' href='https://c0.wp.com/c/6.5.3/wp-includes/css/dist/block-library/style.min.css' type='text/css' media='all' />
+<style id='wp-block-library-inline-css' type='text/css'>
+.has-text-align-justify{text-align:justify;}
+</style>
+<link rel='stylesheet' id='mediaelement-css' href='https://c0.wp.com/c/6.5.3/wp-includes/js/mediaelement/mediaelementplayer-legacy.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-mediaelement-css' href='https://c0.wp.com/c/6.5.3/wp-includes/js/mediaelement/wp-mediaelement.min.css' type='text/css' media='all' />
+<style id='jetpack-sharing-buttons-style-inline-css' type='text/css'>
+.jetpack-sharing-buttons__services-list{display:flex;flex-direction:row;flex-wrap:wrap;gap:0;list-style-type:none;margin:5px;padding:0}.jetpack-sharing-buttons__services-list.has-small-icon-size{font-size:12px}.jetpack-sharing-buttons__services-list.has-normal-icon-size{font-size:16px}.jetpack-sharing-buttons__services-list.has-large-icon-size{font-size:24px}.jetpack-sharing-buttons__services-list.has-huge-icon-size{font-size:36px}@media print{.jetpack-sharing-buttons__services-list{display:none!important}}.editor-styles-wrapper .wp-block-jetpack-sharing-buttons{gap:0;padding-inline-start:0}ul.jetpack-sharing-buttons__services-list.has-background{padding:1.25em 2.375em}
+</style>
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='email-subscribers-css' href='https://somoshackersdelaprogramacion.es/wp-content/plugins/email-subscribers/lite/public/css/email-subscribers-public.css?ver=5.7.22' type='text/css' media='all' />
+<link rel='stylesheet' id='yosemite-fonts-css' href='https://fonts.googleapis.com/css?family=Lora%3A400%2C400i%2C700%2C700i%7CJosefin+Slab%3A400%7CLibre+Baskerville%3A400%2C400i%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='font-awesome-css' href='https://somoshackersdelaprogramacion.es/wp-content/themes/yosemite-lite/css/font-awesome.css?ver=4.5.0' type='text/css' media='all' />
+<link rel='stylesheet' id='yosemite-style-css' href='https://somoshackersdelaprogramacion.es/wp-content/themes/yosemite-lite/style.css?ver=6.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='heateor_sss_frontend_css-css' href='https://somoshackersdelaprogramacion.es/wp-content/plugins/sassy-social-share/public/css/sassy-social-share-public.css?ver=3.3.63' type='text/css' media='all' />
+<style id='heateor_sss_frontend_css-inline-css' type='text/css'>
+.heateor_sss_button_instagram span.heateor_sss_svg,a.heateor_sss_instagram span.heateor_sss_svg{background:radial-gradient(circle at 30% 107%,#fdf497 0,#fdf497 5%,#fd5949 45%,#d6249f 60%,#285aeb 90%)}.heateor_sss_horizontal_sharing .heateor_sss_svg,.heateor_sss_standard_follow_icons_container .heateor_sss_svg{color:#fff;border-width:0px;border-style:solid;border-color:transparent}.heateor_sss_horizontal_sharing .heateorSssTCBackground{color:#666}.heateor_sss_horizontal_sharing span.heateor_sss_svg:hover,.heateor_sss_standard_follow_icons_container span.heateor_sss_svg:hover{border-color:transparent;}.heateor_sss_vertical_sharing span.heateor_sss_svg,.heateor_sss_floating_follow_icons_container span.heateor_sss_svg{color:#fff;border-width:0px;border-style:solid;border-color:transparent;}.heateor_sss_vertical_sharing .heateorSssTCBackground{color:#666;}.heateor_sss_vertical_sharing span.heateor_sss_svg:hover,.heateor_sss_floating_follow_icons_container span.heateor_sss_svg:hover{border-color:transparent;}@media screen and (max-width:783px) {.heateor_sss_vertical_sharing{display:none!important}}
+</style>
+<style id='kadence-blocks-global-variables-inline-css' type='text/css'>
+:root {--global-kb-font-size-sm:clamp(0.8rem, 0.73rem + 0.217vw, 0.9rem);--global-kb-font-size-md:clamp(1.1rem, 0.995rem + 0.326vw, 1.25rem);--global-kb-font-size-lg:clamp(1.75rem, 1.576rem + 0.543vw, 2rem);--global-kb-font-size-xl:clamp(2.25rem, 1.728rem + 1.63vw, 3rem);--global-kb-font-size-xxl:clamp(2.5rem, 1.456rem + 3.26vw, 4rem);--global-kb-font-size-xxxl:clamp(2.75rem, 0.489rem + 7.065vw, 6rem);}:root {--global-palette1: #3182CE;--global-palette2: #2B6CB0;--global-palette3: #1A202C;--global-palette4: #2D3748;--global-palette5: #4A5568;--global-palette6: #718096;--global-palette7: #EDF2F7;--global-palette8: #F7FAFC;--global-palette9: #ffffff;}
+</style>
+<link rel='stylesheet' id='jetpack_css-css' href='https://c0.wp.com/p/jetpack/13.5/css/jetpack.css' type='text/css' media='all' />
+<script type="text/javascript" id="jetpack_related-posts-js-extra">
+/* <![CDATA[ */
+var related_posts_js_options = {"post_heading":"h4"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://c0.wp.com/p/jetpack/13.5/_inc/build/related-posts/related-posts.min.js" id="jetpack_related-posts-js"></script>
+<script type="text/javascript" src="https://c0.wp.com/c/6.5.3/wp-includes/js/jquery/jquery.min.js" id="jquery-core-js"></script>
+<script type="text/javascript" src="https://c0.wp.com/c/6.5.3/wp-includes/js/jquery/jquery-migrate.min.js" id="jquery-migrate-js"></script>
+<link rel="https://api.w.org/" href="https://somoshackersdelaprogramacion.es/wp-json/" /><link rel="alternate" type="application/json" href="https://somoshackersdelaprogramacion.es/wp-json/wp/v2/posts/408" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://somoshackersdelaprogramacion.es/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.5.3" />
+<link rel='shortlink' href='https://somoshackersdelaprogramacion.es/?p=408' />
+<link rel="alternate" type="application/json+oembed" href="https://somoshackersdelaprogramacion.es/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fsomoshackersdelaprogramacion.es%2Futilizando-genericos-en-java" />
+<link rel="alternate" type="text/xml+oembed" href="https://somoshackersdelaprogramacion.es/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fsomoshackersdelaprogramacion.es%2Futilizando-genericos-en-java&#038;format=xml" />
+	<style>img#wpstats{display:none}</style>
+		<link rel="pingback" href="https://somoshackersdelaprogramacion.es/xmlrpc.php">	<script>document.documentElement.className = document.documentElement.className.replace( 'no-js', 'js' );</script>
+	<style type="text/css">.broken_link, a.broken_link {
+	text-decoration: line-through;
+}</style><link rel="icon" href="https://i0.wp.com/somoshackersdelaprogramacion.es/wp-content/uploads/2022/06/cropped-cropped-925895_embed_development_code_coding_dev_icon.png?fit=32%2C32&#038;ssl=1" sizes="32x32" />
+<link rel="icon" href="https://i0.wp.com/somoshackersdelaprogramacion.es/wp-content/uploads/2022/06/cropped-cropped-925895_embed_development_code_coding_dev_icon.png?fit=192%2C192&#038;ssl=1" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://i0.wp.com/somoshackersdelaprogramacion.es/wp-content/uploads/2022/06/cropped-cropped-925895_embed_development_code_coding_dev_icon.png?fit=180%2C180&#038;ssl=1" />
+<meta name="msapplication-TileImage" content="https://i0.wp.com/somoshackersdelaprogramacion.es/wp-content/uploads/2022/06/cropped-cropped-925895_embed_development_code_coding_dev_icon.png?fit=270%2C270&#038;ssl=1" />
+		<style type="text/css" id="wp-custom-css">
+			.codigo_personalizado{
+	font-size: 14pt !important;
+}
+
+.site-content p{
+	font-size: 14pt !important;
+}
+
+.entry-content li{
+	font-size: 14pt !important;
+}
+
+.widget ul li a {
+  color: #b0814e;
+	font-size: 12pt;
+}
+
+.wp-block-latest-comments{
+	font-size: 12pt;
+}		</style>
+		</head>
+
+<body class="post-template-default single single-post postid-408 single-format-standard">
+<div id="page" class="site">
+	<span
+		class="page-overlay"
+		role="button"
+		tabindex="-1"
+			></span>
+	<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+	<header id="masthead" class="site-header" role="banner">
+		<div class="site-branding container">
+										<p class="site-title"><a href="https://somoshackersdelaprogramacion.es/" rel="home">Somos Hackers de la Programación</a></p>
+								<p class="site-description">Se trata de un blog personal acerca del arte de la programación</p>
+						</div><!-- .logo -->
+
+		<div class="header-content">
+			<div class="header-content__container container">
+				<nav id="site-navigation" class="main-navigation" role="navigation">
+					<button
+						class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"
+											>Menu</button>
+					<div class="menu-general-container"><ul id="primary-menu" class="menu"><li id="menu-item-103" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-103"><a href="https://somoshackersdelaprogramacion.es/category/java">Java</a></li>
+<li id="menu-item-108" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-108"><a href="https://somoshackersdelaprogramacion.es/category/estructuras-de-datos">Estructuras de Datos</a></li>
+<li id="menu-item-288" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-288"><a href="https://somoshackersdelaprogramacion.es/category/algoritmos">Algoritmos</a></li>
+<li id="menu-item-586" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-586"><a href="https://somoshackersdelaprogramacion.es/category/android">Android</a></li>
+<li id="menu-item-104" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-104"><a href="https://somoshackersdelaprogramacion.es/category/javascript">JavaScript</a></li>
+<li id="menu-item-105" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-105"><a href="https://somoshackersdelaprogramacion.es/category/c-c">C/C++</a></li>
+<li id="menu-item-106" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-106"><a href="https://somoshackersdelaprogramacion.es/category/python">Python</a></li>
+</ul></div>				</nav><!-- #site-navigation -->
+
+													
+				<!-- .header-search -->
+				
+<form role="search" method="get" class="search-form" action="https://somoshackersdelaprogramacion.es/">
+	<label>
+		<span class="screen-reader-text">Search for:</span>
+		<input type="search" class="search-field" placeholder="Search..." value="" name="s">
+	</label>
+	<button type="submit" class="search-submit">
+		<i class="fa fa-search"></i>
+		<span class="screen-reader-text">Search</span>
+	</button>
+</form>
+
+			</div>
+		</div><!-- .header-content -->
+
+	</header><!-- #masthead -->
+	
+	<div id="content" class="site-content container">
+
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main" role="main">
+
+		
+<article id="post-408" class="post-408 post type-post status-publish format-standard has-post-thumbnail hentry category-java tag-genericos tag-generics tag-java tag-parametrizacion tag-programacion tag-programming tag-templates yosemite-has-thumbnail">
+
+	<header class="entry-header">
+
+		<div class="entry-meta">
+			<span class="cat-links"><span class="screen-reader-text">Categories </span><a href="https://somoshackersdelaprogramacion.es/category/java" rel="category tag">Java</a></span>		</div><!-- .entry-meta -->
+		<h1 class="entry-title">Utilizando Genéricos en Java</h1>		<div class="entry-meta">
+			<span class="by-author"><i class="fa fa-user"></i>by <a class="url fn n" href="https://somoshackersdelaprogramacion.es/author/k3rnel" rel="bookmark">k3rnel</a></span><span class="posted-on"><i class="fa fa-clock-o"></i><a href="https://somoshackersdelaprogramacion.es/utilizando-genericos-en-java" rel="bookmark"><time class="entry-date published" datetime="2022-05-15T20:46:10+00:00">mayo 15, 2022</time><time class="updated" datetime="2022-05-16T08:21:03+00:00">mayo 16, 2022</time></a></span><span class="comments-link"><i class="fa fa-comments-o"></i><a href="https://somoshackersdelaprogramacion.es/utilizando-genericos-en-java#respond">Leave a Comment<span class="screen-reader-text"> on Utilizando Genéricos en Java</span></a></span>
+		</div>
+	</header><!-- .entry-header -->
+
+	<div class="entry-content">
+		<div class='heateorSssClear'></div><div  class='heateor_sss_sharing_container heateor_sss_horizontal_sharing' data-heateor-sss-href='https://somoshackersdelaprogramacion.es/utilizando-genericos-en-java'><div class='heateor_sss_sharing_title' style="font-weight:bold" >COMPARTIR EN REDES SOCIALES</div><div class="heateor_sss_sharing_ul"><a aria-label="Facebook" class="heateor_sss_facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fsomoshackersdelaprogramacion.es%2Futilizando-genericos-en-java" title="Facebook" rel="nofollow noopener" target="_blank" style="font-size:32px!important;box-shadow:none;display:inline-block;vertical-align:middle"><span class="heateor_sss_svg" style="background-color:#0765FE;width:70px;height:35px;display:inline-block;opacity:1;float:left;font-size:32px;box-shadow:none;display:inline-block;font-size:16px;padding:0 4px;vertical-align:middle;background-repeat:repeat;overflow:hidden;padding:0;cursor:pointer;box-sizing:content-box"><svg style="display:block;" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 32 32"><path fill="#fff" d="M28 16c0-6.627-5.373-12-12-12S4 9.373 4 16c0 5.628 3.875 10.35 9.101 11.647v-7.98h-2.474V16H13.1v-1.58c0-4.085 1.849-5.978 5.859-5.978.76 0 2.072.15 2.608.298v3.325c-.283-.03-.775-.045-1.386-.045-1.967 0-2.728.745-2.728 2.683V16h3.92l-.673 3.667h-3.247v8.245C23.395 27.195 28 22.135 28 16Z"></path></svg></span></a><a aria-label="Twitter" class="heateor_sss_button_twitter" href="http://twitter.com/intent/tweet?text=Utilizando%20Gen%C3%A9ricos%20en%20Java&url=https%3A%2F%2Fsomoshackersdelaprogramacion.es%2Futilizando-genericos-en-java" title="Twitter" rel="nofollow noopener" target="_blank" style="font-size:32px!important;box-shadow:none;display:inline-block;vertical-align:middle"><span class="heateor_sss_svg heateor_sss_s__default heateor_sss_s_twitter" style="background-color:#55acee;width:70px;height:35px;display:inline-block;opacity:1;float:left;font-size:32px;box-shadow:none;display:inline-block;font-size:16px;padding:0 4px;vertical-align:middle;background-repeat:repeat;overflow:hidden;padding:0;cursor:pointer;box-sizing:content-box"><svg style="display:block;" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="-4 -4 39 39"><path d="M28 8.557a9.913 9.913 0 0 1-2.828.775 4.93 4.93 0 0 0 2.166-2.725 9.738 9.738 0 0 1-3.13 1.194 4.92 4.92 0 0 0-3.593-1.55 4.924 4.924 0 0 0-4.794 6.049c-4.09-.21-7.72-2.17-10.15-5.15a4.942 4.942 0 0 0-.665 2.477c0 1.71.87 3.214 2.19 4.1a4.968 4.968 0 0 1-2.23-.616v.06c0 2.39 1.7 4.38 3.952 4.83-.414.115-.85.174-1.297.174-.318 0-.626-.03-.928-.086a4.935 4.935 0 0 0 4.6 3.42 9.893 9.893 0 0 1-6.114 2.107c-.398 0-.79-.023-1.175-.068a13.953 13.953 0 0 0 7.55 2.213c9.056 0 14.01-7.507 14.01-14.013 0-.213-.005-.426-.015-.637.96-.695 1.795-1.56 2.455-2.55z" fill="#fff"></path></svg></span></a><a aria-label="Reddit" class="heateor_sss_button_reddit" href="http://reddit.com/submit?url=https%3A%2F%2Fsomoshackersdelaprogramacion.es%2Futilizando-genericos-en-java&title=Utilizando%20Gen%C3%A9ricos%20en%20Java" title="Reddit" rel="nofollow noopener" target="_blank" style="font-size:32px!important;box-shadow:none;display:inline-block;vertical-align:middle"><span class="heateor_sss_svg heateor_sss_s__default heateor_sss_s_reddit" style="background-color:#ff5700;width:70px;height:35px;display:inline-block;opacity:1;float:left;font-size:32px;box-shadow:none;display:inline-block;font-size:16px;padding:0 4px;vertical-align:middle;background-repeat:repeat;overflow:hidden;padding:0;cursor:pointer;box-sizing:content-box"><svg style="display:block;" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="-3.5 -3.5 39 39"><path d="M28.543 15.774a2.953 2.953 0 0 0-2.951-2.949 2.882 2.882 0 0 0-1.9.713 14.075 14.075 0 0 0-6.85-2.044l1.38-4.349 3.768.884a2.452 2.452 0 1 0 .24-1.176l-4.274-1a.6.6 0 0 0-.709.4l-1.659 5.224a14.314 14.314 0 0 0-7.316 2.029 2.908 2.908 0 0 0-1.872-.681 2.942 2.942 0 0 0-1.618 5.4 5.109 5.109 0 0 0-.062.765c0 4.158 5.037 7.541 11.229 7.541s11.22-3.383 11.22-7.541a5.2 5.2 0 0 0-.053-.706 2.963 2.963 0 0 0 1.427-2.51zm-18.008 1.88a1.753 1.753 0 0 1 1.73-1.74 1.73 1.73 0 0 1 1.709 1.74 1.709 1.709 0 0 1-1.709 1.711 1.733 1.733 0 0 1-1.73-1.711zm9.565 4.968a5.573 5.573 0 0 1-4.081 1.272h-.032a5.576 5.576 0 0 1-4.087-1.272.6.6 0 0 1 .844-.854 4.5 4.5 0 0 0 3.238.927h.032a4.5 4.5 0 0 0 3.237-.927.6.6 0 1 1 .844.854zm-.331-3.256a1.726 1.726 0 1 1 1.709-1.712 1.717 1.717 0 0 1-1.712 1.712z" fill="#fff"/></svg></span></a><a aria-label="Whatsapp" class="heateor_sss_whatsapp" href="https://api.whatsapp.com/send?text=Utilizando%20Gen%C3%A9ricos%20en%20Java https%3A%2F%2Fsomoshackersdelaprogramacion.es%2Futilizando-genericos-en-java" title="Whatsapp" rel="nofollow noopener" target="_blank" style="font-size:32px!important;box-shadow:none;display:inline-block;vertical-align:middle"><span class="heateor_sss_svg" style="background-color:#55eb4c;width:70px;height:35px;display:inline-block;opacity:1;float:left;font-size:32px;box-shadow:none;display:inline-block;font-size:16px;padding:0 4px;vertical-align:middle;background-repeat:repeat;overflow:hidden;padding:0;cursor:pointer;box-sizing:content-box"><svg style="display:block;" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="-6 -5 40 40"><path class="heateor_sss_svg_stroke heateor_sss_no_fill" stroke="#fff" stroke-width="2" fill="none" d="M 11.579798566743314 24.396926207859085 A 10 10 0 1 0 6.808479557110079 20.73576436351046"></path><path d="M 7 19 l -1 6 l 6 -1" class="heateor_sss_no_fill heateor_sss_svg_stroke" stroke="#fff" stroke-width="2" fill="none"></path><path d="M 10 10 q -1 8 8 11 c 5 -1 0 -6 -1 -3 q -4 -3 -5 -5 c 4 -2 -1 -5 -1 -4" fill="#fff"></path></svg></span></a><a aria-label="Linkedin" class="heateor_sss_button_linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fsomoshackersdelaprogramacion.es%2Futilizando-genericos-en-java" title="Linkedin" rel="nofollow noopener" target="_blank" style="font-size:32px!important;box-shadow:none;display:inline-block;vertical-align:middle"><span class="heateor_sss_svg heateor_sss_s__default heateor_sss_s_linkedin" style="background-color:#0077b5;width:70px;height:35px;display:inline-block;opacity:1;float:left;font-size:32px;box-shadow:none;display:inline-block;font-size:16px;padding:0 4px;vertical-align:middle;background-repeat:repeat;overflow:hidden;padding:0;cursor:pointer;box-sizing:content-box"><svg style="display:block;" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 32 32"><path d="M6.227 12.61h4.19v13.48h-4.19V12.61zm2.095-6.7a2.43 2.43 0 0 1 0 4.86c-1.344 0-2.428-1.09-2.428-2.43s1.084-2.43 2.428-2.43m4.72 6.7h4.02v1.84h.058c.56-1.058 1.927-2.176 3.965-2.176 4.238 0 5.02 2.792 5.02 6.42v7.395h-4.183v-6.56c0-1.564-.03-3.574-2.178-3.574-2.18 0-2.514 1.7-2.514 3.46v6.668h-4.187V12.61z" fill="#fff"></path></svg></span></a><a aria-label="Pinterest" class="heateor_sss_button_pinterest" href="https://somoshackersdelaprogramacion.es/utilizando-genericos-en-java" onclick="event.preventDefault();javascript:void( (function() {var e=document.createElement('script' );e.setAttribute('type','text/javascript' );e.setAttribute('charset','UTF-8' );e.setAttribute('src','//assets.pinterest.com/js/pinmarklet.js?r='+Math.random()*99999999);document.body.appendChild(e)})());" title="Pinterest" rel="nofollow noopener" style="font-size:32px!important;box-shadow:none;display:inline-block;vertical-align:middle"><span class="heateor_sss_svg heateor_sss_s__default heateor_sss_s_pinterest" style="background-color:#cc2329;width:70px;height:35px;display:inline-block;opacity:1;float:left;font-size:32px;box-shadow:none;display:inline-block;font-size:16px;padding:0 4px;vertical-align:middle;background-repeat:repeat;overflow:hidden;padding:0;cursor:pointer;box-sizing:content-box"><svg style="display:block;" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="-2 -2 35 35"><path fill="#fff" d="M16.539 4.5c-6.277 0-9.442 4.5-9.442 8.253 0 2.272.86 4.293 2.705 5.046.303.125.574.005.662-.33.061-.231.205-.816.27-1.06.088-.331.053-.447-.191-.736-.532-.627-.873-1.439-.873-2.591 0-3.338 2.498-6.327 6.505-6.327 3.548 0 5.497 2.168 5.497 5.062 0 3.81-1.686 7.025-4.188 7.025-1.382 0-2.416-1.142-2.085-2.545.397-1.674 1.166-3.48 1.166-4.689 0-1.081-.581-1.983-1.782-1.983-1.413 0-2.548 1.462-2.548 3.419 0 1.247.421 2.091.421 2.091l-1.699 7.199c-.505 2.137-.076 4.755-.039 5.019.021.158.223.196.314.077.13-.17 1.813-2.247 2.384-4.324.162-.587.929-3.631.929-3.631.46.876 1.801 1.646 3.227 1.646 4.247 0 7.128-3.871 7.128-9.053.003-3.918-3.317-7.568-8.361-7.568z"/></svg></span></a><a aria-label="Telegram" class="heateor_sss_button_telegram" href="https://telegram.me/share/url?url=https%3A%2F%2Fsomoshackersdelaprogramacion.es%2Futilizando-genericos-en-java&text=Utilizando%20Gen%C3%A9ricos%20en%20Java" title="Telegram" rel="nofollow noopener" target="_blank" style="font-size:32px!important;box-shadow:none;display:inline-block;vertical-align:middle"><span class="heateor_sss_svg heateor_sss_s__default heateor_sss_s_telegram" style="background-color:#3da5f1;width:70px;height:35px;display:inline-block;opacity:1;float:left;font-size:32px;box-shadow:none;display:inline-block;font-size:16px;padding:0 4px;vertical-align:middle;background-repeat:repeat;overflow:hidden;padding:0;cursor:pointer;box-sizing:content-box"><svg style="display:block;" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 32 32"><path fill="#fff" d="M25.515 6.896L6.027 14.41c-1.33.534-1.322 1.276-.243 1.606l5 1.56 1.72 5.66c.226.625.115.873.77.873.506 0 .73-.235 1.012-.51l2.43-2.363 5.056 3.734c.93.514 1.602.25 1.834-.863l3.32-15.638c.338-1.363-.52-1.98-1.41-1.577z"></path></svg></span></a><a aria-label="WordPress" class="heateor_sss_button_wordpress" href="https://somoshackersdelaprogramacion.es/wp-admin/press-this.php?u=https%3A%2F%2Fsomoshackersdelaprogramacion.es%2Futilizando-genericos-en-java&t=Utilizando%20Gen%C3%A9ricos%20en%20Java" title="WordPress" rel="nofollow noopener" target="_blank" style="font-size:32px!important;box-shadow:none;display:inline-block;vertical-align:middle"><span class="heateor_sss_svg heateor_sss_s__default heateor_sss_s_wordpress" style="background-color:#464646;width:70px;height:35px;display:inline-block;opacity:1;float:left;font-size:32px;box-shadow:none;display:inline-block;font-size:16px;padding:0 4px;vertical-align:middle;background-repeat:repeat;overflow:hidden;padding:0;cursor:pointer;box-sizing:content-box"><svg style="display:block;" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 32 32"><circle fill="#fff" cx="16" cy="16" r="14.75"/><path class="heateor_sss_no_fill" fill="#464646" d="M3.176 16c0 5.076 2.95 9.462 7.226 11.54L4.287 10.78c-.712 1.595-1.11 3.36-1.11 5.22zm21.48-.646c0-1.586-.57-2.684-1.06-3.537-.647-1.058-1.26-1.95-1.26-3.008 0-1.18.897-2.278 2.156-2.278.057 0 .11.008.166.01-2.28-2.09-5.32-3.367-8.658-3.367-4.48 0-8.422 2.3-10.715 5.78.302.01.585.017.826.017 1.343 0 3.418-.164 3.418-.164.69-.042.774.974.084 1.056 0 0-.694.08-1.466.12l4.668 13.892 2.808-8.417-1.998-5.476c-.69-.04-1.345-.12-1.345-.12-.69-.04-.61-1.1.08-1.058 0 0 2.116.164 3.38.164 1.34 0 3.416-.163 3.416-.163.69-.04.77.976.08 1.058 0 0-.694.08-1.467.12l4.634 13.785 1.28-4.272c.552-1.773.975-3.048.975-4.144zm-8.43 1.766l-3.85 11.18c1.15.34 2.365.523 3.624.523 1.492 0 2.925-.26 4.26-.728-.035-.056-.066-.113-.093-.177L16.225 17.12zM27.25 9.848c.055.408.086.848.086 1.318 0 1.3-.242 2.764-.975 4.594l-3.916 11.324C26.26 24.86 28.822 20.73 28.822 16c0-2.23-.568-4.326-1.57-6.152z"/><path d="M16 1.052C7.757 1.052 1.052 7.757 1.052 16c0 8.242 6.705 14.948 14.948 14.948 8.242 0 14.948-6.706 14.948-14.95 0-8.24-6.706-14.946-14.948-14.946zm0 29.212c-7.865 0-14.264-6.4-14.264-14.265S8.136 1.734 16 1.734c7.863 0 14.264 6.398 14.264 14.263 0 7.863-6.4 14.264-14.264 14.264z"/></svg></span></a><a style="font-size:32px!important;box-shadow: none;display: inline-block!important;font-size: 16px;padding: 0 4px;vertical-align: middle;display:inline;" class="heateorSssSharingRound"><div style="width:70px;height:35px;margin-left:9px !important;" title="Compartidos totales" class="heateorSssSharing heateorSssTCBackground"></div></a></div><div class="heateorSssClear"></div></div><div class='heateorSssClear'></div><br/>
+<p class="has-medium-font-size">En esta entrada vamos a profundizar sobre los tipos genéricos en Java. Los tipos genéricos en Java nos permiten crear métodos y clases cuyos tipos de parámetros pueden ser variables, y por lo tanto, nos permiten implementar menos código para realizar nuestras funcionalidades. Los genéricos en Java son el mismo concepto que los «templates» en C++.</p>
+
+
+
+<p class="has-medium-font-size">Los genéricos en Java se pueden aplicar sobre funciones y sobre clases, y por lo tanto, también en las funciones de nuestras clases. Sin más dilaciones vamos al lio con los genéricos en funciones. </p>
+
+
+
+<h2 class="wp-block-heading">Utilizando Genéricos en Funciones</h2>
+
+
+
+<p class="has-medium-font-size">Supongamos que queremos crear una función que nos permita convertir un Array estático a un ArrayList, y queremos que nos sirva para tipos «Integer», «Float», y «Double». Sin utilizar genéricos tendríamos que realizar 3 implementaciones. Vamos primero a ver nuestros Arrays estáticos:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code codigo_personalizado"><pre class="brush: java; title: ; quick-code: false; notranslate" title="">
+Integer &#x5B;] numerosEnteros = new Integer &#x5B;] {1,2,3,4,5};
+Float &#x5B;] numerosFlotantesSimples = new Float&#x5B;] {1.0f, 2.0f, 3.0f, 4.0f, 5.0f};
+Double &#x5B;] numerosFlotantes = new Double&#x5B;] {1.0, 2.0, 3.0, 4.0, 5.0};
+</pre></div>
+
+
+<p class="has-medium-font-size">Veamos las diferentes implementaciones para convertir cada Array estático a ArrayList del mismo tipo:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code codigo_personalizado"><pre class="brush: java; title: ; quick-code: false; notranslate" title="">
+//Para Integers
+public static ArrayList&lt;Integer&gt; convertToArrayList(Integer &#x5B;] array){
+	ArrayList&lt;Integer&gt; miLista = new ArrayList&lt;Integer&gt;();
+		
+	for (Integer numero: array) {
+		miLista.add(numero);
+	}
+		
+	return miLista;
+}
+	
+//Para Float's
+public static ArrayList&lt;Float&gt; convertToArrayList(Float &#x5B;] array){
+	ArrayList&lt;Float&gt; miLista = new ArrayList&lt;Float&gt;();
+		
+	for (Float numero: array) {
+		miLista.add(numero);
+	}
+		
+	return miLista;
+}
+	
+//Para Doubles
+public static ArrayList&lt;Double&gt; convertToArrayList(Double &#x5B;] array){
+	ArrayList&lt;Double&gt; miLista = new ArrayList&lt;Double&gt;();
+		
+	for (Double numero: array) {
+		miLista.add(numero);
+	}
+		
+	return miLista;
+}
+</pre></div>
+
+
+<p class="has-medium-font-size">Hemos tenido que implementar una función para cada tipo de datos.</p>
+
+
+
+<h3 class="wp-block-heading">¿ Podríamos crear una única función utilizando Genéricos que nos sirva para los 3 Arrays ? </h3>
+
+
+
+<p class="has-medium-font-size">Sí, claro que podemos, utilizando genéricos. Veamos primero la implementación con «genéricos» y luego explicaremos como funcionan:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code codigo_personalizado"><pre class="brush: java; title: ; quick-code: false; notranslate" title="">
+public static &lt;V&gt; ArrayList&lt;V&gt; convertToArrayList(V &#x5B;] array){
+	ArrayList&lt;V&gt; miLista = new ArrayList&lt;&gt;();
+		
+	for (V numero: array){
+		miLista.add(numero);
+	}
+		
+	return miLista;
+}
+</pre></div>
+
+
+<p class="has-medium-font-size">Vayamos por orden de los resaltados:</p>
+
+
+
+<ol class="has-medium-font-size"><li>«&lt;V&gt;»: De esta forma estamos parametrizando que V puede ser un Objeto de cualquier tipo.</li><li>«ArrayList&lt;V&gt;»: será el tipo de datos que devolveremos.</li><li>«V [] array»: será el Array estático que nos llegará como parámetro de entrada.</li><li>«V numero»: para iterar sobre nuestro Array estático nuestros elementos serán de tipo «V».</li></ol>
+
+
+
+<p class="has-medium-font-size">Ahora imaginad que en tiempo de compilación Java sustituye nuestra V por el tipo de datos que detecta en la llamada a la función, de tal forma que sí llamamos a la función con un Array de «Float», V se sustituirá por «Float», si lo hacemos con «Integer» igual, y así sucesivamente.</p>
+
+
+
+<p class="has-medium-font-size">Hemos conseguido con una única función crear la 3 implementaciones.</p>
+
+
+
+<h3 class="wp-block-heading">¿ Y cómo llamamos a la función para los 3 Arrays ?</h3>
+
+
+<div class="wp-block-syntaxhighlighter-code codigo_personalizado"><pre class="brush: java; title: ; quick-code: false; notranslate" title="">
+//LLamada para enteros
+ArrayList&lt;Integer&gt; listaEnteros = convertToArrayList(numerosEnteros);
+//LLamada para flotantes
+ArrayList&lt;Float&gt; listaFloat = convertToArrayList(numerosFlotantesSimples);
+//LLamada para Doubles
+ArrayList&lt;Double&gt; listaDouble = convertToArrayList(numerosFlotantes);
+		
+//Comprobación de que ha funcionado
+System.out.println(listaEnteros.get(0).getClass().getName());
+System.out.println(listaFloat.get(0).getClass().getName());
+System.out.println(listaDouble.get(0).getClass().getName());
+</pre></div>
+
+
+<p class="has-medium-font-size"><strong>La salida de nuestro programa: </strong></p>
+
+
+<div class="wp-block-syntaxhighlighter-code codigo_personalizado"><pre class="brush: plain; title: ; quick-code: false; notranslate" title="">
+java.lang.Integer
+java.lang.Float
+java.lang.Double
+</pre></div>
+
+
+<p class="has-medium-font-size">Cómo podéis apreciar ha funcionado perfectamente, una única función parametrizable por tipo, ¿ no os parece una pasada ?</p>
+
+
+
+<h2 class="wp-block-heading">Utilizando Genéricos en Clases</h2>
+
+
+
+<p class="has-medium-font-size">En las clases también podemos utilizar genéricos y parametrizar los tipos de datos. Para entender como funciona vamos a partir de la siguiente clase «Persona»:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code codigo_personalizado"><pre class="brush: java; title: ; quick-code: false; notranslate" title="">
+public class Persona {
+	private String nombre;
+	private String apellidos;
+	private Integer edad;
+	
+	public Persona(String nombre, String apellidos, Integer edad) {
+		super();
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.edad = edad;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getApellidos() {
+		return apellidos;
+	}
+
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
+	}
+
+	public Integer getEdad() {
+		return edad;
+	}
+
+	public void setEdad(Integer edad) {
+		this.edad = edad;
+	}
+}
+</pre></div>
+
+
+<p class="has-medium-font-size">Ahora supongamos que queremos que la misma clase pueda almacenar la edad tanto en «Integer» como en «Double». Ya estamos otra vez en las mismas, nuestra implementación de «Persona» solo contempla «Integer». Vamos a transformar nuestra clase para que el atributo edad sea «genérico»:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code codigo_personalizado"><pre class="brush: java; highlight: [1,4,6,29,33]; title: ; quick-code: false; notranslate" title="">
+public class Persona &lt;V&gt;{
+	private String nombre;
+	private String apellidos;
+	private V edad;
+	
+	public Persona(String nombre, String apellidos, V edad) {
+		super();
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.edad = edad;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getApellidos() {
+		return apellidos;
+	}
+
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
+	}
+
+	public V getEdad() {
+		return edad;
+	}
+
+	public void setEdad(V edad) {
+		this.edad = edad;
+	}
+}
+</pre></div>
+
+
+<p class="has-medium-font-size"><strong>Para ver la explicación vamos por orden:</strong></p>
+
+
+
+<ol class="has-medium-font-size"><li>public class Persona <mark class="kt-highlight">&lt;V&gt;</mark>: Aquí estamos indicando que el tipo de datos «V» es un genérico.</li><li>private <mark class="kt-highlight">V</mark> edad: Nuestro atributo «edad» será de tipo «V».</li><li>Persona(String nombre, String apellidos, <mark class="kt-highlight">V edad</mark>): En el constructor nuestro parámetro de entrada «edad» será de tipo «V».</li><li>public <mark class="kt-highlight">V</mark> getEdad(): Nuestro «getter» de «edad» devolverá la edad con el tipo de datos «V».</li><li>public void setEdad(<mark class="kt-highlight">V</mark> edad): Nuestro «setter» recibirá como parámetro la edad con el tipo de datos «V»</li></ol>
+
+
+
+<p class="has-medium-font-size">Ya hemos implementado nuestra clase para que admita la edad con «Integer» y «Double» y en general con cualquier tipo de datos, ya que «V» es un Object, por lo tanto, podría ser cualquier clase.</p>
+
+
+
+<h3 class="wp-block-heading">¿ Cómo se instancian las clases Genéricas ?</h3>
+
+
+
+<p class="has-medium-font-size">Simplemente tenemos que parametrizar con «&lt;&gt;» su definición e instanciación:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code codigo_personalizado"><pre class="brush: java; highlight: [2,4]; title: ; notranslate" title="">
+//Instanciamos una clase Persona con la edad en Integer
+Persona&lt;Integer&gt; persona1 = new Persona&lt;Integer&gt;(&quot;Somos&quot;, &quot;Hackers de la Programacion&quot;, 32);
+//Instanciamos una clase Persona con la edad en Double
+Persona&lt;Double&gt; persona2 = new Persona&lt;Double&gt;(&quot;Somos&quot;, &quot;Hackers de la Programacion&quot;, 32.3);
+</pre></div>
+
+
+<p class="has-medium-font-size">Vamos a comprobar su funcionamiento y ver si realmente funciona:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code codigo_personalizado"><pre class="brush: java; title: ; quick-code: false; notranslate" title="">
+//Comprobamos su funcionamiento
+System.out.println(&quot;La persona 1 tiene: &quot; + persona1.getEdad() + &quot; años&quot;);
+System.out.println(&quot;El atributo edad de persona 1 es: &quot; + persona1.getEdad().getClass().getName());
+System.out.println(&quot;La persona 2 tiene: &quot; + persona2.getEdad() + &quot; años&quot;);
+System.out.println(&quot;El atributo edad de persona 2 es: &quot; + persona2.getEdad().getClass().getName());
+</pre></div>
+
+
+<p class="has-medium-font-size"><strong>La salida de nuestro programa:</strong></p>
+
+
+<div class="wp-block-syntaxhighlighter-code codigo_personalizado"><pre class="brush: plain; title: ; quick-code: false; notranslate" title="">
+La persona 1 tiene: 32 años
+El atributo edad de persona 1 es: java.lang.Integer
+La persona 2 tiene: 32.3 años
+El atributo edad de persona 2 es: java.lang.Double
+</pre></div>
+
+
+<h2 class="wp-block-heading">¿ Se puede utilizar más de un tipo Genérico en las Funciones y Clases ?</h2>
+
+
+
+<p class="has-medium-font-size">Sí, basta con declarar la lista separada por «,». Veamos un ejemplo de nuestra función:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code codigo_personalizado"><pre class="brush: java; title: ; quick-code: false; notranslate" title="">
+public static &lt;V, V2&gt; ArrayList&lt;V&gt; convertToArrayList(V &#x5B;] array, V2 otroTipoDeDato){
+	ArrayList&lt;V&gt; miLista = new ArrayList&lt;&gt;();
+		
+	for (V numero: array){
+		miLista.add(numero);
+	}
+		
+	System.out.println(otroTipoDeDato);
+		
+	return miLista;
+}
+</pre></div>
+
+
+<p class="has-medium-font-size"><strong>¿ Como sería ahora la llamada a la función ?</strong></p>
+
+
+<div class="wp-block-syntaxhighlighter-code codigo_personalizado"><pre class="brush: java; title: ; quick-code: false; notranslate" title="">
+//LLamada para enteros
+ArrayList&lt;Integer&gt; listaEnteros = convertToArrayList(numerosEnteros, &quot;Otro tipo de dato genérico de parámetro&quot;);
+//LLamada para flotantes
+ArrayList&lt;Float&gt; listaFloat = convertToArrayList(numerosFlotantesSimples, &quot;Otro tipo de dato genérico de parámetro&quot;);
+//LLamada para Doubles
+ArrayList&lt;Double&gt; listaDouble = convertToArrayList(numerosFlotantes, &quot;Otro tipo de dato genérico de parámetro&quot;);
+</pre></div>
+
+
+<p class="has-medium-font-size"><strong>La salida de nuestro programa</strong></p>
+
+
+<div class="wp-block-syntaxhighlighter-code codigo_personalizado"><pre class="brush: plain; title: ; quick-code: false; notranslate" title="">
+Otro tipo de dato genérico de parámetro
+Otro tipo de dato genérico de parámetro
+Otro tipo de dato genérico de parámetro
+java.lang.Integer
+java.lang.Float
+java.lang.Double
+</pre></div>
+
+
+<h3 class="wp-block-heading">¿ Y en las clases ?</h3>
+
+
+
+<p class="has-medium-font-size">Se sigue la misma metodología:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code codigo_personalizado"><pre class="brush: java; highlight: [1]; title: ; quick-code: false; notranslate" title="">
+public class Persona &lt;V, V2, V3&gt;{
+	private V2 nombre;
+	private V3 apellidos;
+	private V edad;
+	
+	public Persona(V2 nombre, V3 apellidos, V edad) {
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.edad = edad;
+	}
+
+	public V2 getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(V2 nombre) {
+		this.nombre = nombre;
+	}
+
+	public V3 getApellidos() {
+		return apellidos;
+	}
+
+	public void setApellidos(V3 apellidos) {
+		this.apellidos = apellidos;
+	}
+
+	public V getEdad() {
+		return edad;
+	}
+
+	public void setEdad(V edad) {
+		this.edad = edad;
+	}
+}
+
+</pre></div>
+
+
+<p class="has-medium-font-size">Y podemos crear nuestras clases con los parámetros totalmente parametrizables:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code codigo_personalizado"><pre class="brush: java; title: ; quick-code: false; notranslate" title="">
+//Instanciamos la primera persona
+Persona&lt;Integer, String, StringBuilder&gt; persona1 = new Persona&lt;Integer, String, StringBuilder&gt;(&quot;Somos&quot;, new StringBuilder(&quot;Hackers de la Programación&quot;), 32);
+//Instanciamos la segunda persona
+Persona&lt;Double, String, StringBuilder&gt; persona2 = new Persona&lt;Double, String, StringBuilder&gt;(&quot;Somos&quot;, new StringBuilder(&quot;Hackers de la Programación&quot;), 32.3);
+		
+//Comprobamos su funcionamiento
+System.out.println(persona1.getNombre() + &quot; &quot; + persona1.getApellidos().toString() + &quot; tiene &quot; + persona1.getEdad() + &quot; años&quot;);
+System.out.println(persona2.getNombre() + &quot; &quot; + persona2.getApellidos().toString() + &quot; tiene &quot; + persona2.getEdad() + &quot; años&quot;);
+</pre></div>
+
+
+<p class="has-medium-font-size"><strong>La salida de nuestro programa</strong></p>
+
+
+<div class="wp-block-syntaxhighlighter-code codigo_personalizado"><pre class="brush: plain; title: ; quick-code: false; notranslate" title="">
+Somos Hackers de la Programación tiene 32 años
+Somos Hackers de la Programación tiene 32.3 años
+</pre></div>
+
+
+<p class="has-medium-font-size">Y esto es todo con los Genéricos en Java.</p>
+
+
+
+<p class="has-medium-font-size">Si os ha gustado la entrada dejad un comentario en la caja de comentarios, y si no habéis entendido algo también, así lo podremos debatir!</p>
+
+
+
+<p class="has-medium-font-size">Os dejo un <a href="https://docs.oracle.com/javase/tutorial/java/generics/types.html" target="_blank" rel="noreferrer noopener">enlace</a> con la documentación oficial de Oracle.</p>
+
+
+
+<p class="has-medium-font-size">Podéis también ver nuestra <a href="https://somoshackersdelaprogramacion.es/implementamos-un-arraylist-generico">entrada</a> implementación de un ArrayList Genérico en Java</p>
+
+<div id='jp-relatedposts' class='jp-relatedposts' >
+	<h3 class="jp-relatedposts-headline"><em>Relacionado</em></h3>
+</div><br/><div class='heateorSssClear'></div><div  class='heateor_sss_sharing_container heateor_sss_horizontal_sharing' data-heateor-sss-href='https://somoshackersdelaprogramacion.es/utilizando-genericos-en-java'><div class='heateor_sss_sharing_title' style="font-weight:bold" >COMPARTIR EN REDES SOCIALES</div><div class="heateor_sss_sharing_ul"><a aria-label="Facebook" class="heateor_sss_facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fsomoshackersdelaprogramacion.es%2Futilizando-genericos-en-java" title="Facebook" rel="nofollow noopener" target="_blank" style="font-size:32px!important;box-shadow:none;display:inline-block;vertical-align:middle"><span class="heateor_sss_svg" style="background-color:#0765FE;width:70px;height:35px;display:inline-block;opacity:1;float:left;font-size:32px;box-shadow:none;display:inline-block;font-size:16px;padding:0 4px;vertical-align:middle;background-repeat:repeat;overflow:hidden;padding:0;cursor:pointer;box-sizing:content-box"><svg style="display:block;" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 32 32"><path fill="#fff" d="M28 16c0-6.627-5.373-12-12-12S4 9.373 4 16c0 5.628 3.875 10.35 9.101 11.647v-7.98h-2.474V16H13.1v-1.58c0-4.085 1.849-5.978 5.859-5.978.76 0 2.072.15 2.608.298v3.325c-.283-.03-.775-.045-1.386-.045-1.967 0-2.728.745-2.728 2.683V16h3.92l-.673 3.667h-3.247v8.245C23.395 27.195 28 22.135 28 16Z"></path></svg></span></a><a aria-label="Twitter" class="heateor_sss_button_twitter" href="http://twitter.com/intent/tweet?text=Utilizando%20Gen%C3%A9ricos%20en%20Java&url=https%3A%2F%2Fsomoshackersdelaprogramacion.es%2Futilizando-genericos-en-java" title="Twitter" rel="nofollow noopener" target="_blank" style="font-size:32px!important;box-shadow:none;display:inline-block;vertical-align:middle"><span class="heateor_sss_svg heateor_sss_s__default heateor_sss_s_twitter" style="background-color:#55acee;width:70px;height:35px;display:inline-block;opacity:1;float:left;font-size:32px;box-shadow:none;display:inline-block;font-size:16px;padding:0 4px;vertical-align:middle;background-repeat:repeat;overflow:hidden;padding:0;cursor:pointer;box-sizing:content-box"><svg style="display:block;" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="-4 -4 39 39"><path d="M28 8.557a9.913 9.913 0 0 1-2.828.775 4.93 4.93 0 0 0 2.166-2.725 9.738 9.738 0 0 1-3.13 1.194 4.92 4.92 0 0 0-3.593-1.55 4.924 4.924 0 0 0-4.794 6.049c-4.09-.21-7.72-2.17-10.15-5.15a4.942 4.942 0 0 0-.665 2.477c0 1.71.87 3.214 2.19 4.1a4.968 4.968 0 0 1-2.23-.616v.06c0 2.39 1.7 4.38 3.952 4.83-.414.115-.85.174-1.297.174-.318 0-.626-.03-.928-.086a4.935 4.935 0 0 0 4.6 3.42 9.893 9.893 0 0 1-6.114 2.107c-.398 0-.79-.023-1.175-.068a13.953 13.953 0 0 0 7.55 2.213c9.056 0 14.01-7.507 14.01-14.013 0-.213-.005-.426-.015-.637.96-.695 1.795-1.56 2.455-2.55z" fill="#fff"></path></svg></span></a><a aria-label="Reddit" class="heateor_sss_button_reddit" href="http://reddit.com/submit?url=https%3A%2F%2Fsomoshackersdelaprogramacion.es%2Futilizando-genericos-en-java&title=Utilizando%20Gen%C3%A9ricos%20en%20Java" title="Reddit" rel="nofollow noopener" target="_blank" style="font-size:32px!important;box-shadow:none;display:inline-block;vertical-align:middle"><span class="heateor_sss_svg heateor_sss_s__default heateor_sss_s_reddit" style="background-color:#ff5700;width:70px;height:35px;display:inline-block;opacity:1;float:left;font-size:32px;box-shadow:none;display:inline-block;font-size:16px;padding:0 4px;vertical-align:middle;background-repeat:repeat;overflow:hidden;padding:0;cursor:pointer;box-sizing:content-box"><svg style="display:block;" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="-3.5 -3.5 39 39"><path d="M28.543 15.774a2.953 2.953 0 0 0-2.951-2.949 2.882 2.882 0 0 0-1.9.713 14.075 14.075 0 0 0-6.85-2.044l1.38-4.349 3.768.884a2.452 2.452 0 1 0 .24-1.176l-4.274-1a.6.6 0 0 0-.709.4l-1.659 5.224a14.314 14.314 0 0 0-7.316 2.029 2.908 2.908 0 0 0-1.872-.681 2.942 2.942 0 0 0-1.618 5.4 5.109 5.109 0 0 0-.062.765c0 4.158 5.037 7.541 11.229 7.541s11.22-3.383 11.22-7.541a5.2 5.2 0 0 0-.053-.706 2.963 2.963 0 0 0 1.427-2.51zm-18.008 1.88a1.753 1.753 0 0 1 1.73-1.74 1.73 1.73 0 0 1 1.709 1.74 1.709 1.709 0 0 1-1.709 1.711 1.733 1.733 0 0 1-1.73-1.711zm9.565 4.968a5.573 5.573 0 0 1-4.081 1.272h-.032a5.576 5.576 0 0 1-4.087-1.272.6.6 0 0 1 .844-.854 4.5 4.5 0 0 0 3.238.927h.032a4.5 4.5 0 0 0 3.237-.927.6.6 0 1 1 .844.854zm-.331-3.256a1.726 1.726 0 1 1 1.709-1.712 1.717 1.717 0 0 1-1.712 1.712z" fill="#fff"/></svg></span></a><a aria-label="Whatsapp" class="heateor_sss_whatsapp" href="https://api.whatsapp.com/send?text=Utilizando%20Gen%C3%A9ricos%20en%20Java https%3A%2F%2Fsomoshackersdelaprogramacion.es%2Futilizando-genericos-en-java" title="Whatsapp" rel="nofollow noopener" target="_blank" style="font-size:32px!important;box-shadow:none;display:inline-block;vertical-align:middle"><span class="heateor_sss_svg" style="background-color:#55eb4c;width:70px;height:35px;display:inline-block;opacity:1;float:left;font-size:32px;box-shadow:none;display:inline-block;font-size:16px;padding:0 4px;vertical-align:middle;background-repeat:repeat;overflow:hidden;padding:0;cursor:pointer;box-sizing:content-box"><svg style="display:block;" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="-6 -5 40 40"><path class="heateor_sss_svg_stroke heateor_sss_no_fill" stroke="#fff" stroke-width="2" fill="none" d="M 11.579798566743314 24.396926207859085 A 10 10 0 1 0 6.808479557110079 20.73576436351046"></path><path d="M 7 19 l -1 6 l 6 -1" class="heateor_sss_no_fill heateor_sss_svg_stroke" stroke="#fff" stroke-width="2" fill="none"></path><path d="M 10 10 q -1 8 8 11 c 5 -1 0 -6 -1 -3 q -4 -3 -5 -5 c 4 -2 -1 -5 -1 -4" fill="#fff"></path></svg></span></a><a aria-label="Linkedin" class="heateor_sss_button_linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fsomoshackersdelaprogramacion.es%2Futilizando-genericos-en-java" title="Linkedin" rel="nofollow noopener" target="_blank" style="font-size:32px!important;box-shadow:none;display:inline-block;vertical-align:middle"><span class="heateor_sss_svg heateor_sss_s__default heateor_sss_s_linkedin" style="background-color:#0077b5;width:70px;height:35px;display:inline-block;opacity:1;float:left;font-size:32px;box-shadow:none;display:inline-block;font-size:16px;padding:0 4px;vertical-align:middle;background-repeat:repeat;overflow:hidden;padding:0;cursor:pointer;box-sizing:content-box"><svg style="display:block;" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 32 32"><path d="M6.227 12.61h4.19v13.48h-4.19V12.61zm2.095-6.7a2.43 2.43 0 0 1 0 4.86c-1.344 0-2.428-1.09-2.428-2.43s1.084-2.43 2.428-2.43m4.72 6.7h4.02v1.84h.058c.56-1.058 1.927-2.176 3.965-2.176 4.238 0 5.02 2.792 5.02 6.42v7.395h-4.183v-6.56c0-1.564-.03-3.574-2.178-3.574-2.18 0-2.514 1.7-2.514 3.46v6.668h-4.187V12.61z" fill="#fff"></path></svg></span></a><a aria-label="Pinterest" class="heateor_sss_button_pinterest" href="https://somoshackersdelaprogramacion.es/utilizando-genericos-en-java" onclick="event.preventDefault();javascript:void( (function() {var e=document.createElement('script' );e.setAttribute('type','text/javascript' );e.setAttribute('charset','UTF-8' );e.setAttribute('src','//assets.pinterest.com/js/pinmarklet.js?r='+Math.random()*99999999);document.body.appendChild(e)})());" title="Pinterest" rel="nofollow noopener" style="font-size:32px!important;box-shadow:none;display:inline-block;vertical-align:middle"><span class="heateor_sss_svg heateor_sss_s__default heateor_sss_s_pinterest" style="background-color:#cc2329;width:70px;height:35px;display:inline-block;opacity:1;float:left;font-size:32px;box-shadow:none;display:inline-block;font-size:16px;padding:0 4px;vertical-align:middle;background-repeat:repeat;overflow:hidden;padding:0;cursor:pointer;box-sizing:content-box"><svg style="display:block;" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="-2 -2 35 35"><path fill="#fff" d="M16.539 4.5c-6.277 0-9.442 4.5-9.442 8.253 0 2.272.86 4.293 2.705 5.046.303.125.574.005.662-.33.061-.231.205-.816.27-1.06.088-.331.053-.447-.191-.736-.532-.627-.873-1.439-.873-2.591 0-3.338 2.498-6.327 6.505-6.327 3.548 0 5.497 2.168 5.497 5.062 0 3.81-1.686 7.025-4.188 7.025-1.382 0-2.416-1.142-2.085-2.545.397-1.674 1.166-3.48 1.166-4.689 0-1.081-.581-1.983-1.782-1.983-1.413 0-2.548 1.462-2.548 3.419 0 1.247.421 2.091.421 2.091l-1.699 7.199c-.505 2.137-.076 4.755-.039 5.019.021.158.223.196.314.077.13-.17 1.813-2.247 2.384-4.324.162-.587.929-3.631.929-3.631.46.876 1.801 1.646 3.227 1.646 4.247 0 7.128-3.871 7.128-9.053.003-3.918-3.317-7.568-8.361-7.568z"/></svg></span></a><a aria-label="Telegram" class="heateor_sss_button_telegram" href="https://telegram.me/share/url?url=https%3A%2F%2Fsomoshackersdelaprogramacion.es%2Futilizando-genericos-en-java&text=Utilizando%20Gen%C3%A9ricos%20en%20Java" title="Telegram" rel="nofollow noopener" target="_blank" style="font-size:32px!important;box-shadow:none;display:inline-block;vertical-align:middle"><span class="heateor_sss_svg heateor_sss_s__default heateor_sss_s_telegram" style="background-color:#3da5f1;width:70px;height:35px;display:inline-block;opacity:1;float:left;font-size:32px;box-shadow:none;display:inline-block;font-size:16px;padding:0 4px;vertical-align:middle;background-repeat:repeat;overflow:hidden;padding:0;cursor:pointer;box-sizing:content-box"><svg style="display:block;" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 32 32"><path fill="#fff" d="M25.515 6.896L6.027 14.41c-1.33.534-1.322 1.276-.243 1.606l5 1.56 1.72 5.66c.226.625.115.873.77.873.506 0 .73-.235 1.012-.51l2.43-2.363 5.056 3.734c.93.514 1.602.25 1.834-.863l3.32-15.638c.338-1.363-.52-1.98-1.41-1.577z"></path></svg></span></a><a aria-label="WordPress" class="heateor_sss_button_wordpress" href="https://somoshackersdelaprogramacion.es/wp-admin/press-this.php?u=https%3A%2F%2Fsomoshackersdelaprogramacion.es%2Futilizando-genericos-en-java&t=Utilizando%20Gen%C3%A9ricos%20en%20Java" title="WordPress" rel="nofollow noopener" target="_blank" style="font-size:32px!important;box-shadow:none;display:inline-block;vertical-align:middle"><span class="heateor_sss_svg heateor_sss_s__default heateor_sss_s_wordpress" style="background-color:#464646;width:70px;height:35px;display:inline-block;opacity:1;float:left;font-size:32px;box-shadow:none;display:inline-block;font-size:16px;padding:0 4px;vertical-align:middle;background-repeat:repeat;overflow:hidden;padding:0;cursor:pointer;box-sizing:content-box"><svg style="display:block;" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 32 32"><circle fill="#fff" cx="16" cy="16" r="14.75"/><path class="heateor_sss_no_fill" fill="#464646" d="M3.176 16c0 5.076 2.95 9.462 7.226 11.54L4.287 10.78c-.712 1.595-1.11 3.36-1.11 5.22zm21.48-.646c0-1.586-.57-2.684-1.06-3.537-.647-1.058-1.26-1.95-1.26-3.008 0-1.18.897-2.278 2.156-2.278.057 0 .11.008.166.01-2.28-2.09-5.32-3.367-8.658-3.367-4.48 0-8.422 2.3-10.715 5.78.302.01.585.017.826.017 1.343 0 3.418-.164 3.418-.164.69-.042.774.974.084 1.056 0 0-.694.08-1.466.12l4.668 13.892 2.808-8.417-1.998-5.476c-.69-.04-1.345-.12-1.345-.12-.69-.04-.61-1.1.08-1.058 0 0 2.116.164 3.38.164 1.34 0 3.416-.163 3.416-.163.69-.04.77.976.08 1.058 0 0-.694.08-1.467.12l4.634 13.785 1.28-4.272c.552-1.773.975-3.048.975-4.144zm-8.43 1.766l-3.85 11.18c1.15.34 2.365.523 3.624.523 1.492 0 2.925-.26 4.26-.728-.035-.056-.066-.113-.093-.177L16.225 17.12zM27.25 9.848c.055.408.086.848.086 1.318 0 1.3-.242 2.764-.975 4.594l-3.916 11.324C26.26 24.86 28.822 20.73 28.822 16c0-2.23-.568-4.326-1.57-6.152z"/><path d="M16 1.052C7.757 1.052 1.052 7.757 1.052 16c0 8.242 6.705 14.948 14.948 14.948 8.242 0 14.948-6.706 14.948-14.95 0-8.24-6.706-14.946-14.948-14.946zm0 29.212c-7.865 0-14.264-6.4-14.264-14.265S8.136 1.734 16 1.734c7.863 0 14.264 6.398 14.264 14.263 0 7.863-6.4 14.264-14.264 14.264z"/></svg></span></a><a style="font-size:32px!important;box-shadow: none;display: inline-block!important;font-size: 16px;padding: 0 4px;vertical-align: middle;display:inline;" class="heateorSssSharingRound"><div style="width:70px;height:35px;margin-left:9px !important;" title="Compartidos totales" class="heateorSssSharing heateorSssTCBackground"></div></a></div><div class="heateorSssClear"></div></div><div class='heateorSssClear'></div>	</div><!-- .entry-content -->
+
+	<div class="entry-footer">
+		<div class="tagcloud"><a href="https://somoshackersdelaprogramacion.es/tag/genericos" rel="tag">genericos</a><a href="https://somoshackersdelaprogramacion.es/tag/generics" rel="tag">generics</a><a href="https://somoshackersdelaprogramacion.es/tag/java" rel="tag">java</a><a href="https://somoshackersdelaprogramacion.es/tag/parametrizacion" rel="tag">parametrizacion</a><a href="https://somoshackersdelaprogramacion.es/tag/programacion" rel="tag">programación</a><a href="https://somoshackersdelaprogramacion.es/tag/programming" rel="tag">programming</a><a href="https://somoshackersdelaprogramacion.es/tag/templates" rel="tag">templates</a></div>	</div><!-- entry-footer -->
+
+	</article><!-- #post-## -->
+
+	<nav class="navigation post-navigation" aria-label="Entradas">
+		<h2 class="screen-reader-text">Navegación de entradas</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://somoshackersdelaprogramacion.es/hashmap-en-java" rel="prev"><span class="meta-nav">Previous Post &raquo;</span> <span class="post-title">HashMap en Java</span></a></div><div class="nav-next"><a href="https://somoshackersdelaprogramacion.es/excepciones-en-java" rel="next"><span class="meta-nav">&laquo; Next Post</span> <span class="post-title">Excepciones en Java</span></a></div></div>
+	</nav>
+<div id="comments" class="comments-area">
+
+		<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">Deja una respuesta <small><a rel="nofollow" id="cancel-comment-reply-link" href="/utilizando-genericos-en-java#respond" style="display:none;">Cancelar la respuesta</a></small></h3><form action="https://somoshackersdelaprogramacion.es/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate><p class="comment-notes"><span id="email-notes">Tu dirección de correo electrónico no será publicada.</span> <span class="required-field-message">Los campos obligatorios están marcados con <span class="required">*</span></span></p><p class="comment-form-comment"><label for="comment">Comentario <span class="required">*</span></label> <textarea autocomplete="new-password"  id="fec742af32"  name="fec742af32"   cols="45" rows="8" maxlength="65525" required></textarea><textarea id="comment" aria-label="hp-comment" aria-hidden="true" name="comment" autocomplete="new-password" style="padding:0 !important;clip:rect(1px, 1px, 1px, 1px) !important;position:absolute !important;white-space:nowrap !important;height:1px !important;width:1px !important;overflow:hidden !important;" tabindex="-1"></textarea><script data-noptimize>document.getElementById("comment").setAttribute( "id", "a4ba3f5269587e0fef215f53a6879174" );document.getElementById("fec742af32").setAttribute( "id", "comment" );</script></p><p class="comment-form-author"><label for="author">Nombre <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" autocomplete="name" required /></p>
+<p class="comment-form-email"><label for="email">Correo electrónico <span class="required">*</span></label> <input id="email" name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes" autocomplete="email" required /></p>
+<p class="comment-form-url"><label for="url">Web</label> <input id="url" name="url" type="url" value="" size="30" maxlength="200" autocomplete="url" /></p>
+<p class="comment-form-cookies-consent"><input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes" /> <label for="wp-comment-cookies-consent">Guarda mi nombre, correo electrónico y web en este navegador para la próxima vez que comente.</label></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Publicar el comentario" /> <input type='hidden' name='comment_post_ID' value='408' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p></form>	</div><!-- #respond -->
+	
+</div><!-- #comments -->
+		</main><!-- #main -->
+	</div><!-- #primary -->
+
+<aside id="secondary" class="widget-area add_sticky_sidebar" role="complementary">
+	<section id="block-2" class="widget widget_block widget_search"><form role="search" method="get" action="https://somoshackersdelaprogramacion.es/" class="wp-block-search__button-outside wp-block-search__text-button wp-block-search"    ><label class="wp-block-search__label" for="wp-block-search__input-1" ><br><strong>CUADRO DE BÚSQUEDA </strong><br><br></label><div class="wp-block-search__inside-wrapper " ><input class="wp-block-search__input" id="wp-block-search__input-1" placeholder="" value="" type="search" name="s" required /><button aria-label="Buscar" class="wp-block-search__button wp-element-button" type="submit" >Buscar</button></div></form></section><section id="email-subscribers-form-3" class="widget widget_email-subscribers-form"><h2 class="widget-title"> Suscríbite a Somos Hackers de la Programación(GRATIS) </h2><div class="emaillist" id="es_form_f2-n1"><form action="/utilizando-genericos-en-java#es_form_f2-n1" method="post" class="es_subscription_form es_shortcode_form " id="es_subscription_form_66615773ca635" data-source="ig-es" data-form-id="2"><div class="es_caption">Si quieres estar enterado de todas mis nuevas entradas suscríbete!!!</div><div class="es-field-wrap"><label><input class="es_required_field es_txt_email ig_es_form_field_email" type="email" name="esfpx_email" value="" placeholder="" required="required" /></label></div><input type="hidden" name="esfpx_lists[]" value="8f7b511ba45e" /><input type="hidden" name="esfpx_form_id" value="2" /><input type="hidden" name="es" value="subscribe" />
+			<input type="hidden" name="esfpx_es_form_identifier" value="f2-n1" />
+			<input type="hidden" name="esfpx_es_email_page" value="408" />
+			<input type="hidden" name="esfpx_es_email_page_url" value="https://somoshackersdelaprogramacion.es/utilizando-genericos-en-java" />
+			<input type="hidden" name="esfpx_status" value="Unconfirmed" />
+			<input type="hidden" name="esfpx_es-subscribe" id="es-subscribe-66615773ca635" value="8bfa466fd8" />
+			<label style="position:absolute;top:-99999px;left:-99999px;z-index:-99;" aria-hidden="true"><span hidden>Por favor, deja este campo vacío.</span><input type="email" name="esfpx_es_hp_email" class="es_required_field" tabindex="-1" autocomplete="-1" value="" /></label><input type="submit" name="submit" class="es_subscription_form_submit es_submit_button es_textbox_button" id="es_subscription_form_submit_66615773ca635" value="Suscribirse" /><span class="es_spinner_image" id="spinner-image"><img src="https://somoshackersdelaprogramacion.es/wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" alt="Loading" /></span></form><span class="es_subscription_message " id="es_subscription_message_66615773ca635"></span></div></section><section id="block-34" class="widget widget_block"><div style="" class="mis_redes_sociales">
+<div style="">
+		<h4>SIGUEME EN TUS REDES SOCIALES</h4>
+	</div>
+<div class="iconos_sociales" style="display:flex;  justify-content: center; margin-top:20px;">
+<div style="">
+			<a href="https://twitter.com/HDLProgramacion"><img decoding="async" src="https://somoshackersdelaprogramacion.es/wp-content/uploads/2022/06/twitter.png"></a>
+		</div>
+<div style="margin-left:15px;">
+			<a href="https://www.facebook.com/groups/1167189440785846"><img decoding="async" src="https://somoshackersdelaprogramacion.es/wp-content/uploads/2022/06/facebook.png"></a>
+		</div>
+<p></p></div>
+</div></section><section id="block-3" class="widget widget_block">
+<div class="wp-block-group"><div class="wp-block-group__inner-container is-layout-flow wp-block-group-is-layout-flow">
+<h4 class="wp-block-heading">POSTS RECIENTES</h4>
+
+
+<ul class="wp-block-latest-posts__list wp-block-latest-posts"><li><a class="wp-block-latest-posts__post-title" href="https://somoshackersdelaprogramacion.es/herencia-y-polimorfismo-en-java">Herencia y Polimorfismo en Java</a></li>
+<li><a class="wp-block-latest-posts__post-title" href="https://somoshackersdelaprogramacion.es/listas-en-python">Listas en Python</a></li>
+<li><a class="wp-block-latest-posts__post-title" href="https://somoshackersdelaprogramacion.es/la-estructura-de-datos-cola-en-java">La Estructura de Datos Cola en Java</a></li>
+<li><a class="wp-block-latest-posts__post-title" href="https://somoshackersdelaprogramacion.es/comunicacion-entre-procesos-en-windows">Comunicación entre procesos en Windows</a></li>
+<li><a class="wp-block-latest-posts__post-title" href="https://somoshackersdelaprogramacion.es/array-generico-en-c-con-memoria-dinamica">Array Genérico en C con Memoria Dinámica</a></li>
+</ul></div></div>
+</section><section id="block-4" class="widget widget_block">
+<div class="wp-block-group"><div class="wp-block-group__inner-container is-layout-flow wp-block-group-is-layout-flow">
+<h4 class="wp-block-heading">COMENTARIOS RECIENTES</h4>
+
+
+<ol class="wp-block-latest-comments"><li class="wp-block-latest-comments__comment"><article><footer class="wp-block-latest-comments__comment-meta"><a class="wp-block-latest-comments__comment-author" href="https://wonderfulportal.com/portal/blog/2022/07/10/very-interesting-blog-about-programming-in-spanish/">Very interesting blog about programming in Spanish :) &#8211; WONDERFUL PORTAL</a> en <a class="wp-block-latest-comments__comment-link" href="https://somoshackersdelaprogramacion.es/explicamos-los-punteros-en-c#comment-18">Explicamos los Punteros en C</a></footer></article></li><li class="wp-block-latest-comments__comment"><article><footer class="wp-block-latest-comments__comment-meta"><span class="wp-block-latest-comments__comment-author">Ángel SI</span> en <a class="wp-block-latest-comments__comment-link" href="https://somoshackersdelaprogramacion.es/arrays-estaticos-en-java#comment-10">Arrays estáticos en Java Parte I</a></footer></article></li></ol></div></div>
+</section><section id="block-12" class="widget widget_block widget_media_image">
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="536" src="https://somoshackersdelaprogramacion.es/wp-content/uploads/2022/05/lenguaje-de-programacion-1024x536.webp" alt="" class="wp-image-68" srcset="https://i0.wp.com/somoshackersdelaprogramacion.es/wp-content/uploads/2022/05/lenguaje-de-programacion.webp?resize=1024%2C536&amp;ssl=1 1024w, https://i0.wp.com/somoshackersdelaprogramacion.es/wp-content/uploads/2022/05/lenguaje-de-programacion.webp?resize=300%2C157&amp;ssl=1 300w, https://i0.wp.com/somoshackersdelaprogramacion.es/wp-content/uploads/2022/05/lenguaje-de-programacion.webp?resize=768%2C402&amp;ssl=1 768w, https://i0.wp.com/somoshackersdelaprogramacion.es/wp-content/uploads/2022/05/lenguaje-de-programacion.webp?w=1268&amp;ssl=1 1268w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+</section><section id="block-13" class="widget widget_block widget_media_image">
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="576" src="https://somoshackersdelaprogramacion.es/wp-content/uploads/2022/05/top-lenguajes-programacion-2021-1024x576.jpg" alt="" class="wp-image-71" srcset="https://i0.wp.com/somoshackersdelaprogramacion.es/wp-content/uploads/2022/05/top-lenguajes-programacion-2021.jpg?resize=1024%2C576&amp;ssl=1 1024w, https://i0.wp.com/somoshackersdelaprogramacion.es/wp-content/uploads/2022/05/top-lenguajes-programacion-2021.jpg?resize=300%2C169&amp;ssl=1 300w, https://i0.wp.com/somoshackersdelaprogramacion.es/wp-content/uploads/2022/05/top-lenguajes-programacion-2021.jpg?resize=768%2C432&amp;ssl=1 768w, https://i0.wp.com/somoshackersdelaprogramacion.es/wp-content/uploads/2022/05/top-lenguajes-programacion-2021.jpg?w=1200&amp;ssl=1 1200w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+</section><section id="block-14" class="widget widget_block widget_media_image">
+<figure class="wp-block-image size-full"><img loading="lazy" decoding="async" width="800" height="400" src="https://somoshackersdelaprogramacion.es/wp-content/uploads/2022/05/programacion-2-e1551291144973.jpg" alt="" class="wp-image-72" srcset="https://i0.wp.com/somoshackersdelaprogramacion.es/wp-content/uploads/2022/05/programacion-2-e1551291144973.jpg?w=800&amp;ssl=1 800w, https://i0.wp.com/somoshackersdelaprogramacion.es/wp-content/uploads/2022/05/programacion-2-e1551291144973.jpg?resize=300%2C150&amp;ssl=1 300w, https://i0.wp.com/somoshackersdelaprogramacion.es/wp-content/uploads/2022/05/programacion-2-e1551291144973.jpg?resize=768%2C384&amp;ssl=1 768w" sizes="(max-width: 800px) 100vw, 800px" /></figure>
+</section></aside><!-- #secondary -->
+
+	</div><!-- #content -->
+	<aside id="secondary" class="sidebar-footer widget-area" role="complementary">
+		<div class="container">
+			<section id="block-5" class="widget widget_block">
+<div class="wp-block-group"><div class="wp-block-group__inner-container is-layout-flow wp-block-group-is-layout-flow">
+<h4 class="wp-block-heading">ARCHIVO</h4>
+
+
+<ul class="wp-block-archives-list wp-block-archives">	<li><a href='https://somoshackersdelaprogramacion.es/2022/07'>julio 2022</a></li>
+	<li><a href='https://somoshackersdelaprogramacion.es/2022/06'>junio 2022</a></li>
+	<li><a href='https://somoshackersdelaprogramacion.es/2022/05'>mayo 2022</a></li>
+</ul></div></div>
+</section><section id="heateor_sss_sharing-3" class="widget widget_heateor_sss_sharing"><div class='heateor_sss_sharing_container heateor_sss_horizontal_sharing' data-heateor-sss-href='https://somoshackersdelaprogramacion.es/utilizando-genericos-en-java'><h2 class="widget-title">COMPARTIR EN REDES SOCIALES</h2><div class="heateor_sss_sharing_ul"><a class="heateor_sss_facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fsomoshackersdelaprogramacion.es%2Futilizando-genericos-en-java" title="Facebook" rel="nofollow noopener" target="_blank" style="font-size:32px!important;box-shadow:none;display:inline-block;vertical-align:middle"><span class="heateor_sss_svg" style="background-color:#0765FE;width:70px;height:35px;display:inline-block;opacity:1;float:left;font-size:32px;box-shadow:none;display:inline-block;font-size:16px;padding:0 4px;vertical-align:middle;background-repeat:repeat;overflow:hidden;padding:0;cursor:pointer;box-sizing:content-box"><svg style="display:block" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 32 32"><path fill="#fff" d="M28 16c0-6.627-5.373-12-12-12S4 9.373 4 16c0 5.628 3.875 10.35 9.101 11.647v-7.98h-2.474V16H13.1v-1.58c0-4.085 1.849-5.978 5.859-5.978.76 0 2.072.15 2.608.298v3.325c-.283-.03-.775-.045-1.386-.045-1.967 0-2.728.745-2.728 2.683V16h3.92l-.673 3.667h-3.247v8.245C23.395 27.195 28 22.135 28 16Z"></path></svg></span></a><a class="heateor_sss_button_twitter" href="http://twitter.com/intent/tweet?text=Utilizando%20Gen%C3%A9ricos%20en%20Java&amp;url=https%3A%2F%2Fsomoshackersdelaprogramacion.es%2Futilizando-genericos-en-java" title="Twitter" rel="nofollow noopener" target="_blank" style="font-size:32px!important;box-shadow:none;display:inline-block;vertical-align:middle"><span class="heateor_sss_svg heateor_sss_s__default heateor_sss_s_twitter" style="background-color:#55acee;width:70px;height:35px;display:inline-block;opacity:1;float:left;font-size:32px;box-shadow:none;display:inline-block;font-size:16px;padding:0 4px;vertical-align:middle;background-repeat:repeat;overflow:hidden;padding:0;cursor:pointer;box-sizing:content-box"><svg style="display:block" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="-4 -4 39 39"><path d="M28 8.557a9.913 9.913 0 0 1-2.828.775 4.93 4.93 0 0 0 2.166-2.725 9.738 9.738 0 0 1-3.13 1.194 4.92 4.92 0 0 0-3.593-1.55 4.924 4.924 0 0 0-4.794 6.049c-4.09-.21-7.72-2.17-10.15-5.15a4.942 4.942 0 0 0-.665 2.477c0 1.71.87 3.214 2.19 4.1a4.968 4.968 0 0 1-2.23-.616v.06c0 2.39 1.7 4.38 3.952 4.83-.414.115-.85.174-1.297.174-.318 0-.626-.03-.928-.086a4.935 4.935 0 0 0 4.6 3.42 9.893 9.893 0 0 1-6.114 2.107c-.398 0-.79-.023-1.175-.068a13.953 13.953 0 0 0 7.55 2.213c9.056 0 14.01-7.507 14.01-14.013 0-.213-.005-.426-.015-.637.96-.695 1.795-1.56 2.455-2.55z" fill="#fff"></path></svg></span></a><a class="heateor_sss_button_reddit" href="http://reddit.com/submit?url=https%3A%2F%2Fsomoshackersdelaprogramacion.es%2Futilizando-genericos-en-java&amp;title=Utilizando%20Gen%C3%A9ricos%20en%20Java" title="Reddit" rel="nofollow noopener" target="_blank" style="font-size:32px!important;box-shadow:none;display:inline-block;vertical-align:middle"><span class="heateor_sss_svg heateor_sss_s__default heateor_sss_s_reddit" style="background-color:#ff5700;width:70px;height:35px;display:inline-block;opacity:1;float:left;font-size:32px;box-shadow:none;display:inline-block;font-size:16px;padding:0 4px;vertical-align:middle;background-repeat:repeat;overflow:hidden;padding:0;cursor:pointer;box-sizing:content-box"><svg style="display:block" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="-3.5 -3.5 39 39"><path d="M28.543 15.774a2.953 2.953 0 0 0-2.951-2.949 2.882 2.882 0 0 0-1.9.713 14.075 14.075 0 0 0-6.85-2.044l1.38-4.349 3.768.884a2.452 2.452 0 1 0 .24-1.176l-4.274-1a.6.6 0 0 0-.709.4l-1.659 5.224a14.314 14.314 0 0 0-7.316 2.029 2.908 2.908 0 0 0-1.872-.681 2.942 2.942 0 0 0-1.618 5.4 5.109 5.109 0 0 0-.062.765c0 4.158 5.037 7.541 11.229 7.541s11.22-3.383 11.22-7.541a5.2 5.2 0 0 0-.053-.706 2.963 2.963 0 0 0 1.427-2.51zm-18.008 1.88a1.753 1.753 0 0 1 1.73-1.74 1.73 1.73 0 0 1 1.709 1.74 1.709 1.709 0 0 1-1.709 1.711 1.733 1.733 0 0 1-1.73-1.711zm9.565 4.968a5.573 5.573 0 0 1-4.081 1.272h-.032a5.576 5.576 0 0 1-4.087-1.272.6.6 0 0 1 .844-.854 4.5 4.5 0 0 0 3.238.927h.032a4.5 4.5 0 0 0 3.237-.927.6.6 0 1 1 .844.854zm-.331-3.256a1.726 1.726 0 1 1 1.709-1.712 1.717 1.717 0 0 1-1.712 1.712z" fill="#fff" /></svg></span></a><a class="heateor_sss_whatsapp" href="https://api.whatsapp.com/send?text=Utilizando%20Gen%C3%A9ricos%20en%20Java https%3A%2F%2Fsomoshackersdelaprogramacion.es%2Futilizando-genericos-en-java" title="Whatsapp" rel="nofollow noopener" target="_blank" style="font-size:32px!important;box-shadow:none;display:inline-block;vertical-align:middle"><span class="heateor_sss_svg" style="background-color:#55eb4c;width:70px;height:35px;display:inline-block;opacity:1;float:left;font-size:32px;box-shadow:none;display:inline-block;font-size:16px;padding:0 4px;vertical-align:middle;background-repeat:repeat;overflow:hidden;padding:0;cursor:pointer;box-sizing:content-box"><svg style="display:block" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="-6 -5 40 40"><path class="heateor_sss_svg_stroke heateor_sss_no_fill" stroke="#fff" stroke-width="2" fill="none" d="M 11.579798566743314 24.396926207859085 A 10 10 0 1 0 6.808479557110079 20.73576436351046"></path><path d="M 7 19 l -1 6 l 6 -1" class="heateor_sss_no_fill heateor_sss_svg_stroke" stroke="#fff" stroke-width="2" fill="none"></path><path d="M 10 10 q -1 8 8 11 c 5 -1 0 -6 -1 -3 q -4 -3 -5 -5 c 4 -2 -1 -5 -1 -4" fill="#fff"></path></svg></span></a><a class="heateor_sss_button_linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fsomoshackersdelaprogramacion.es%2Futilizando-genericos-en-java" title="Linkedin" rel="nofollow noopener" target="_blank" style="font-size:32px!important;box-shadow:none;display:inline-block;vertical-align:middle"><span class="heateor_sss_svg heateor_sss_s__default heateor_sss_s_linkedin" style="background-color:#0077b5;width:70px;height:35px;display:inline-block;opacity:1;float:left;font-size:32px;box-shadow:none;display:inline-block;font-size:16px;padding:0 4px;vertical-align:middle;background-repeat:repeat;overflow:hidden;padding:0;cursor:pointer;box-sizing:content-box"><svg style="display:block" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 32 32"><path d="M6.227 12.61h4.19v13.48h-4.19V12.61zm2.095-6.7a2.43 2.43 0 0 1 0 4.86c-1.344 0-2.428-1.09-2.428-2.43s1.084-2.43 2.428-2.43m4.72 6.7h4.02v1.84h.058c.56-1.058 1.927-2.176 3.965-2.176 4.238 0 5.02 2.792 5.02 6.42v7.395h-4.183v-6.56c0-1.564-.03-3.574-2.178-3.574-2.18 0-2.514 1.7-2.514 3.46v6.668h-4.187V12.61z" fill="#fff"></path></svg></span></a><a class="heateor_sss_button_pinterest" href="https://somoshackersdelaprogramacion.es/utilizando-genericos-en-java" onclick="event.preventDefault();javascript:void( (function() {var e=document.createElement('script' );e.setAttribute('type','text/javascript' );e.setAttribute('charset','UTF-8' );e.setAttribute('src','//assets.pinterest.com/js/pinmarklet.js?r='+Math.random()*99999999);document.body.appendChild(e)})());" title="Pinterest" rel="nofollow noopener" style="font-size:32px!important;box-shadow:none;display:inline-block;vertical-align:middle"><span class="heateor_sss_svg heateor_sss_s__default heateor_sss_s_pinterest" style="background-color:#cc2329;width:70px;height:35px;display:inline-block;opacity:1;float:left;font-size:32px;box-shadow:none;display:inline-block;font-size:16px;padding:0 4px;vertical-align:middle;background-repeat:repeat;overflow:hidden;padding:0;cursor:pointer;box-sizing:content-box"><svg style="display:block" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="-2 -2 35 35"><path fill="#fff" d="M16.539 4.5c-6.277 0-9.442 4.5-9.442 8.253 0 2.272.86 4.293 2.705 5.046.303.125.574.005.662-.33.061-.231.205-.816.27-1.06.088-.331.053-.447-.191-.736-.532-.627-.873-1.439-.873-2.591 0-3.338 2.498-6.327 6.505-6.327 3.548 0 5.497 2.168 5.497 5.062 0 3.81-1.686 7.025-4.188 7.025-1.382 0-2.416-1.142-2.085-2.545.397-1.674 1.166-3.48 1.166-4.689 0-1.081-.581-1.983-1.782-1.983-1.413 0-2.548 1.462-2.548 3.419 0 1.247.421 2.091.421 2.091l-1.699 7.199c-.505 2.137-.076 4.755-.039 5.019.021.158.223.196.314.077.13-.17 1.813-2.247 2.384-4.324.162-.587.929-3.631.929-3.631.46.876 1.801 1.646 3.227 1.646 4.247 0 7.128-3.871 7.128-9.053.003-3.918-3.317-7.568-8.361-7.568z" /></svg></span></a><a class="heateor_sss_button_telegram" href="https://telegram.me/share/url?url=https%3A%2F%2Fsomoshackersdelaprogramacion.es%2Futilizando-genericos-en-java&amp;text=Utilizando%20Gen%C3%A9ricos%20en%20Java" title="Telegram" rel="nofollow noopener" target="_blank" style="font-size:32px!important;box-shadow:none;display:inline-block;vertical-align:middle"><span class="heateor_sss_svg heateor_sss_s__default heateor_sss_s_telegram" style="background-color:#3da5f1;width:70px;height:35px;display:inline-block;opacity:1;float:left;font-size:32px;box-shadow:none;display:inline-block;font-size:16px;padding:0 4px;vertical-align:middle;background-repeat:repeat;overflow:hidden;padding:0;cursor:pointer;box-sizing:content-box"><svg style="display:block" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 32 32"><path fill="#fff" d="M25.515 6.896L6.027 14.41c-1.33.534-1.322 1.276-.243 1.606l5 1.56 1.72 5.66c.226.625.115.873.77.873.506 0 .73-.235 1.012-.51l2.43-2.363 5.056 3.734c.93.514 1.602.25 1.834-.863l3.32-15.638c.338-1.363-.52-1.98-1.41-1.577z"></path></svg></span></a><a class="heateor_sss_button_wordpress" href="https://somoshackersdelaprogramacion.es/wp-admin/press-this.php?u=https%3A%2F%2Fsomoshackersdelaprogramacion.es%2Futilizando-genericos-en-java&amp;t=Utilizando%20Gen%C3%A9ricos%20en%20Java" title="WordPress" rel="nofollow noopener" target="_blank" style="font-size:32px!important;box-shadow:none;display:inline-block;vertical-align:middle"><span class="heateor_sss_svg heateor_sss_s__default heateor_sss_s_wordpress" style="background-color:#464646;width:70px;height:35px;display:inline-block;opacity:1;float:left;font-size:32px;box-shadow:none;display:inline-block;font-size:16px;padding:0 4px;vertical-align:middle;background-repeat:repeat;overflow:hidden;padding:0;cursor:pointer;box-sizing:content-box"><svg style="display:block" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 32 32"><circle fill="#fff" cx="16" cy="16" r="14.75" /><path class="heateor_sss_no_fill" fill="#464646" d="M3.176 16c0 5.076 2.95 9.462 7.226 11.54L4.287 10.78c-.712 1.595-1.11 3.36-1.11 5.22zm21.48-.646c0-1.586-.57-2.684-1.06-3.537-.647-1.058-1.26-1.95-1.26-3.008 0-1.18.897-2.278 2.156-2.278.057 0 .11.008.166.01-2.28-2.09-5.32-3.367-8.658-3.367-4.48 0-8.422 2.3-10.715 5.78.302.01.585.017.826.017 1.343 0 3.418-.164 3.418-.164.69-.042.774.974.084 1.056 0 0-.694.08-1.466.12l4.668 13.892 2.808-8.417-1.998-5.476c-.69-.04-1.345-.12-1.345-.12-.69-.04-.61-1.1.08-1.058 0 0 2.116.164 3.38.164 1.34 0 3.416-.163 3.416-.163.69-.04.77.976.08 1.058 0 0-.694.08-1.467.12l4.634 13.785 1.28-4.272c.552-1.773.975-3.048.975-4.144zm-8.43 1.766l-3.85 11.18c1.15.34 2.365.523 3.624.523 1.492 0 2.925-.26 4.26-.728-.035-.056-.066-.113-.093-.177L16.225 17.12zM27.25 9.848c.055.408.086.848.086 1.318 0 1.3-.242 2.764-.975 4.594l-3.916 11.324C26.26 24.86 28.822 20.73 28.822 16c0-2.23-.568-4.326-1.57-6.152z" /><path d="M16 1.052C7.757 1.052 1.052 7.757 1.052 16c0 8.242 6.705 14.948 14.948 14.948 8.242 0 14.948-6.706 14.948-14.95 0-8.24-6.706-14.946-14.948-14.946zm0 29.212c-7.865 0-14.264-6.4-14.264-14.265S8.136 1.734 16 1.734c7.863 0 14.264 6.398 14.264 14.263 0 7.863-6.4 14.264-14.264 14.264z" /></svg></span></a><a style="font-size:32px!important;box-shadow: none;display: inline-block!important;font-size: 16px;padding: 0 4px;vertical-align: middle;display:inline" class="heateorSssSharingRound"><div style="width:70px;height:35px;margin-left:9px !important" title="Compartidos totales" class="heateorSssSharing heateorSssTCBackground"></div></a></div><div class="heateorSssClear"></div></div><script>heateorSssLoadEvent(function(){heateorSssGetSharingCounts();});</script></section><section id="block-6" class="widget widget_block">
+<div class="wp-block-group"><div class="wp-block-group__inner-container is-layout-flow wp-block-group-is-layout-flow">
+<h4 class="wp-block-heading">CATEGORÍAS</h4>
+
+
+<ul class="wp-block-categories-list wp-block-categories">	<li class="cat-item cat-item-32"><a href="https://somoshackersdelaprogramacion.es/category/algoritmos">Algoritmos</a>
+</li>
+	<li class="cat-item cat-item-81"><a href="https://somoshackersdelaprogramacion.es/category/android">Android</a>
+</li>
+	<li class="cat-item cat-item-104"><a href="https://somoshackersdelaprogramacion.es/category/angular">Angular</a>
+</li>
+	<li class="cat-item cat-item-12"><a href="https://somoshackersdelaprogramacion.es/category/c-c">C/C++</a>
+</li>
+	<li class="cat-item cat-item-15"><a href="https://somoshackersdelaprogramacion.es/category/estructuras-de-datos">Estructuras de Datos</a>
+</li>
+	<li class="cat-item cat-item-11"><a href="https://somoshackersdelaprogramacion.es/category/java">Java</a>
+</li>
+	<li class="cat-item cat-item-13"><a href="https://somoshackersdelaprogramacion.es/category/python">Python</a>
+</li>
+	<li class="cat-item cat-item-94"><a href="https://somoshackersdelaprogramacion.es/category/java/springboot">SpringBoot</a>
+</li>
+</ul></div></div>
+</section>		</div>
+	</aside><!-- .sidebar-footer  -->
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+		<div class="container">
+						<h1 class="site-title"><a href="https://somoshackersdelaprogramacion.es/" rel="home">Somos Hackers de la Programación</a></h1>
+			<div class="site-info">
+				<a href="https://wordpress.org/">
+					Proudly powered by WordPress				</a>
+				<span> | </span>
+				Theme: Yosemite by				<a href="https://gretathemes.com/" rel="designer">GretaThemes</a>
+			</div><!-- .site-info -->
+		</div>
+	</footer><!-- #colophon -->
+
+	<nav class="mobile-navigation" role="navigation">
+		<div class="mobile-menu"><ul><li class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-103"><a href="https://somoshackersdelaprogramacion.es/category/java">Java</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-108"><a href="https://somoshackersdelaprogramacion.es/category/estructuras-de-datos">Estructuras de Datos</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-288"><a href="https://somoshackersdelaprogramacion.es/category/algoritmos">Algoritmos</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-586"><a href="https://somoshackersdelaprogramacion.es/category/android">Android</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-104"><a href="https://somoshackersdelaprogramacion.es/category/javascript">JavaScript</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-105"><a href="https://somoshackersdelaprogramacion.es/category/c-c">C/C++</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-106"><a href="https://somoshackersdelaprogramacion.es/category/python">Python</a></li>
+</ul></div>	</nav>
+</div><!-- #page -->
+
+<a href="#" class="scroll-to-top hidden"><i class="fa fa-angle-up"></i></a>
+
+<script type="text/javascript" src="https://somoshackersdelaprogramacion.es/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js?ver=3.0.9b" id="syntaxhighlighter-core-js"></script>
+<script type="text/javascript" src="https://somoshackersdelaprogramacion.es/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushJava.js?ver=3.0.9b" id="syntaxhighlighter-brush-java-js"></script>
+<script type="text/javascript" src="https://somoshackersdelaprogramacion.es/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPlain.js?ver=3.0.9b" id="syntaxhighlighter-brush-plain-js"></script>
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "https://somoshackersdelaprogramacion.es/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.head.appendChild( corecss );
+		var themecssurl = "https://somoshackersdelaprogramacion.es/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		document.head.appendChild( themecss );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expandir código';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'No se encuentra el pincel para:';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'El pincel no está configurado para la opción html-script:';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+
+	// Infinite scroll support
+	if ( typeof( jQuery ) !== 'undefined' ) {
+		jQuery( function( $ ) {
+			$( document.body ).on( 'post-load', function() {
+				SyntaxHighlighter.highlight();
+			} );
+		} );
+	}
+</script>
+<script type="text/javascript" id="email-subscribers-js-extra">
+/* <![CDATA[ */
+var es_data = {"messages":{"es_empty_email_notice":"Por favor, introduce tu direcci\u00f3n de correo electr\u00f3nico","es_rate_limit_notice":"Tienes que esperar algo de tiempo antes de volver a suscribirte","es_single_optin_success_message":"Suscrito con \u00e9xito.","es_email_exists_notice":"\u00a1La direcci\u00f3n de correo electr\u00f3nico ya existe!","es_unexpected_error_notice":"Ups... Ha ocurrido un error inesperado.","es_invalid_email_notice":"DIrecci\u00f3n de correo electr\u00f3nico no v\u00e1lida","es_try_later_notice":"Por favor, vuelve a intentarlo pasados unos minutos"},"es_ajax_url":"https:\/\/somoshackersdelaprogramacion.es\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://somoshackersdelaprogramacion.es/wp-content/plugins/email-subscribers/lite/public/js/email-subscribers-public.js?ver=5.7.22" id="email-subscribers-js"></script>
+<script type="text/javascript" src="https://somoshackersdelaprogramacion.es/wp-content/themes/yosemite-lite/js/navigation.js?ver=20151215" id="yosemite-navigation-js"></script>
+<script type="text/javascript" src="https://somoshackersdelaprogramacion.es/wp-content/themes/yosemite-lite/js/skip-link-focus-fix.js?ver=20151215" id="yosemite-skip-link-focus-fix-js"></script>
+<script type="text/javascript" src="https://somoshackersdelaprogramacion.es/wp-content/themes/yosemite-lite/js/slick.js?ver=1.0" id="slick-js-js"></script>
+<script type="text/javascript" src="https://somoshackersdelaprogramacion.es/wp-content/themes/yosemite-lite/js/theia-sticky-sidebar.js?ver=1.5.0" id="theia-sticky-sidebar-js"></script>
+<script type="text/javascript" src="https://somoshackersdelaprogramacion.es/wp-content/themes/yosemite-lite/js/script.js?ver=1.0" id="yosemite-script-js"></script>
+<script type="text/javascript" src="https://c0.wp.com/c/6.5.3/wp-includes/js/comment-reply.min.js" id="comment-reply-js" async="async" data-wp-strategy="async"></script>
+<script type="text/javascript" id="heateor_sss_sharing_js-js-before">
+/* <![CDATA[ */
+function heateorSssLoadEvent(e) {var t=window.onload;if (typeof window.onload!="function") {window.onload=e}else{window.onload=function() {t();e()}}};	var heateorSssSharingAjaxUrl = 'https://somoshackersdelaprogramacion.es/wp-admin/admin-ajax.php', heateorSssCloseIconPath = 'https://somoshackersdelaprogramacion.es/wp-content/plugins/sassy-social-share/public/../images/close.png', heateorSssPluginIconPath = 'https://somoshackersdelaprogramacion.es/wp-content/plugins/sassy-social-share/public/../images/logo.png', heateorSssHorizontalSharingCountEnable = 1, heateorSssVerticalSharingCountEnable = 0, heateorSssSharingOffset = -10; var heateorSssMobileStickySharingEnabled = 0;var heateorSssCopyLinkMessage = "Enlace copiado.";var heateorSssUrlCountFetched = [], heateorSssSharesText = 'Compartidos', heateorSssShareText = 'Compartir';function heateorSssPopup(e) {window.open(e,"popUpWindow","height=400,width=600,left=400,top=100,resizable,scrollbars,toolbar=0,personalbar=0,menubar=no,location=no,directories=no,status")}
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://somoshackersdelaprogramacion.es/wp-content/plugins/sassy-social-share/public/js/sassy-social-share-public.js?ver=3.3.63" id="heateor_sss_sharing_js-js"></script>
+<script type="text/javascript" src="https://stats.wp.com/e-202423.js" id="jetpack-stats-js" data-wp-strategy="defer"></script>
+<script type="text/javascript" id="jetpack-stats-js-after">
+/* <![CDATA[ */
+_stq = window._stq || [];
+_stq.push([ "view", JSON.parse("{\"v\":\"ext\",\"blog\":\"206226737\",\"post\":\"408\",\"tz\":\"0\",\"srv\":\"somoshackersdelaprogramacion.es\",\"j\":\"1:13.5\"}") ]);
+_stq.push([ "clickTrackerInit", "206226737", "408" ]);
+/* ]]> */
+</script>
+
+</body>
+</html>
+
+
+<!-- IONOS Performance | https://www.ionos.com
+Generated @ 06.06.2024 06:30:11 -->

@@ -12,11 +12,22 @@ public class Principal {
 	private static void lanzar2Hilos() {
 		Mensajes h1, h2;
 		
-		h1 = new Mensajes(10, "H1");
-		h2 = new Mensajes(8, "H2");
 		
-		h1.start();
-		h2.start();
+		try {
+			h1 = new Mensajes(10, "H1");
+			h2 = new Mensajes(8, "H2");
+			
+			h1.start();				
+			h2.start();
+			
+			h1.join();
+			h2.join();
+			
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 		System.out.println("main termina");
 	}

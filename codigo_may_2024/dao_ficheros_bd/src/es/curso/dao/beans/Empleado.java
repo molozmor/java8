@@ -1,6 +1,13 @@
 package es.curso.dao.beans;
 
-public class Empleado {
+import java.io.Serializable;
+
+public class Empleado implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	private int id;
 	private String nombre;

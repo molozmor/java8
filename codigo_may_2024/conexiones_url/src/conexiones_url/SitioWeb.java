@@ -1,6 +1,10 @@
 package conexiones_url;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Date;
@@ -53,6 +57,7 @@ public class SitioWeb {
 		resul += "Content-type: "+this.con.getContentType()+"\n";
 		resul += "Content-length: "+this.con.getContentLength()+"\n";
 		resul += "Fecha: " + (new Date(this.con.getDate())).toString()+"\n";
+		resul += "Fichero: "+this.url.getFile()+"\n";
 		return resul;
 	}
 
@@ -62,6 +67,35 @@ public class SitioWeb {
 	 * @param pathLocal
 	 */
 	public void download(String pathLocal) {
+		FileOutputStream fichero = null;
+		InputStream is;
+		int c;
+		File f;
+		
+		try {
+			
+			is = this.con.getInputStream();
+			f = new File(this.url.getFile());
+			System.out.println(f.getPath());
+			
+			fichero = new FileOutputStream(pathLocal);
+			
+			while ((c=is.read())!= -1) {
+				fichero.write(c);
+			}
+			
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+			
+		} finally {
+			if (fichero != null)
+				try {
+					fichero.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
 		
 	}
 
