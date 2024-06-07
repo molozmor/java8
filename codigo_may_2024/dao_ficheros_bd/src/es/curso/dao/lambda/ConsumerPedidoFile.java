@@ -1,16 +1,16 @@
 package es.curso.dao.lambda;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.function.Consumer;
 
 import es.curso.dao.beans.Pedido;
 
 public class ConsumerPedidoFile implements Consumer<Pedido> {
 	
-	private FileOutputStream fichero;
+	private OutputStream fichero;
 
-	public ConsumerPedidoFile(FileOutputStream fich) {
+	public ConsumerPedidoFile(OutputStream fich) {
 		// TODO Auto-generated constructor stub
 		this.fichero = fich;
 	}

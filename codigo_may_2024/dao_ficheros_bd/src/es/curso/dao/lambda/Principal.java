@@ -3,7 +3,15 @@ package es.curso.dao.lambda;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 import es.curso.dao.beans.Pedido;
 import es.curso.dao.dao.PedidoBD;
@@ -14,13 +22,72 @@ public class Principal {
 	public static void main(String[] args) {
 		
 		// Pruebas con funciones lambda:
-		pruebasFuncionesLambda();
+		//pruebasConsumer();
 		
+		//pruebasBiConsumer();
 		
+		//pruebasSupplier();
+		
+		pruebaPredicate();
 
 	}
 
-	private static void pruebasFuncionesLambda() {
+	private static void pruebaPredicate() {
+		// Sirve para crear filtros sobre streams de colecciones:
+		Predicate<Pedido> filtro = p -> p.getImporte() > 100.0;
+		
+		Predicate<Pedido> filtro2 = new PredicatePais("Suiza");
+		
+		
+	}
+
+	private static void pruebasSupplier() {
+		// Pruebas con proveedores:
+		
+		Supplier<String> ahora = new Supplier<String>() {
+			
+			@Override
+			public String get() {
+				Date d = new Date();
+				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+				return sdf.format(d);
+			}
+		};
+		
+		System.out.println("Ahora: "+ahora.get());
+		try {
+			Thread.sleep(1000);
+			
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("Ahora: "+ahora.get());
+	}
+
+	private static void pruebasBiConsumer() {
+		// TODO Auto-generated method stub
+		
+		Map<String, String> paises = new HashMap<String, String>();
+		paises.put("España", "Madrid");
+		paises.put("Francia", "París");
+		paises.put("Alemania", "Berlín");
+		
+		// Con la expresión lambda: 2 parámetros (k, v)
+		paises.forEach((pais, capital)->System.out.println(pais+" => "+capital));
+		
+		paises.forEach(new BiConsumer<String, String>() {
+
+			@Override
+			public void accept(String t, String u) {
+				// TODO Auto-generated method stub
+				System.out.println(t + " " + u);
+			}
+		});
+		
+	}
+
+	private static void pruebasConsumer() {
 		PedidoBD bd;
 		List<Pedido> pedidos;
 		FileOutputStream fich = null;
@@ -35,8 +102,18 @@ public class Principal {
 						
 			pedidos.forEach(new ConsumerPedido());
 			
-			pedidos.forEach(new ConsumerPedidoFile(fich));
-					
+			pedidos.forEach(new ConsumerPedidoFile(fich));					
+			
+			pedidos.forEach(new ConsumerPedidoFile(System.out));
+			
+			pedidos.forEach(new Consumer<Pedido>() {
+
+				@Override
+				public void accept(Pedido pedido) {
+					// TODO Auto-generated method stub
+					System.out.println(pedido.getPais());
+				}
+			});
 			
 			
 		} catch (PedidoException | FileNotFoundException e) {
