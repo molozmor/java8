@@ -1,5 +1,7 @@
 package es.curso.hilos;
 
+import java.util.Arrays;
+
 public class Buffer {
 	
 	private char buffer[];
@@ -10,6 +12,8 @@ public class Buffer {
 	
 	public Buffer(int n) {
 		buffer = new char[n];
+		Arrays.fill(buffer, '_');
+		
 		siguiente = 0; // La primera casilla libre
 		
 		// Al inicio el buffer está vacío:
@@ -22,7 +26,39 @@ public class Buffer {
 	 * @return
 	 */
 	public synchronized char recoger() {
-		return 0;
+		char letra;
+		
+		//  Si el buffer está vacío tiene que esperar:
+		while (estaVacio == true) {
+			try {
+				// Esperar
+				wait();
+				
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+		}
+		
+		//Decrementar el indice para recuperar la letra:
+		siguiente--;
+		
+		if (siguiente == 0)
+			// Ha vacíado el buffer:
+			estaVacio = true;
+		
+		// El buffer no puede estar lleno:
+		estaLleno = false;
+		notify(); // Avisar que hemos consumido!
+		
+		// Recuperar la letra del buffer y marcar la casilla como
+		// vacía:
+		letra = buffer[siguiente];
+		buffer[siguiente] = '_';
+				
+		System.out.println(Arrays.toString(buffer));
+		
+		return letra;
 	}
 	
 	/**
