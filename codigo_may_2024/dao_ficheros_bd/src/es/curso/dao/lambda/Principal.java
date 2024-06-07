@@ -10,8 +10,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import es.curso.dao.beans.Pedido;
 import es.curso.dao.dao.PedidoBD;
@@ -28,8 +31,25 @@ public class Principal {
 		
 		//pruebasSupplier();
 		
-		pruebaPredicate();
+		//pruebaPredicate();
+		
+		pruebaFunction();
 
+	}
+
+	private static void pruebaFunction() {
+		// Crear una función que devuelva el importe de cada pedido y
+		// dejar los importes en una colección o sumarlos.
+		Function<Pedido, Double> importe = new Function<Pedido, Double>() {
+
+			@Override
+			public Double apply(Pedido pedido) {
+				// TODO Auto-generated method stub
+				return pedido.getImporte();
+			}
+			
+		};
+		
 	}
 
 	private static void pruebaPredicate() {
@@ -40,14 +60,22 @@ public class Principal {
 		
 		List<Pedido> pedidos = getPedidos();
 		
-		// Filtrar pedidos de un determinado país:
+		// Filtrar pedidos de un determinado país y un importe y contarlos:
 		long numPedidosPais = pedidos.stream().filter(filtro2).count();
 		System.out.println("pedidos: Suiza -> " + numPedidosPais);
 		
 		numPedidosPais = pedidos.stream().filter(filtro2).filter(filtro).count();
 		System.out.println("pedidos: Suiza con importe > 100 -> " + numPedidosPais);
 		
+		// Filtrar y recuperar los pedidos de Suiza:
+		List<Pedido> pedidos2 = pedidos.stream().filter(filtro2).collect(Collectors.toList());
+		pedidos2.forEach(new ConsumerPedido());
 		
+		// Filtrar y contar los pedidos con un importe superior a 100
+		// con un Predicado
+		double importe = 100.0;
+		numPedidosPais = pedidos.stream().filter(p -> p.getImporte() > importe).count();
+		System.out.println("pedidos: Suiza con importe > 100 -> " + numPedidosPais);
 	}
 
 	private static void pruebasSupplier() {
