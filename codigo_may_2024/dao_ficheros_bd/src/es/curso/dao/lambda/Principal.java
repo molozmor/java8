@@ -38,6 +38,15 @@ public class Principal {
 		
 		Predicate<Pedido> filtro2 = new PredicatePais("Suiza");
 		
+		List<Pedido> pedidos = getPedidos();
+		
+		// Filtrar pedidos de un determinado país:
+		long numPedidosPais = pedidos.stream().filter(filtro2).count();
+		System.out.println("pedidos: Suiza -> " + numPedidosPais);
+		
+		numPedidosPais = pedidos.stream().filter(filtro2).filter(filtro).count();
+		System.out.println("pedidos: Suiza con importe > 100 -> " + numPedidosPais);
+		
 		
 	}
 
@@ -86,16 +95,31 @@ public class Principal {
 		});
 		
 	}
-
-	private static void pruebasConsumer() {
+	
+	private static List<Pedido> getPedidos(){
 		PedidoBD bd;
+		List<Pedido> pedidos = null;
+		
+		try {
+			bd = new PedidoBD("bd/empresa3.db");
+			pedidos = bd.select();
+			
+			
+		} catch (PedidoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+		return pedidos;
+	}
+
+	private static void pruebasConsumer() {		
 		List<Pedido> pedidos;
 		FileOutputStream fich = null;
 		
 		try {
-			fich = new FileOutputStream("ficheros/pedidos.csv");
-			bd = new PedidoBD("bd/empresa3.db");
-			pedidos = bd.select();
+			fich = new FileOutputStream("ficheros/pedidos.csv");			
+			pedidos = getPedidos();
 			
 			// Imprimir los pedidos:
 			pedidos.forEach(pedido -> System.out.println(pedido));
@@ -116,7 +140,7 @@ public class Principal {
 			});
 			
 			
-		} catch (PedidoException | FileNotFoundException e) {
+		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			
