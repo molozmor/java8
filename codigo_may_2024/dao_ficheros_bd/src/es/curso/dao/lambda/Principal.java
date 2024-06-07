@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -33,14 +34,36 @@ public class Principal {
 		
 		//pruebaPredicate();
 		
-		pruebaFunction();
+		//pruebaFunction();
+		
+		mapasConFunciones();
 
+	}
+
+	private static void mapasConFunciones() {
+		
+		Map<String, BiFunction<Integer, Integer, Integer>> funciones;
+		
+		funciones = new HashMap<String, BiFunction<Integer,Integer,Integer>>();
+		funciones.put("Suma", (n1, n2)->n1+n2);
+		funciones.put("Resta", (n1, n2)->n1-n2);
+		funciones.put("Mul", (n1, n2)->n1*n2);
+		funciones.put("Div", (n1, n2)->n1/n2);
+		
+		int n2 = 12;
+		int n1 = 34;
+		
+		System.out.println(funciones.get("Mul").apply(n1, n2));
+		for (String op : funciones.keySet()) {
+			System.out.println(op + " " + funciones.get(op).apply(n1, n2));
+		}
+		
 	}
 
 	private static void pruebaFunction() {
 		// Crear una función que devuelva el importe de cada pedido y
 		// dejar los importes en una colección o sumarlos.
-		Function<Pedido, Double> importe = new Function<Pedido, Double>() {
+		Function<Pedido, Double> calcularImporte = new Function<Pedido, Double>() {
 
 			@Override
 			public Double apply(Pedido pedido) {
@@ -50,6 +73,12 @@ public class Principal {
 			
 		};
 		
+		List<Pedido> pedidos = getPedidos();
+		
+		List<Double> precios = pedidos.stream().map(calcularImporte).
+				collect(Collectors.toList());
+		
+		System.out.println("precios: "+precios);
 	}
 
 	private static void pruebaPredicate() {
