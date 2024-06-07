@@ -1,4 +1,4 @@
-package es.curso.principios_solid.pru_ok;
+package es.curso.principios_solid.pac_ok;
 
 public class Factura {
 	
