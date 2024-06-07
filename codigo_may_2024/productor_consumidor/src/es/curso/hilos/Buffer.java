@@ -66,7 +66,33 @@ public class Buffer {
 	 * en el buffer.
 	 * @param c
 	 */
-	public synchronized void lanzar(char c) {
+	public synchronized void lanzar(char letra) {
 		
+		// Comprobar si el buffer está vacío
+		while (estaLleno == true) {
+			try {
+				wait();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} // esperar
+		}
+		
+		// Colocar la letra en el buffer
+		buffer[siguiente] = letra;
+		
+		System.out.println(Arrays.toString(buffer));
+		
+		// Avanzar a la siguiente casilla:
+		siguiente++;
+		
+		// Comprobar si hemos llenado el buffer:
+		if (siguiente == buffer.length)
+			estaLleno = true;
+			
+		// No puede estar vacío porque hemos colocado una letra:
+		estaVacio = false;
+		
+		notify(); // Avisar que hay nuevas letras:
 	}
 }
