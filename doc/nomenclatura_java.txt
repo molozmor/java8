@@ -7,3 +7,8 @@ es
       ejemplo
 
 clases --> Primera letra en mayúsculas
+
+métodos, variables, parámetros: en minúsculas
+String nombreCompleto;
+
+constantes: en MAYUSCULAS
