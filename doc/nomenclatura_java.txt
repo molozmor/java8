@@ -1,0 +1,9 @@
+paquetes --> en minúsculas
+dominio.empresa.aplicacion
+es.curso.ejemplo
+
+es
+   curso
+      ejemplo
+
+clases --> Primera letra en mayúsculas
