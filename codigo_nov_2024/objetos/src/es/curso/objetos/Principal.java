@@ -27,9 +27,34 @@ public class Principal {
 		Direccion dir1 = new Direccion("Gran Vía",45, 28021, "Madrid");		
 		Direccion[] direcciones = {dir1, new Direccion("Arenal",1, 95877, "Barcelona")};
 		
+		Object[] objetos = new Object[4];
+		objetos[0] = new Direccion("Gran Vía",45, 28021, "Madrid");
+		objetos[1] = new Persona("Miguel");
+		objetos[2] = new Direccion("Arenal",1, 95877, "Barcelona");
+		objetos[3] = new Persona("Eva", 34, 0.0, 0.0);
+		
+		
+		for (Object o : objetos) {
+			if (o instanceof Persona)
+				System.out.println("Nombre de la persona: "+ ((Persona)o).getNombre());
+			
+			System.out.println("CLase: "+o.getClass().getCanonicalName());
+			System.out.println(o.toString());
+		}
+		
+		/*
+		
 		for (Direccion d : direcciones) {
 			System.out.println("Dirección: "+d);
-		}				
+		}
+		
+		Direccion[] direcciones2 = new Direccion[2];
+		direcciones2[0] = dir1;
+		direcciones2[1] = new Direccion("Arenal",1, 95877, "Barcelona");
+		
+		for (int i = 0 ; i < direcciones2.length ; i++) {
+			System.out.println("Dirección: "+direcciones2[i]);
+		}*/	
 	}
 
 

@@ -1,0 +1,32 @@
+Relaciones entre clases:
+
+1) Herencia: Cuando tengamos clases que tienen cosas en común.
+
+   Empleado (datos personales, sueldo y empresa)
+	Programador: un prog. es un empleado con lenguajes de progración
+	JefeProyecto: es un empleado con programadores a su cargo
+	Administrativo: es un empleado con ofimática
+
+
+2) Composición:
+    Un objeto se desglosa en partes y cada parte es un objeto de otra clase
+
+    Coche: motor, chasis, ruedas
+    Ordenador: memoria, disco, placa
+
+	En java tenemos att. que son objetos de otras clases.
+
+
+3) Asociación:
+
+   Dos objetos independientes que no heredan entre si, ni se compone y en un instante
+   se relacionan.
+
+   Tenemos un método en una clase que recibe por parámetro un objeto de otra clases.
+   Coche coche = new Coche();
+   SurtidorGas surtidor = new SurtidorGas();
+
+   coche.repostar(surtidor);
+
+
+
