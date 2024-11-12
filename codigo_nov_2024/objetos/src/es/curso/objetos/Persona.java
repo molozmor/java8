@@ -42,7 +42,9 @@ public class Persona {
 		this(nombre, 0,0.0,0.0);
 	}
 
-
+	public void hablar(Persona persona) {
+		System.out.println(this.nombre + " habla con " + persona.nombre);
+	}
 	
 	@Override
 	/**
