@@ -34,7 +34,23 @@ public class Principal {
 		Arrays.sort(numeros);
 		System.out.println(Arrays.toString(numeros));
 		
-		System.out.println(numeros[10]);
+		//System.out.println(numeros[10]);
+		
+		// Copiar un array:
+		numeros3 = new int[numeros.length];
+		System.arraycopy(numeros, 0, numeros3, 0, numeros.length); // Antes de copiar reservar espacio.
+		
+		//numeros3 = numeros; OJO es una referencia al mismo array.
+				
+		numeros[0] = 1000;
+		System.out.println(Arrays.toString(numeros3));
+		
+		if (Arrays.equals(numeros3, numeros)) {
+			System.out.println("son iguales");
+			
+		} else {
+			System.out.println("son distintos");
+		}
 		
 	}
 
