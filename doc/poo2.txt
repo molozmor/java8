@@ -1,0 +1,27 @@
+Personas:
+
+Características
+altura, peso, edad ... --> atributos.
+
+
+Acciones:
+comer(), correr(), andar() ... --> métodos
+
+
+1 objeto -> 1 persona
+
+1 clases -> N objetos (instanciar la clase --> crear un objeto --> crear  una persona).
+
+this --> el objeto en curso
+
+Constructores --> crear objetos
+Persona p1 = new Persona("Jose");
+
+// objeto.metodo()
+p1.correr();
+
+private, protected, public, package
+
+
+
+

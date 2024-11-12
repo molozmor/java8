@@ -41,6 +41,72 @@ public class Persona {
 	public Persona(String nombre) {		
 		this(nombre, 0,0.0,0.0);
 	}
+	
+	
+
+	/**
+	 * @return the nombre
+	 */
+	public String getNombre() {
+		return nombre;
+	}
+
+
+	/**
+	 * @param nombre the nombre to set
+	 */
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+
+	/**
+	 * @return the edad
+	 */
+	public int getEdad() {
+		return edad;
+	}
+
+
+	/**
+	 * @param edad the edad to set
+	 */
+	public void setEdad(int edad) {
+		this.edad = edad;
+	}
+
+
+	/**
+	 * @return the altura
+	 */
+	public double getAltura() {
+		return altura;
+	}
+
+
+	/**
+	 * @param altura the altura to set
+	 */
+	public void setAltura(double altura) {
+		this.altura = altura;
+	}
+
+
+	/**
+	 * @return the peso
+	 */
+	public double getPeso() {
+		return peso;
+	}
+
+
+	/**
+	 * @param peso the peso to set
+	 */
+	public void setPeso(double peso) {
+		this.peso = peso;
+	}
+
 
 	public void hablar(Persona persona) {
 		System.out.println(this.nombre + " habla con " + persona.nombre);

@@ -1,0 +1,17 @@
+Crear la clase Direccion (en el mismo paquete) con:
+ - calle
+ - numero
+ - cp
+ - poblacion
+
+
+Constructores (2)
+toString
+getters / setters
+
+
+Desde main:
+Crear una Dirección con todos los datos
+imprimir
+cambiar el CP
+imprimir
