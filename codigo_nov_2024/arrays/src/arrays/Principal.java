@@ -51,6 +51,7 @@ public class Principal {
 		} else {
 			System.out.println("son distintos");
 		}
+			
 		
 	}
 
