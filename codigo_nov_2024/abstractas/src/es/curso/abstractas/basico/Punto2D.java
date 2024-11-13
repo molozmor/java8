@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class Punto2D {
 
-	private double x;
-	private double y;
+	protected double x;
+	protected double y;
 
 	public Punto2D() {
 
@@ -47,6 +47,13 @@ public class Punto2D {
 		x *= escalar;
 		y *= escalar;
 	}
+	
+	public void desplazar(Punto2D p) {
+		this.x += p.x;
+		this.y += p.y;
+	}
+
+	
 
 	public Punto2D sumar(Punto2D p) {
 		// crea un nuevo punto que representa la suma.
