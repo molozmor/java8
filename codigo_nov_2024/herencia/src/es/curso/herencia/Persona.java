@@ -1,5 +1,7 @@
 package es.curso.herencia;
 
+import java.util.Objects;
+
 /**
  * Implementación de la clase Persona
  */
@@ -43,6 +45,27 @@ public class Persona {
 	}
 	
 	
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(altura, edad, nombre, peso);
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Persona other = (Persona) obj;
+		return Double.doubleToLongBits(altura) == Double.doubleToLongBits(other.altura) && edad == other.edad
+				&& Objects.equals(nombre, other.nombre)
+				&& Double.doubleToLongBits(peso) == Double.doubleToLongBits(other.peso);
+	}
+
 
 	/**
 	 * @return the nombre
@@ -117,7 +140,7 @@ public class Persona {
 	 * Devuelve una representación en texto del objeto
 	 */
 	public String toString() {
-		return "Persona [nombre=" + nombre + ", edad=" + edad + ", altura=" + altura + ", peso=" + peso + "]";
+		return "nombre=" + nombre + ", edad=" + edad + ", altura=" + altura + ", peso=" + peso;
 	}
 	
 	/**
