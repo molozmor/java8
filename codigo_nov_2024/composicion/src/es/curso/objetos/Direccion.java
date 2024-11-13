@@ -9,10 +9,14 @@ public class Direccion {
 	private int cp;
 	private String poblacion;
 	
+	private static int contador = 0;
+	
 	
 	public Direccion() {
 		super();
 		// TODO Auto-generated constructor stub
+		
+		contador++;
 	}
 
 
@@ -22,6 +26,20 @@ public class Direccion {
 		this.numero = numero;
 		this.cp = cp;
 		this.poblacion = poblacion;		
+		
+		contador++;
+	}
+	
+	/**
+	 * Contructor copia. Sirve para copiar objetos
+	 * @param dir el origen
+	 */
+	public Direccion(Direccion dir) {
+		this(dir.calle, dir.numero, dir.cp, dir.poblacion);
+	}
+	
+	public static int getNumInstancias() {
+		return contador;
 	}
 
 

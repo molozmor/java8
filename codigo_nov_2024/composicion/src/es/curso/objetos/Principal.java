@@ -5,6 +5,9 @@ package es.curso.objetos;
  */
 public class Principal {
 
+	private static int a = 10;
+	private static int b;
+	
 	/**
 	 * La función principal.
 	 * @param args los argumentos de main
@@ -12,13 +15,38 @@ public class Principal {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		pruebasPersona();	
+		//Principal principal = new Principal();
+		//principal.pruebasDireccion(); // Si no fuera static
+		
+		
+		
+		pruebaB();
+		
+		pruebasPersona();
 		pruebasDireccion();
+		
+	}
+	
+	
+	private static void pruebaB() {
+		System.out.println("b: "+b);
+	}
+	
+	static {
+		// PARA INICIALIZACIONES DE PROPIEDADES QUE PODAMOS NECESITAR Y NO CAMBIARAN
+		System.out.println("Bloque static: a = "+a);
+		b = a * 1000;		
+	}
+	
+	private static void modificarDireccion(Direccion dir) {
+		dir.setCp(29999);
 	}
 		
 	private static void pruebasDireccion() {
 		// TODO Auto-generated method stub
-		Direccion dir1, dir2;
+		Direccion dir1, dir2, dir3;
+		
+		System.out.println("Num instancias: "+Direccion.getNumInstancias());
 		
 		dir1 = new Direccion("Calle 1", 10, 28000, "Ciudad1");
 		dir2 = new Direccion("Calle 1", 10, 28000, "Ciudad1");
@@ -32,6 +60,12 @@ public class Principal {
 		
 		System.out.println("Dir1: "+dir1.hashCode());
 		System.out.println("Dir2: "+dir2.hashCode());
+		
+		System.out.println(dir1);
+		dir3 = new Direccion(dir1);
+		modificarDireccion(dir1);
+		System.out.println("dir1: "+dir1);
+		System.out.println("dir3: "+dir3);
 	}
 
 	private static void pruebasPersona() {
