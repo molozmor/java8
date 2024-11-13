@@ -41,6 +41,13 @@ public abstract class Figura2D extends Figura {
 	public String toString() {
 		return super.toString() + ", centro=" + centro;
 	}
+	
+	@Override
+	public void dibujar() {
+		// TODO Auto-generated method stub
+		System.out.println(this.toString()+ " Area: "+this.calcularArea());
+	}
+
 
 
 	public abstract double calcularArea();

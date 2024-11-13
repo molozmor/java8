@@ -38,6 +38,13 @@ public abstract class Figura3D extends Figura {
 	public String toString() {
 		return super.toString() + ", centro=" + centro;
 	}
+	
+
+	@Override
+	public void dibujar() {
+		// TODO Auto-generated method stub
+		System.out.println(this.toString() + " Volumen: "+this.calcularVolumen());
+	}
 
 
 	public abstract double calcularVolumen();
