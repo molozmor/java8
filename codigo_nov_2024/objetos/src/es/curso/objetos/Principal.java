@@ -27,12 +27,17 @@ public class Principal {
 		Direccion dir1 = new Direccion("Gran Vía",45, 28021, "Madrid");		
 		Direccion[] direcciones = {dir1, new Direccion("Arenal",1, 95877, "Barcelona")};
 		
-		Object[] objetos = new Object[4];
+		// Una Direccion ES UN Object
+		// Una Persona ES UN Object
+		Integer numero = 999;
+		
+		Object[] objetos = new Object[6];
 		objetos[0] = new Direccion("Gran Vía",45, 28021, "Madrid");
 		objetos[1] = new Persona("Miguel");
 		objetos[2] = new Direccion("Arenal",1, 95877, "Barcelona");
 		objetos[3] = new Persona("Eva", 34, 0.0, 0.0);
-		
+		objetos[4] = "Mensaje de prueba";
+		objetos[5] = numero;
 		
 		for (Object o : objetos) {
 			if (o instanceof Persona)

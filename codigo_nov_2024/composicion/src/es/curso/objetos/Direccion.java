@@ -1,5 +1,7 @@
 package es.curso.objetos;
 
+import java.util.Objects;
+
 public class Direccion {
 	
 	private String calle;
@@ -19,7 +21,7 @@ public class Direccion {
 		this.calle = calle;
 		this.numero = numero;
 		this.cp = cp;
-		this.poblacion = poblacion;
+		this.poblacion = poblacion;		
 	}
 
 
@@ -84,6 +86,28 @@ public class Direccion {
 	 */
 	public void setPoblacion(String poblacion) {
 		this.poblacion = poblacion;
+	}
+	
+	
+
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(calle, cp, numero, poblacion);
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Direccion other = (Direccion) obj;
+		return Objects.equals(calle, other.calle) && cp == other.cp && numero == other.numero
+				&& Objects.equals(poblacion, other.poblacion);
 	}
 
 

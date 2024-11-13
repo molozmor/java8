@@ -113,6 +113,16 @@ public class Persona {
 	public void setPeso(double peso) {
 		this.peso = peso;
 	}
+	
+	
+
+
+	/**
+	 * @return the numCasas
+	 */
+	public int getNumCasas() {
+		return numCasas;
+	}
 
 
 	public void hablar(Persona persona) {

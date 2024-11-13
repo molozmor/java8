@@ -3,7 +3,7 @@ Relaciones entre clases:
 1) Herencia: Cuando tengamos clases que tienen cosas en común.
 
    Empleado (datos personales, sueldo y empresa)
-	Programador: un prog. es un empleado con lenguajes de progración
+	Programador: un prog. es un empleado con lenguajes de programación
 	JefeProyecto: es un empleado con programadores a su cargo
 	Administrativo: es un empleado con ofimática
 
