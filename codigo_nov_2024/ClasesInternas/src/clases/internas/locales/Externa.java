@@ -42,6 +42,7 @@ public class Externa {
 			public void acceso() {
 				System.out.println(PI);
 				System.out.println("att interno:" + this.interno);
+				System.out.println("att externo:" + externo);
 				System.out.println("att externo:" + Externa.this.externo);
 			}
 		}
