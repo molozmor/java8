@@ -35,21 +35,51 @@ public class AplicacionConsola {
 	}
 	
 	public void run() {
-		Empleado emp = new Empleado(1,"nombre","cargo"); 
+		Empleado emp = new Empleado(1, "nombre", "cargo");
 		Empleado emp2;
-		
+
 		dao.create(emp);
 		dao.delete(1);
 		dao.update(emp);
 		emp2 = dao.read(1);
-		System.out.println("read: "+emp2);
+		System.out.println("read: " + emp2);
 	}
-	
+
 	public static void main(String[] args) {
 		AplicacionConsola app;
-		
+
 		app = new AplicacionConsola(FILE);
 		app.run();
+		
+		// Clase anónima:Una interface no se puede instanciar a no ser que hagamos una clase anónima!
+		IEmpleadoDAO dao2 = new IEmpleadoDAO() {
+			
+			@Override
+			public void update(Empleado e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public Empleado read(int id) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public void delete(int id) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void create(Empleado e) {
+				// TODO Auto-generated method stub
+				System.out.println("Empleado anonimo");
+			}
+		};
+		
+		dao2.create(null);
 	}
 
 }

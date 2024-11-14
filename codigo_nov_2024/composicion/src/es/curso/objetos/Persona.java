@@ -14,11 +14,14 @@ public class Persona {
 	private int numCasas;
 	
 	public static final int NUM_CASAS_MAX = 5;
+	public static final int EDAD_MAX = 130;
+	
 	
 	/**
 	 * Constructor por defecto. Inicializa el nombre a anónimo
+	 * @throws PersonaException 
 	 */
-	public Persona() {		
+	public Persona() throws PersonaException {		
 		this("anonimo", 0, 0.0, 0.0);
 	}
 
@@ -29,9 +32,15 @@ public class Persona {
 	 * @param edad la edad
 	 * @param altura la altura
 	 * @param peso el peso
+	 * @throws PersonaException 
 	 */
-	public Persona(String nombre, int edad, double altura, double peso) {
+	public Persona(String nombre, int edad, double altura, double peso) throws PersonaException {
 		super();
+		
+		if (edad < 0 || edad > EDAD_MAX) {
+			throw new PersonaException("La edad es incorrecta: "+edad);
+		}
+		
 		this.nombre = nombre;
 		this.edad = edad;
 		this.altura = altura;
@@ -44,8 +53,9 @@ public class Persona {
 	/**
 	 * Sólo inicializa el nombre de la persona.
 	 * @param nombre el nombre de la persona
+	 * @throws PersonaException 
 	 */
-	public Persona(String nombre) {		
+	public Persona(String nombre) throws PersonaException {		
 		this(nombre, 0,0.0,0.0);
 	}
 	
