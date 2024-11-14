@@ -32,8 +32,6 @@ public class OrdenarPersonas implements Comparator<Persona> {
 		this.sentido = sentido;
 	}
 
-
-
 	@Override
 	public int compare(Persona p1, Persona p2) {
 		// TODO Auto-generated method stub
