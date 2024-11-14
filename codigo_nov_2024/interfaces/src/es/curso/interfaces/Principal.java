@@ -22,6 +22,9 @@ public class Principal {
 		Arrays.sort(personas);
 		System.out.println(Arrays.toString(personas));
 		
+		Arrays.sort(personas, new OrdenarPersonas(OrdenarPersonas.POR_ALTURA, OrdenarPersonas.DESC));
+		System.out.println(Arrays.toString(personas));
+		
 		//int resul = p1.compareTo(p2);
 		
 		/*
