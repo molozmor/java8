@@ -40,6 +40,7 @@ public final class Punto3D extends Punto2D {
 	@Override
 	public void desplazar(Punto2D p) {
 		
+		
 		if (p instanceof Punto3D) {
 			Punto3D q = (Punto3D) p;
 			
