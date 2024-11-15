@@ -11,6 +11,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.TreeMap;
 
 public class Principal {
 
@@ -26,7 +27,8 @@ public class Principal {
 		// TODO Auto-generated method stub
 		
 		//Map<String, Integer> mapa = new HashMap<String, Integer>(); // No mantiene el orden de inserción
-		Map<String, Integer> mapa = new LinkedHashMap<String, Integer>(); // Mantiene el orden
+		// Map<String, Integer> mapa = new LinkedHashMap<String, Integer>(); // Mantiene el orden
+		Map<String, Integer> mapa = new TreeMap<String, Integer>(); // Ordenar las claves
 		
 		mapa.put("uno", 1);
 		mapa.put("dos", 2);
@@ -35,6 +37,31 @@ public class Principal {
 		mapa.put("cuatro", 4);
 		
 		System.out.println(mapa);
+		
+		for (String key : mapa.keySet()) {
+			System.out.println(key + " => " + mapa.get(key));
+		}
+		
+		System.out.println("Contains key dos: "+mapa.containsKey("dos"));
+		System.out.println("Contains value 4: "+mapa.containsValue(4));
+		
+		
+		//Map<String, List<String[]>> mapa2;
+		
+		
+		// Utilizar un mapa para realizar un recuento de las veces que se repite un valor en una lista
+		// Histograma
+		Random rd = new Random((new Date()).getTime());
+
+		// Elegimos una implementación
+		List<Integer> numeros = new ArrayList<>();
+		
+		for (int i = 0 ; i < 50 ; i++) {
+			numeros.add(rd.nextInt(30));
+		}
+		
+		Map<Integer, Integer> histograma = new HashMap<Integer, Integer>();
+		
 		
 	}
 
