@@ -1,9 +1,11 @@
 package clases_api_java;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Random;
 import java.util.StringTokenizer;
-
-import javax.print.attribute.standard.JobImpressions;
 
 
 public class Principal {
@@ -12,7 +14,59 @@ public class Principal {
 		// TODO Auto-generated method stub
 
 		//pruebaDeprecated();
-		pruebaSTK();
+		//pruebaSTK();
+		//pruebasClasesEnvolventes();
+		pruebaOtrasClases();
+	}
+
+	private static void pruebaOtrasClases() {
+		Random rd;
+		Date fecha;
+		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss"); // "dd/MM/YYYY HH:mm:ss"
+		
+		fecha = new Date();
+		// Tomamos como semilla el tiempo del sistema en milisg.
+		rd = new Random(fecha.getTime());
+		
+		for (int i = 0 ; i < 10 ; i++) {
+			System.out.println(rd.nextBoolean()+" "+rd.nextFloat()+" "+rd.nextInt(100));
+		}
+		
+		System.out.println("Ahora: "+ sdf.format(fecha));
+		
+		Calendar cal = Calendar.getInstance();
+		// Establecer la fecha de hoy
+		cal.setTime(fecha);
+		
+		// Sumar 3 meses:
+		cal.add(Calendar.DAY_OF_MONTH, -3);
+		
+		Date nuevaFecha = new Date(cal.getTimeInMillis());
+		System.out.println("Nueva Fecha: "+ sdf.format(nuevaFecha));
+		
+	}
+
+	private static void pruebasClasesEnvolventes() {
+		// TODO Auto-generated method stub
+		Double d = 34.78;
+		Float f = 34.8F;
+		Integer num = 90;
+		Long largo = 100L;
+		
+		Float f2 = new Float("34.0");
+		
+		System.out.println("F2: "+f2);
+		
+		float f3 = f2.floatValue(); // No es obligatorio
+		float f4 = f2; // Autoboxing igualar tipos primitivos y clases envolventes.
+		
+		// Prueba de comparación:
+		float r1 = 2.44F;
+		float r2 = 9.0F;
+									// Comparamos directamente con los tipos primitivos.
+		System.out.println("Compare: "+Float.compare(r1, r2));
+		
+		
 	}
 
 	private static void pruebaSTK() {
