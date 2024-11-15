@@ -19,6 +19,12 @@ public class Empleado {
 		this.nombre = nombre;
 		this.cargo = cargo;
 	}
+	
+	public Empleado(String csv) {}
+	
+	public String toCSV(char delim) {
+		return null;
+	}
 
 
 	/**
