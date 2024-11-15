@@ -1,5 +1,9 @@
 package es.curso.excepciones;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 public class CapturarExcepciones {
 
 	public static void main(String[] args) {
@@ -15,8 +19,37 @@ public class CapturarExcepciones {
 		//prueba2(1);
 		//prueba3(12);
 		//prueba4(44);
-		prueba5(2);
+		//prueba5(2);
+		pruebas6();
 		
+	}
+
+	private static void pruebas6() {
+		// TODO Auto-generated method stub
+		FileInputStream fin = null;
+		Integer i;
+		
+		try {
+			fin = new FileInputStream("src/prueba.txt");
+			System.out.println("Fichero ok!");
+			i = Integer.parseInt("345.77");
+			return;
+			
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+			
+		} finally {
+			
+			if (fin != null) {
+				try {
+					fin.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+				
 	}
 
 	private static void prueba1(int i) {

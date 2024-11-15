@@ -71,7 +71,8 @@ public class Principal {
 
 		Persona p1;
 		try {
-			p1 = new Persona("Miguel",-3, 1.77, 80);
+			p1 = new Persona("Miguel",30, 1.77, 80);
+			p1.setEdad(-99);
 			if (p1.comprarCasa(new Direccion("Gran Via", 1, 28001, "Madrid")))
 				System.out.println("Casa comprada ...");
 			else

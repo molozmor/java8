@@ -21,7 +21,7 @@ public class Persona {
 	 * Constructor por defecto. Inicializa el nombre a anónimo
 	 * @throws PersonaException 
 	 */
-	public Persona() throws PersonaException {		
+	public Persona() throws PersonaException  {		
 		this("anonimo", 0, 0.0, 0.0);
 	}
 
@@ -87,8 +87,14 @@ public class Persona {
 
 	/**
 	 * @param edad the edad to set
+	 * @throws PersonaException 
 	 */
-	public void setEdad(int edad) {
+	public void setEdad(int edad) throws PersonaException {
+		
+		if (edad < 0 || edad > EDAD_MAX) {
+			throw new PersonaException("La edad es incorrecta: "+edad);
+		}
+		
 		this.edad = edad;
 	}
 
