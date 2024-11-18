@@ -29,8 +29,15 @@ public class Principal {
 		// TODO Auto-generated method stub
 		
 		GestorPedidos gestorPedidos = new GestorPedidos(path);
+		
 		System.out.println(gestorPedidos.getNombrePaises());
 		System.out.println("Alemania:"+gestorPedidos.getNumPedidosPais("Alemania"));
+		
+		gestorPedidos.borrarFicheros("ficheros/resultados/");
+		//gestorPedidos.generarFicheros("ficheros/resultados/");
+		System.out.println("Ficheros generados ...");
+		
+		gestorPedidos.generarFicheros("ficheros/resultados/", "Alemania", "Dinamarca");
 	}
 
 	private static void grabarFichero(String path) {

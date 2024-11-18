@@ -22,42 +22,68 @@ public class GestorPedidos {
 
 		this.cargarMapa();
 	}
-
-	public void generarFicheros(String carpeta) {
+	
+	public void borrarFicheros(String carpeta) {
+		File file;
+		File filePais;
+		String[] ficheros;
+		
+		file = new File(carpeta);
+		ficheros = file.list();
+		for (String fich : ficheros) {
+			filePais = new File(carpeta+fich);
+			filePais.delete();
+			
+			System.out.println(fich+" borrado");
+		}
+	}
+	
+	private void grabarFichero(String carpeta, String pais) {
 		FileOutputStream fichero;
 		String pathDestino;
 
-		for (String pais : this.mapaPaises.keySet()) {
-			fichero = null;
+		fichero = null;
+		
+		try {
+			pathDestino = carpeta + pais + ".csv"; 
+			fichero = new FileOutputStream(pathDestino);
 			
-			try {
-				pathDestino = carpeta + pais + ".csv"; 
-				fichero = new FileOutputStream(pathDestino);
-				
-				// Grabar cabeceras:
-				fichero.write(cabeceras.getBytes());
+			// Grabar cabeceras:
+			fichero.write(cabeceras.getBytes());
+			fichero.write("\n".getBytes());
+			
+			for (String pedido : this.mapaPaises.get(pais)) {
+				fichero.write(pedido.getBytes());
 				fichero.write("\n".getBytes());
-				
-				for (String pedido : this.mapaPaises.get(pais)) {
-					fichero.write(pedido.getBytes());
-					fichero.write("\n".getBytes());
-				}
+			}
 
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-				
-			} finally {
-				if (fichero != null) {
-					try {
-						fichero.close();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			
+		} finally {
+			if (fichero != null) {
+				try {
+					fichero.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}
 		}
+	}
+	
+	public void generarFicheros(String carpeta, String...paises) {
+		
+		for (String pais : paises) {
+			this.grabarFichero(carpeta, pais);
+		}
+	}
 
+	public void generarFicheros(String carpeta) {
+	
+		for (String pais : this.mapaPaises.keySet()) {
+			this.grabarFichero(carpeta, pais);
+		}
 	}
 
 	public List<String> getNombrePaises() {
