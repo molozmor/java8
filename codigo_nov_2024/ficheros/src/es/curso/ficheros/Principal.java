@@ -4,9 +4,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 public class Principal {
 
@@ -16,7 +19,18 @@ public class Principal {
 		// leerFichero("src/es/curso/datos/Empleados.txt");
 		// grabarFichero("ficheros/resultados/texto.txt");
 		// leerFicheroPorFilas("ficheros/pedidos.csv");
-		generarPedidosPais("ficheros/pedidos.csv");
+		// generarPedidosPais("ficheros/pedidos.csv");
+		// generarPedidosPaisMapa("ficheros/pedidos.csv");
+		
+		pruebaGestorPedidos("ficheros/pedidos.csv");
+	}
+
+	private static void pruebaGestorPedidos(String path) {
+		// TODO Auto-generated method stub
+		
+		GestorPedidos gestorPedidos = new GestorPedidos(path);
+		System.out.println(gestorPedidos.getNombrePaises());
+		System.out.println("Alemania:"+gestorPedidos.getNumPedidosPais("Alemania"));
 	}
 
 	private static void grabarFichero(String path) {
@@ -75,6 +89,62 @@ public class Principal {
 		}
 
 	}
+	
+	private static void generarPedidosPaisMapa(String path) {
+		Scanner scan = null;
+		String linea, pais;
+		String[] campos;
+		String pathDestino;
+		FileOutputStream ficheroPais;
+		String cabeceras = null;
+		Map<String, List<String>> mapaPaises;
+		List<String> pedidos;
+
+		try {
+			mapaPaises = new TreeMap<String, List<String>>();
+			scan = new Scanner(new File(path));
+
+			// Lectura del fichero: byte a byte!
+			while (scan.hasNextLine()) {
+				linea = scan.nextLine();
+				if (cabeceras == null) {
+					cabeceras = linea;
+					continue;
+				}
+				
+				campos = linea.split(";");
+				pais = campos[campos.length - 1].replace(' ', '_');
+				
+				// Colocar el pais en el mapa y añadir el pedido a su colección;
+				if (mapaPaises.containsKey(pais)) {
+					// Recuperamos la lista de pedidos de ese pais:
+					pedidos = mapaPaises.get(pais);
+					
+				} else {
+					// Es la primera vez, hay que crear la colección
+					pedidos = new ArrayList<String>();
+				}
+				
+				// Añadir el pedido a la colección:
+				pedidos.add(linea);
+				
+				// Modificar el mapa:
+				mapaPaises.put(pais, pedidos);				
+			}	
+			
+			System.out.println();
+			
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+
+		} finally {
+
+			if (scan != null) {
+				scan.close();
+			}
+		}
+	}
+			
 
 	private static void generarPedidosPais(String path) {
 		Scanner scan = null;
