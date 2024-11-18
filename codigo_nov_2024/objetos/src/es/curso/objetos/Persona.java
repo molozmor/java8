@@ -3,7 +3,7 @@ package es.curso.objetos;
 /**
  * Implementación de la clase Persona
  */
-public class Persona {
+public class Persona implements Comparable<Persona> {
 	
 	private String nombre;	
 	private int edad;	
@@ -127,6 +127,14 @@ public class Persona {
 	public String toCSV() {
 		return nombre + ";" + edad + ";" + altura + ";" + peso;
 	}
-	
-	
+
+
+	@Override
+	public int compareTo(Persona o) {
+		Integer edad1, edad2;
+		
+		edad1 = this.edad;
+		edad2 = o.edad;
+		return edad1.compareTo(edad2);
+	}
 }
