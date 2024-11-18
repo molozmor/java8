@@ -13,6 +13,8 @@ import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
 
+import es.curso.objetos.Persona;
+
 public class Principal {
 
 	public static void main(String[] args) {
@@ -20,7 +22,23 @@ public class Principal {
 
 		//pruebasListas();
 		//pruebaCalendarios();
-		pruebaMapas();
+		//pruebaMapas();
+		pruebaListaPersonas();
+	}
+
+	private static void pruebaListaPersonas() {
+		// TODO Auto-generated method stub
+		List<Persona> personal;
+		
+		personal = new ArrayList<Persona>();
+		personal.add(new Persona("José", 30, 1.80, 80));
+		personal.add(new Persona("Ana", 34, 1.70, 70));
+		personal.add(new Persona("Miguel", 40, 1.60, 65));
+		personal.add(new Persona("Eva", 32, 1.78, 77));
+		
+		for (Persona p : personal) {
+			System.out.println(p);
+		}
 	}
 
 	private static void pruebaMapas() {
@@ -152,9 +170,6 @@ public class Principal {
 		List<String> nombres = Arrays.asList("Ana","Eva","Pedro", "julián","Alberto");
 		Collections.sort(nombres);
 		System.out.println(nombres);
-		
-		
-		
 	}
 
 }
