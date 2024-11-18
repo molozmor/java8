@@ -3,9 +3,11 @@ package colecciones;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -21,8 +23,8 @@ public class Principal {
 		// pruebasListas();
 		// pruebaCalendarios();
 		// pruebaMapas();
-		// pruebaListaPersonas();
-		histograma(50, 20);
+		pruebaMapaPersonas();
+		//histogramaString(500, 20);
 	}
 
 	private static void pruebaListaPersonas() {
@@ -37,6 +39,20 @@ public class Principal {
 
 		for (Persona p : personal) {
 			System.out.println(p);
+		}
+	}
+	
+	
+	private static void pruebaMapaPersonas() {	
+		Map<Persona, Integer> mapa = new TreeMap<Persona, Integer>();
+		mapa.put(new Persona("José", 30, 1.80, 80),1);
+		mapa.put(new Persona("Ana", 34, 1.70, 70),2);
+		mapa.put(new Persona("Miguel", 40, 1.60, 65),3);
+		mapa.put(new Persona("Eva", 32, 1.78, 77),4);
+		
+		for (Persona p : mapa.keySet()) {
+			System.out.println(p+ " "+mapa.get(p));
+			
 		}
 	}
 
@@ -115,13 +131,27 @@ public class Principal {
 		return fechas;
 	}
 
-	private static void histograma(int tam, int tope) {
+	private static void histogramaString(int tam, int tope) {
 		// Generar tam números aleatorios, se almacenan en una lista
 		// Crear un histograma a partir de la lista: mapa
 		List<Integer> numeros;
 		Random rd;
-		Date d = new Date();		
-		Map<Integer, Integer> histo = new TreeMap<Integer, Integer>();
+		Date d = new Date();
+		
+		Map<String, Integer> histo = new TreeMap<String, Integer>(new Comparator<String>() {
+
+			@Override
+			public int compare(String s1, String s2) {
+				// TODO Auto-generated method stub
+				Integer i1, i2;
+				
+				i1 = Integer.parseInt(s1);
+				i2 = Integer.parseInt(s2);
+				
+				return i1.compareTo(i2);
+			}
+						
+		});
 		int valor;
 		
 		rd = new Random(d.getTime());
@@ -138,21 +168,21 @@ public class Principal {
 		// Utilizar el mapa para crear un histograma. Cuantas veces se repite cada número.
 		// Manteniendo el orden de los números (claves) --> TreeMap
 		for (int numero : numeros) {
-			if (histo.containsKey(numero)) {
+			if (histo.containsKey(numero+"")) {
 				// Incrementar en uno el valor de la clave
-				valor = histo.get(numero) + 1;
+				valor = histo.get(numero+"") + 1;
 				
 			} else {
 				// Es la primera vez, se inicializa a 1 la clave:
 				valor = 1;
 			}
 			
-			histo.put(numero, valor);
+			histo.put(numero+"", valor);
 		}
 		
 		// Recorrer el mapa:
 		System.out.println("\n\nHISTOGRAMA:");
-		for (int clave : histo.keySet()) {
+		for (String clave : histo.keySet()) {
 			System.out.println("Número: "+clave+" se repite "+histo.get(clave)+" veces");
 		}
 		
