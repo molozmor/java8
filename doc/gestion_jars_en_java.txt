@@ -1,2 +1,17 @@
 Gestión de jars en java, posibilidades:
 
+Cuando queremos utilizar el jar:
+1) En el propio proyecto. En una carpeta: lib
+   Si se copia el proyecto -> funciona ok!
+
+2) Fuera del proyecto. 
+   Si se copia el proyecto --> mantener el jar en la misma ubicación.
+
+3) Un gestor de librerías --> maven
+   Trabaja con un repositorio local y otro global
+   usuarios/tu_usuarios/.m2
+
+   Si no está en el local Lo descarga del global.
+   pom.xml	
+
+
