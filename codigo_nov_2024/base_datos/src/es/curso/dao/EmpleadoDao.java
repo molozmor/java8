@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -84,8 +85,64 @@ public class EmpleadoDao implements IEmpleadoDao {
 
 	@Override
 	public List<Empleado> select(String cargo) throws DaoException {
+		String sql = "select * from empleados";
+		PreparedStatement ps = null;
+		Empleado empleado;
+		ResultSet rst = null;
+		List<Empleado> empleados = new ArrayList<Empleado>();
+		
+		try {
+			if (cargo != null)
+				sql += " where cargo like ?";
+							
+			// Crear prepared
+			ps = this.conexion.prepareStatement(sql);
+			
+			if (cargo != null) {
+				ps.setString(1, "%"+cargo+"%");				
+			}
+				
+			
+			rst = ps.executeQuery();
+			
+			while (rst.next()) {
+				empleado = new Empleado();
+				empleado.setId(rst.getInt("id"));
+				empleado.setNombre(rst.getString("nombre"));
+				empleado.setCargo(rst.getString("cargo"));				
+				
+				// Añadir el empleado a la colección
+				empleados.add(empleado);
+			} 
+			
+			return empleados;
+			
+		} catch (Exception e) {
+			throw new DaoException(e.getMessage());
+			
+		} finally {
+			
+				try {
+					if (rst != null) rst.close();
+					if (ps != null) ps.close();
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					throw new DaoException(e.getMessage());
+				}
+		}		
+	}
+
+
+	public void close() throws DaoException {
 		// TODO Auto-generated method stub
-		return null;
+		if (conexion != null)
+			try {
+				conexion.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				throw new DaoException(e.getMessage());
+			}
 	}
 
 }

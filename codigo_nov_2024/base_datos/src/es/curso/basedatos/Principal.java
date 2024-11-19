@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 import java.util.Scanner;
 
 import es.curso.dao.DaoException;
@@ -30,19 +31,35 @@ public class Principal {
 
 	private static void pruebasEmpleadoDao() {
 		// TODO Auto-generated method stub
+		IEmpleadoDao dao = null;
+		List<Empleado> empleados;
 		
 		try {
-			IEmpleadoDao dao = new EmpleadoDao("src/es/curso/dao/mysql.properties");
+			dao = new EmpleadoDao("src/es/curso/dao/mysql.properties");
 			System.out.println("ok");
 			
 			Empleado emp = dao.read(1);
 			System.out.println(emp);
 			
-			emp = dao.read(34);
+			//emp = dao.read(34);
+			empleados = dao.select("ventas");
+			for (Empleado e : empleados)
+				System.out.println(e);
+			
 			
 		} catch (DaoException e) {
 			// TODO Auto-generated catch block
 			System.out.println(e.getMessage());
+			
+		} finally {
+			if (dao != null) {
+				try {
+					((EmpleadoDao)dao).close();
+				} catch (DaoException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 
