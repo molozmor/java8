@@ -28,6 +28,7 @@ public class Principal {
 		ResultSet rst = null;
 		ResultSetMetaData rstmt;
 		int cols;
+		boolean flag = true;
 
 		try {
 			conexion = DriverManager.getConnection(URL_BD, "root", "antonio");
@@ -40,6 +41,7 @@ public class Principal {
 				try {
 					System.out.print("SQL:> ");
 					sql = scan.nextLine();
+					flag = true;
 
 					// Ejecutar el SQL;
 					rst = st.executeQuery(sql);
@@ -47,6 +49,14 @@ public class Principal {
 					cols = rstmt.getColumnCount();
 
 					while (rst.next()) {
+						
+						if (flag) {
+							for (int i = 1; i <= cols; i++) {
+								System.out.print(rstmt.getColumnLabel(i)+"\t");
+							}
+							System.out.println();
+							flag = false;
+						}
 
 						for (int i = 1; i <= cols; i++) {
 							System.out.print(rst.getString(i) + "\t");
