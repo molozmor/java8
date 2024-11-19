@@ -8,14 +8,42 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
+import es.curso.dao.DaoException;
+import es.curso.dao.Empleado;
+import es.curso.dao.EmpleadoDao;
+import es.curso.dao.IEmpleadoDao;
+
 public class Principal {
 
 	private static final String URL_BD = "jdbc:mysql://localhost:3306/empresa3?serverTimezone=UTC";
+	
+	private static final String PATH_BD = "bd/empresa3.db";
+	private static final String URL_BD_SQLITE3 = "jdbc:sqlite:" + PATH_BD;
+
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		ejecutarQuery();
+		//ejecutarQuery();
+		pruebasEmpleadoDao();
+	}
+
+	private static void pruebasEmpleadoDao() {
+		// TODO Auto-generated method stub
+		
+		try {
+			IEmpleadoDao dao = new EmpleadoDao("src/es/curso/dao/mysql.properties");
+			System.out.println("ok");
+			
+			Empleado emp = dao.read(1);
+			System.out.println(emp);
+			
+			emp = dao.read(34);
+			
+		} catch (DaoException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+		}
 	}
 
 	private static void ejecutarQuery() {
@@ -31,7 +59,8 @@ public class Principal {
 		boolean flag = true;
 
 		try {
-			conexion = DriverManager.getConnection(URL_BD, "root", "antonio");
+			//conexion = DriverManager.getConnection(URL_BD, "root", "antonio");
+			conexion = DriverManager.getConnection(URL_BD_SQLITE3);
 			System.out.println("Conexión ok!");
 			st = conexion.createStatement();
 
