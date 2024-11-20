@@ -244,8 +244,37 @@ public class EmpleadoDao implements IEmpleadoDao {
 
 	@Override
 	public boolean update(Empleado empleado) throws DaoException {
-		// TODO Auto-generated method stub
-		return false;
+		// TODO Auto-generated method stub		
+		String sql;
+		PreparedStatement ps = null;
+		int resul;
+		
+		try {
+			sql = "update empleados set nombre=?, cargo=? where id=?";
+			ps = this.conexion.prepareStatement(sql);
+			
+			ps.setString(1, empleado.getNombre());
+			ps.setString(2, empleado.getCargo());
+			ps.setInt(3, empleado.getId());
+			
+			resul = ps.executeUpdate();
+			return resul == 1;
+			
+		} catch (Exception e) {
+			throw new DaoException(e.getMessage());
+
+		} finally {
+
+			try {
+
+				if (ps != null)
+					ps.close();
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				throw new DaoException(e.getMessage());
+			}
+		}		
 	}
 
 	public void close() throws DaoException {

@@ -41,13 +41,22 @@ public class Principal {
 			Empleado emp = dao.read(1);
 			System.out.println(emp);
 			
+			emp.setNombre("Roberto Sanz");
+			emp.setCargo("Director");
+			
+			if (dao.update(emp)) {
+				System.out.println("Empleado actualizado");
+			} else {
+				System.out.println("No se ha podido actualizar ...");
+			}			
+			
 			//emp = dao.read(34);
 			empleados = dao.select(null);
 			for (Empleado e : empleados)
 				System.out.println(e);
 			
 			// Borrar un empleado:
-			if (dao.delete(10)) {
+			if (dao.delete(1)) {
 				System.out.println("Empleado borrado ...");
 				
 			} else {
