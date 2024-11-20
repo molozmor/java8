@@ -9,8 +9,8 @@ import java.sql.Statement;
 import java.util.List;
 import java.util.Scanner;
 
+import es.curso.beans.Empleado;
 import es.curso.dao.DaoException;
-import es.curso.dao.Empleado;
 import es.curso.dao.EmpleadoDao;
 import es.curso.dao.IEmpleadoDao;
 
@@ -42,7 +42,7 @@ public class Principal {
 			System.out.println(emp);
 			
 			//emp = dao.read(34);
-			empleados = dao.select("ventas");
+			empleados = dao.select(null);
 			for (Empleado e : empleados)
 				System.out.println(e);
 			
