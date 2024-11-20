@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -16,6 +17,10 @@ import es.curso.beans.Empleado;
 public class EmpleadoDao implements IEmpleadoDao {
 
 	private Connection conexion;
+	private int baseDatos;
+
+	private static final int MYSQL = 0;
+	private static final int SQLITE3 = 1;
 
 	public EmpleadoDao(String pathProperties) throws DaoException {
 		Properties properties;
@@ -30,11 +35,13 @@ public class EmpleadoDao implements IEmpleadoDao {
 
 				// Abrir la conexion con mysql
 				this.conexion = DriverManager.getConnection(properties.getProperty("url"), properties);
-				
+				this.baseDatos = MYSQL;
+
 			} else {
 				// Abrir la conexión con sqlite3
 				this.conexion = DriverManager.getConnection(properties.getProperty("url"));
-				
+				this.baseDatos = SQLITE3;
+
 			}
 
 		} catch (Exception e) {
@@ -141,6 +148,65 @@ public class EmpleadoDao implements IEmpleadoDao {
 				// TODO Auto-generated catch block
 				throw new DaoException(e.getMessage());
 			}
+		}
+	}
+
+	@Override
+	public boolean create(Empleado empleado) throws DaoException {
+		String sql;
+		PreparedStatement ps = null;
+		int resul;
+		ResultSet rst = null;
+
+		try {
+
+			if (this.baseDatos == SQLITE3) {
+				// Para sqlite3:
+				sql = "insert into empleados(nombre, cargo) values(?,?)";
+				ps = this.conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+				ps.setString(1, empleado.getNombre());
+				ps.setString(2, empleado.getCargo());
+
+				resul = ps.executeUpdate();
+
+				// Recuperar la clave primaria:
+				rst = ps.getGeneratedKeys();
+				if (rst.next()) {
+					empleado.setId(rst.getInt(1));
+				}
+				
+			} else {
+				// mysql
+				sql = "insert into empleados(id, nombre, cargo) values(?,?,?)";
+				ps = this.conexion.prepareStatement(sql);
+				
+				ps.setInt(1, empleado.getId());
+				ps.setString(2, empleado.getNombre());
+				ps.setString(3, empleado.getCargo());
+
+				resul = ps.executeUpdate();
+			}
+
+			return resul == 1;
+
+		} catch (Exception e) {
+			throw new DaoException(e.getMessage());
+
+		} finally {
+
+			try {
+
+				if (ps != null)
+					ps.close();
+
+				if (rst != null)
+					rst.close();
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				throw new DaoException(e.getMessage());
+			}
+
 		}
 	}
 

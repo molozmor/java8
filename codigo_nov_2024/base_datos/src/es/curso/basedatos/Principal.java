@@ -46,6 +46,15 @@ public class Principal {
 			for (Empleado e : empleados)
 				System.out.println(e);
 			
+			// Crear empleado:
+			Empleado nuevo = new Empleado(10, "Jose Luis", "Gerente de Ventas");
+			if (dao.create(nuevo)) {
+				System.out.println("Empleado: "+nuevo);
+				
+			} else {
+				System.out.println("No se ha podido grabar ...");
+			}
+			
 			
 		} catch (DaoException e) {
 			// TODO Auto-generated catch block

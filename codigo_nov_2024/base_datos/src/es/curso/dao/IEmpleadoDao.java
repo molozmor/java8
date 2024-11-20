@@ -15,6 +15,6 @@ public interface IEmpleadoDao {
 	
 	public Empleado read(int pk) throws DaoException;
 	public List<Empleado> select(String cargo) throws DaoException;
-	
+	public boolean create(Empleado empleado) throws DaoException;
 
 }
