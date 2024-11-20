@@ -46,6 +46,14 @@ public class Principal {
 			for (Empleado e : empleados)
 				System.out.println(e);
 			
+			// Borrar un empleado:
+			if (dao.delete(10)) {
+				System.out.println("Empleado borrado ...");
+				
+			} else {
+				System.out.println("No se ha podido borrar");
+			}
+			
 			// Crear empleado:
 			Empleado nuevo = new Empleado(10, "Jose Luis", "Gerente de Ventas");
 			if (dao.create(nuevo)) {

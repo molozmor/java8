@@ -10,11 +10,15 @@ import es.curso.beans.Empleado;
  * Read -> select (pk)
  * Select --> select 
  * Create --> insert into
+ * Delete --> delete
+ * Update --> update
  */
 public interface IEmpleadoDao {
 	
 	public Empleado read(int pk) throws DaoException;
 	public List<Empleado> select(String cargo) throws DaoException;
 	public boolean create(Empleado empleado) throws DaoException;
+	public boolean delete(int pk) throws DaoException;
+	public boolean update(Empleado empleado) throws DaoException;
 
 }

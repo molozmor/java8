@@ -209,6 +209,44 @@ public class EmpleadoDao implements IEmpleadoDao {
 
 		}
 	}
+	
+	@Override
+	public boolean delete(int pk) throws DaoException {
+		// TODO Auto-generated method stub
+		String sql;
+		PreparedStatement ps = null;
+		int resul;
+		
+		try {
+			sql = "delete from empleados where id=?";
+			ps = this.conexion.prepareStatement(sql);			
+			ps.setInt(1, pk);
+			
+			resul = ps.executeUpdate();
+			return resul == 1;
+			
+		} catch (Exception e) {
+			throw new DaoException(e.getMessage());
+
+		} finally {
+
+			try {
+
+				if (ps != null)
+					ps.close();
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				throw new DaoException(e.getMessage());
+			}
+		}		
+	}
+
+	@Override
+	public boolean update(Empleado empleado) throws DaoException {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 	public void close() throws DaoException {
 		// TODO Auto-generated method stub
