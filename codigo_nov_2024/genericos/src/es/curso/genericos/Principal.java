@@ -14,10 +14,29 @@ public class Principal {
 
 	private static void pruebasMatriz() {
 		// TODO Auto-generated method stub
+		int k = 0;
 
 		// Crear una matriz de Integer;
 		Matriz<Integer> m1 = new Matriz<Integer>(5, 5, 0);
 		m1.print();
+		System.out.println();
+		
+		for (int i = 0 ; i < 5 ; i++) {
+			for (int j = 0 ; j < 5 ; j++, k++) {
+				
+				m1.set(i, j, k);
+			}
+		}
+		
+		m1.print();
+		System.out.println();
+		
+		Matriz<Integer> t = m1.traspuesta();
+		t.print();
+		
+		
+		Matriz<String> m2 = new Matriz<String>(6, 4, "hola");
+		m2.print();
 	}
 
 	private static void pruebasIniciales() {
