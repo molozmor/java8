@@ -8,8 +8,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
+import java.util.function.Consumer;
 
 import es.curso.ficheros.beans.Pedido;
+import es.curso.ficheros.funciones.ConsumerPedido;
 
 public class GestorPedidos {
 
@@ -19,7 +21,7 @@ public class GestorPedidos {
 
 	public GestorPedidos(String path) {
 		this.path = path;
-		this.mapaPaises = new TreeMap<String, List<String>>();
+		this.mapaPaises = new TreeMap<String, List<Pedido>>();
 		this.cabeceras = null;
 
 		this.cargarMapa();
@@ -54,8 +56,8 @@ public class GestorPedidos {
 			fichero.write(cabeceras.getBytes());
 			fichero.write("\n".getBytes());
 			
-			for (String pedido : this.mapaPaises.get(pais)) {
-				fichero.write(pedido.getBytes());
+			for (Pedido pedido : this.mapaPaises.get(pais)) {
+				fichero.write(pedido.toCSV(";").getBytes());
 				fichero.write("\n".getBytes());
 			}
 
@@ -110,7 +112,7 @@ public class GestorPedidos {
 		Scanner scan = null;
 		String linea, pais;
 		String[] campos;
-		List<String> pedidos;
+		List<Pedido> pedidos;
 
 		try {
 			scan = new Scanner(new File(path));
@@ -133,11 +135,11 @@ public class GestorPedidos {
 
 				} else {
 					// Es la primera vez, hay que crear la colección
-					pedidos = new ArrayList<String>();
+					pedidos = new ArrayList<Pedido>();
 				}
 
 				// Añadir el pedido a la colección:
-				pedidos.add(linea);
+				pedidos.add(new Pedido(linea));
 
 				// Modificar el mapa:
 				mapaPaises.put(pais, pedidos);
@@ -153,6 +155,33 @@ public class GestorPedidos {
 			}
 		}
 
+	}
+	
+	public void imprimirPedidos(String pais) {
+		
+		/*
+		System.out.println("Bucle for:");
+		for (Pedido p : this.mapaPaises.get(pais)) {
+			System.out.println(p);
+		}*/
+		
+		System.out.println("forEach:"); // Con una expresión lambda -> función anónima
+		this.mapaPaises.get(pais).forEach(p->System.out.println(p));
+		
+		System.out.println("forEach2:"); // Con una clase anónima
+		this.mapaPaises.get(pais).forEach(new Consumer<Pedido>() {
+
+			@Override
+			public void accept(Pedido p) {
+				// TODO Auto-generated method stub
+				System.out.println(p);
+			}
+			
+		});
+		
+		System.out.println("forEach3:"); // Con una clase Externa
+		ConsumerPedido consumer = new ConsumerPedido();
+		this.mapaPaises.get(pais).forEach(consumer);
 	}
 
 }
