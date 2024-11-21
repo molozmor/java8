@@ -8,10 +8,12 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 import es.curso.sockets.beans.Pedido;
+import es.curso.sockets.dao.IOperaciones;
+import es.curso.sockets.dao.PedidoBD;
+import es.curso.sockets.dao.PedidoException;
 
 public class ServidorBD {
-
-	private static final String HOST = "127.0.0.1";
+	
 	private static final int PUERTO = 4500;
 
 	public static void main(String[] args) {
@@ -23,9 +25,13 @@ public class ServidorBD {
 		ObjectOutputStream salida = null;
 		String strIdPedido;
 		int idPedido;
-		Pedido pedido = new Pedido(0, "ADERF", 1, 1, 450.0, "España");
+		Pedido pedido;
+		IOperaciones dao = null;
 
 		try {
+			
+			// Crear el dao:
+			dao = new PedidoBD("bd/empresa3.db");
 
 			// Crear el socket para conectar con el servidor
 			servidor = new ServerSocket(PUERTO);
@@ -48,9 +54,11 @@ public class ServidorBD {
 
 				if (idPedido != 0) {
 					System.out.println("El cliente solicita el id: " + idPedido);
+					
+					// Buscar el pedido en la BD:
+					pedido = dao.read(idPedido);
 
-					// Responder al cliente
-					pedido.setIdPedido(idPedido);
+					// Responder al cliente					
 					salida.writeObject(pedido);
 				}
 
@@ -63,10 +71,17 @@ public class ServidorBD {
 			// TODO Auto-generated catch block
 			System.out.println(e.getMessage());
 
+		} catch (PedidoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
 		} finally {
 
 			try {
 
+				if (dao != null)
+					dao.close();
+				
 				if (entrada != null)
 					entrada.close();
 				if (salida != null)
@@ -74,7 +89,7 @@ public class ServidorBD {
 				if (socketCliente != null)
 					socketCliente.close();
 
-			} catch (IOException e) {
+			} catch (IOException | PedidoException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
