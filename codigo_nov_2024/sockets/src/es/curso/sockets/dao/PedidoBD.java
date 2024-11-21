@@ -43,12 +43,15 @@ public class PedidoBD implements IOperaciones {
 			}
 
 			// Abrir la conexion:
-			//Class.forName("org.sqlite.JDBC");
+			Class.forName("org.sqlite.JDBC");
 			this.conexion = DriverManager.getConnection(this.cadConexion);
 
 		} catch (SQLException | FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			throw new PedidoException(e.getMessage());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 

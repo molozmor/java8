@@ -31,7 +31,7 @@ public class ServidorBD {
 		try {
 			
 			// Crear el dao:
-			dao = new PedidoBD("bd/empresa3.db");
+			dao = new PedidoBD("empresa3.db");
 
 			// Crear el socket para conectar con el servidor
 			servidor = new ServerSocket(PUERTO);
