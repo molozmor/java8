@@ -1,9 +1,12 @@
 package es.curso.ficheros;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiFunction;
+import java.util.function.Supplier;
 
 import es.curso.ficheros.beans.Pedido;
 
@@ -13,9 +16,36 @@ public class Principal {
 		// TODO Auto-generated method stub
 	
 		
-		//pruebasFunciones("ficheros/pedidos.csv");
-		otrasPruebas();
+		pruebasFunciones("ficheros/pedidos.csv");
+		//otrasPruebas();
+		//pruebaSupplier();
 		
+	}
+
+	private static void pruebaSupplier() {
+		// TODO Auto-generated method stub
+		
+		// DEfinir un proveedor que nos da la fecha y la hora actual con un formato establecido:
+		Supplier<String> ahora = new Supplier<String>() {
+			
+			@Override
+			public String get() {
+				// TODO Auto-generated method stub
+				Date fecha = new Date();
+				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+				return sdf.format(fecha);
+			}
+		};
+		
+		for (int i = 0 ; i < 10 ; i++) {
+			System.out.println(ahora.get());
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}						
 	}
 
 	private static void otrasPruebas() {
@@ -52,8 +82,13 @@ public class Principal {
 		//gestorPedidos.grabarPedidosPais("ficheros/resultados/Suiza.csv", "Suiza");
 		// gestorPedidos.filtrarPedidos("Suiza", 100.0);
 		
-		List<Pedido> pedidos = gestorPedidos.getPedidosPaisImporte("Suiza", 100.0);
-		System.out.println("Num pedidos: " + pedidos.size());
+		//List<Pedido> pedidos = gestorPedidos.getPedidosPaisImporte("Suiza", 100.0);
+		//System.out.println("Num pedidos: " + pedidos.size());
+		
+		//List<Integer> ids = gestorPedidos.getIdPedidosPaisImporte("Suiza", 100.0);
+		//System.out.println(ids);
+		
+		gestorPedidos.listadoPaisNumPedidos();
 	}
 
 }

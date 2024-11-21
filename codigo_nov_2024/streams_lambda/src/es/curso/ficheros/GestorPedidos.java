@@ -9,7 +9,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -254,5 +256,57 @@ public class GestorPedidos {
 		// y resultado lo guarda en otra colección de pedidos:
 		return this.mapaPaises.get(pais).stream().filter(p -> p.getImporte() > importeMinimo).collect(Collectors.toList());
 	}
+	
+	/**
+	 * Recuperar los ids de los pedidos de un país con un importe superior al importe mínimo:
+	 * @param pais
+	 * @param importeMinimo
+	 * @return
+	 */
+	public List<Integer> getIdPedidosPaisImporte(String pais, double importeMinimo) {
+		
+		// La función que recupera el id del pedido a partir del pedido
+		Function<Pedido, Integer> extraerId = new Function<Pedido, Integer>() {
+			
+			@Override
+			public Integer apply(Pedido p) {
+				// TODO Auto-generated method stub
+				return p.getIdPedido();
+			}
+		};
+		
+		// Utilizando la función anterior: aplica la función "extraerId" a cada pedido que supera el filtro.
+		//return this.mapaPaises.get(pais).stream().filter(p -> p.getImporte() > importeMinimo).map(extraerId).collect(Collectors.toList());
+		
+		// Con la expresión lambda:
+		return this.mapaPaises.get(pais).stream().filter(p -> p.getImporte() > importeMinimo).map(p->p.getIdPedido()).collect(Collectors.toList());
+		
+	}
+	
+	/**
+	 * Imprimir un listado de todos los países con el número de pedidos de cada país.
+	 */
+	public void listadoPaisNumPedidos() {
+		
+		BiConsumer<String, List<Pedido>> biConsumer = new BiConsumer<String, List<Pedido>>() {
+			
+			@Override
+			public void accept(String pais, List<Pedido> pedidos) {
+				// TODO Auto-generated method stub
+				System.out.println(pais + " " + pedidos.size()+ " pedidos");				
+			}
+		};
+		
+		// Aplicar el biconsumer a cada par (clave, valor) del mapa:
+		this.mapaPaises.forEach(biConsumer);
+		
+		System.out.println("--------------");
+		
+		// Con la expresión lambda:
+		this.mapaPaises.forEach((pais, pedidos)->System.out.println(pais + " " + pedidos.size()+ " pedidos"));
+		
+	}
+	
+	
 
 }
