@@ -1,6 +1,7 @@
 package es.curso.ficheros;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,9 +10,13 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import es.curso.ficheros.beans.Pedido;
 import es.curso.ficheros.funciones.ConsumerPedido;
+import es.curso.ficheros.funciones.ConsumerPedidoOut;
 
 public class GestorPedidos {
 
@@ -26,36 +31,36 @@ public class GestorPedidos {
 
 		this.cargarMapa();
 	}
-	
+
 	public void borrarFicheros(String carpeta) {
 		File file;
 		File filePais;
 		String[] ficheros;
-		
+
 		file = new File(carpeta);
 		ficheros = file.list();
 		for (String fich : ficheros) {
-			filePais = new File(carpeta+fich);
+			filePais = new File(carpeta + fich);
 			filePais.delete();
-			
-			System.out.println(fich+" borrado");
+
+			System.out.println(fich + " borrado");
 		}
 	}
-	
+
 	private void grabarFichero(String carpeta, String pais) {
 		FileOutputStream fichero;
 		String pathDestino;
 
 		fichero = null;
-		
+
 		try {
-			pathDestino = carpeta + pais + ".csv"; 
+			pathDestino = carpeta + pais + ".csv";
 			fichero = new FileOutputStream(pathDestino);
-			
+
 			// Grabar cabeceras:
 			fichero.write(cabeceras.getBytes());
 			fichero.write("\n".getBytes());
-			
+
 			for (Pedido pedido : this.mapaPaises.get(pais)) {
 				fichero.write(pedido.toCSV(";").getBytes());
 				fichero.write("\n".getBytes());
@@ -63,7 +68,7 @@ public class GestorPedidos {
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			
+
 		} finally {
 			if (fichero != null) {
 				try {
@@ -75,16 +80,16 @@ public class GestorPedidos {
 			}
 		}
 	}
-	
-	public void generarFicheros(String carpeta, String...paises) {
-		
+
+	public void generarFicheros(String carpeta, String... paises) {
+
 		for (String pais : paises) {
 			this.grabarFichero(carpeta, pais);
 		}
 	}
 
 	public void generarFicheros(String carpeta) {
-	
+
 		for (String pais : this.mapaPaises.keySet()) {
 			this.grabarFichero(carpeta, pais);
 		}
@@ -95,8 +100,7 @@ public class GestorPedidos {
 
 		paises = new ArrayList<String>();
 		paises.addAll(mapaPaises.keySet());
-		
-		
+
 		return paises;
 	}
 
@@ -156,18 +160,17 @@ public class GestorPedidos {
 		}
 
 	}
-	
+
 	public void imprimirPedidos(String pais) {
-		
+
 		/*
-		System.out.println("Bucle for:");
-		for (Pedido p : this.mapaPaises.get(pais)) {
-			System.out.println(p);
-		}*/
-		
+		 * System.out.println("Bucle for:"); for (Pedido p : this.mapaPaises.get(pais))
+		 * { System.out.println(p); }
+		 */
+
 		System.out.println("forEach:"); // Con una expresión lambda -> función anónima
-		this.mapaPaises.get(pais).forEach(p->System.out.println(p));
-		
+		this.mapaPaises.get(pais).forEach(p -> System.out.println(p));
+
 		System.out.println("forEach2:"); // Con una clase anónima
 		this.mapaPaises.get(pais).forEach(new Consumer<Pedido>() {
 
@@ -176,12 +179,80 @@ public class GestorPedidos {
 				// TODO Auto-generated method stub
 				System.out.println(p);
 			}
-			
+
 		});
-		
+
 		System.out.println("forEach3:"); // Con una clase Externa
 		ConsumerPedido consumer = new ConsumerPedido();
 		this.mapaPaises.get(pais).forEach(consumer);
+	}
+
+	public void grabarPedidosPais(String path, String pais) {
+		FileOutputStream fOut = null;
+		ConsumerPedidoOut consumer;
+
+		try {
+			fOut = new FileOutputStream(path);
+			consumer = new ConsumerPedidoOut(fOut); // Para lanzar a un fichero!
+			// consumer = new ConsumerPedidoOut(System.out); // Para lanzar a la consola!
+			this.mapaPaises.get(pais).forEach(consumer);
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+		} finally {
+			if (fOut != null) {
+				try {
+					fOut.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+
+	}
+
+	/**
+	 * Filtrar pedidos de un país y que superen el importe mínimo:
+	 * 
+	 * @param pais
+	 * @param importeMinimo
+	 */
+	public void filtrarPedidos(String pais, double importeMinimo) {
+
+		// En el filter aplicamos una expresión lambda
+		this.mapaPaises.get(pais).stream().filter(p -> p.getImporte() > importeMinimo)
+				.forEach(p -> System.out.println(p));
+
+		// Lo mismo de antes pero aplicando una interface funcional: Predicate
+		Predicate<Pedido> filtro = new Predicate<Pedido>() {
+
+			@Override
+			public boolean test(Pedido p) {
+				// TODO Auto-generated method stub
+				return p.getImporte() > importeMinimo;
+			}
+		};
+		System.out.println("-------------");
+
+		// El filter aplicamos un predicado creado con una clase anónima
+		this.mapaPaises.get(pais).stream().filter(filtro).forEach(p -> System.out.println(p));
+	}
+
+	/**
+	 * REcuperar los pedidos de un país con un importe superior al importe mínimo:
+	 * 
+	 * @param pais
+	 * @param importeMinimo
+	 * @return
+	 */
+	public List<Pedido> getPedidosPaisImporte(String pais, double importeMinimo) {
+		
+		// Recupera la colección de pedidos de un país, filtra los que tienen un importe superior al mínimo
+		// y resultado lo guarda en otra colección de pedidos:
+		return this.mapaPaises.get(pais).stream().filter(p -> p.getImporte() > importeMinimo).collect(Collectors.toList());
 	}
 
 }
